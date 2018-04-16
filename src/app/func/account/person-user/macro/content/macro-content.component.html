@@ -1,0 +1,50 @@
+<section>
+  <h2 class="group-big-title">{{reqDatas.title || severdata.title}}</h2>
+  <div class="content">
+    <nav class="tap-nav">
+      <span class="tap-slide {{wrapDatas.tapArr[0]}}" (click)="FnTapBtn(0,'bar')">柱状图</span>
+      <span class="tap-slide {{wrapDatas.tapArr[1]}}" (click)="FnTapBtn(1,'line')">折线图</span>
+      <span class="tap-slide {{wrapDatas.tapArr[2]}}" (click)="FnTapBtn(2,'table')">数据表</span>
+    </nav>
+
+    <div class="main">
+      <div class="row justify-content-between m0 pl25 pr25">
+        <h4 class="b text-center lh30">时间范围：{{wrapDatas.twoGroup[0] | trustDate: 4}} - {{wrapDatas.twoGroup[1] | trustDate: 4}} 统计频率：{{wrapDatas.twoGroup[2]}} 地区：{{wrapDatas.twoGroup[3]}}</h4>
+        <form role="form">
+          <div class="content-select">
+            <div class="form-group">
+              <select (change)="FnChange($event,0)" class="form-control">
+                <option *ngFor="let slide of severdata.regions" value="{{slide}}">{{slide}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select (change)="FnChange($event,1)" class="form-control">
+                <option *ngFor="let slide of severdata.freqs" value="{{slide}}">{{slide}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+  
+      <div class="pos-relative">
+        <div class="pos-absolute group-unit" *ngIf="wrapDatas.type !== 'table'">{{wrapDatas.twoGroup[4]}}</div>
+        <div>
+          <div *ngIf="wrapDatas.type === 'bar'" class="graph-group" [type]="groupData.type || 'bar'" [configOption]="groupOption" [onChartData]="groupData" arkChart></div>
+          <div *ngIf="wrapDatas.type === 'line'" class="graph-group" [type]="groupData.type || 'line'" [configOption]="groupOption" [onChartData]="groupData" arkChart></div>
+        </div>
+        <ul *ngIf="wrapDatas.type === 'table'" class="table-title mb0 mt30">
+          <li class="row table-slide">
+            <span class="col-md-4">时间</span>
+            <span class="col-md-8">{{reqDatas.title || severdata.title}}（{{severdata.entity.unit}}）</span>
+          </li>
+        </ul>
+        <ul *ngIf="wrapDatas.type === 'table'" class="table-group pl0 ml0">
+          <li *ngFor="let slide of JSONdata; let ind=index" class="row table-slide table-slide-{{ind%2}}">
+            <span class="col-md-4">{{slide.t | trustDate: 4}}</span>
+            <span class="col-md-8 txt-idt1">{{slide.v}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

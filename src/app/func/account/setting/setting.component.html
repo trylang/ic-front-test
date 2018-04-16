@@ -1,0 +1,63 @@
+<section>
+  <fieldset>
+    <mat-card>
+      <legend>账号设置</legend>
+      <mat-card-content class="container">
+        <div class="flex-column">
+          <form role="form">
+            <div class="form-group">
+              <label for="logo" class="col-md-2 col-sm-6 col-xs-12 form-label">头像</label>
+              <div class="col-md-8 col-sm-6 col-xs-12 inline-block">
+                <figure>
+                  <img [src]="account.logo | ImgPathPre | trustURL" width="48" height="48" alt="Logo">
+                </figure>
+              </div>
+              <div class="col-md-1 col-sm-6 col-xs-12 inline-block">
+                <ngx-cropper  [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-md-2 col-sm-6 col-xs-12 form-label">用户名</label>
+              <div class="col-md-8 col-sm-6 col-xs-12 inline-block">
+                <span class="form-text">{{account.username}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-md-2 col-sm-6 col-xs-12 form-label">用户类型</label>
+              <div class="col-md-8 col-sm-6 col-xs-12 inline-block">
+                <span class="form-text">{{account.typeName}}</span>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="account.type != 1">
+              <label for="" class="col-md-2 col-sm-6 col-xs-12 form-label">邮箱</label>
+              <div class="col-md-7 col-sm-6 col-xs-12 inline-block">
+                <span class="form-text">{{account.email}}</span>
+              </div>
+              <div class="col-md-2 col-sm-6 col-xs-12 inline-block pull-right">
+                <span *ngIf="!verify"><a href="javascript: void(0)"  (click)="verifyEmail(account.email)" >尚未验证邮箱请验证</a></span>
+              </div>
+            </div>
+
+            <div class="form-group" *ngIf="account.type == 1">
+              <label for="" class="col-md-2 col-sm-6 col-xs-12 form-label">手机</label>
+              <div class="col-md-8 col-sm-6 col-xs-12 inline-block">
+                <span class="form-text">{{account.phone}}</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="" class="col-md-2 col-sm-6 col-xs-12 form-label">密码</label>
+              <div class="col-md-8 col-sm-6 col-xs-12 inline-block"></div>
+              <div class="col-md-1col-sm-6 col-xs-12 inline-block" style="margin-left: 1.4rem;">
+                <a href="javascript: void(0)" class="btn ark-upload-btn" (click)="pswChange()">修改密码</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </fieldset>
+</section>

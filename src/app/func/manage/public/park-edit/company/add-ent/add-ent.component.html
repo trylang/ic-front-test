@@ -1,0 +1,17 @@
+<section>
+  <div class="card-body">
+    <h3 class="margin-b-10">批量上传企业</h3>
+    <form role="form">
+      <h4 class="text-bold margin-b-8" *ngIf="parkName">园区名称： {{parkName}}</h4>
+      <div class="form-group">
+        <label for="ent" class="text-gray margin-b-8 font-12">请输入企业名称（每行一条）</label>
+        <textarea name="ent" id="ent" class="form-control font-12" rows="10" [(ngModel)]="ent"></textarea>
+      </div>
+      
+      <div class="form-group text-center margin-t-32 margin-b-2">
+        <button type="button" class="btn btn-primary btn-lg" (click)="onApply()">确定</button>
+        <button tyoe="button" class="btn btn-secondary btn-lg" [mat-dialog-close]="cancel">取消</button>
+      </div>
+    </form>
+  </div>
+  </section>

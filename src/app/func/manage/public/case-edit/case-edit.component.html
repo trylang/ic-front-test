@@ -1,0 +1,93 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)" routerLink="{{parentRouter.routerLink}}" [queryParams]="parentRouter.queryParams">{{parentRouter.cat1}}</a></li>
+      <li class="breadcrumb-item active">{{parentRouter.cat2}}</li>
+    </ol>
+  </div>
+  <div class="margin-b-20">
+    <mat-card>
+      <mat-card-content class="container">
+        <form role="form">
+          <div class="row justify-content-between">
+            <div class="col-md-5">
+              <div class="form-group row">
+                <label for="" class="col-form-label ">案例名称:</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" autocomplete="off" placeholder="请输入案例名称" name="name" [(ngModel)]="case.name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="" class="col-form-label  font-bold">案例图片:</label>
+                <div class="col-md-9">
+                  <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+                  <!-- 预览照片 -->
+                  <div class="full-width padding-t-26" *ngIf="case.logo">
+                    <img [src]="case.logo | ImgPathPre | trustURL" alt="logo">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group row">
+                <label for="" class=" font-bold">实施地址:</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control " placeholder="请写实施地址" name="address" [(ngModel)]="case.address">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="" class=" font-bold">实施时间:</label>
+                <mat-form-field class="col-md-9 pos-relective">
+                  <input class="form-control" matInput [matDatepicker]="picker" placeholder="选择时间" readonly="readonly" [value]="startDate" [max]="maxDate" [min]="minDate" name="startDate" [(ngModel)]="startDate">
+                  <mat-datepicker-toggle class="pos-absolute mat-abs-data" matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="" class=" font-bold">客户名称:</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" placeholder="请写客户名称" name="customerName" [(ngModel)]="case.customerName">
+                </div>
+              </div>
+              <div *ngIf="userType !== 3 " class="form-group flex">
+                <label for="" class="col-form-label">所属企业:</label>
+                <div class="margin-l-10">
+                  <button class="btn btn-primary btn-lg" (click)="onOpenEntDialog()">关联企业</button>
+                  <span>{{case.companyName}}</span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="" class=" font-bold">相关方案:{{userType !== 3? '(请先选择企业)' : ''}}</label>
+                <div class="col-md-9">
+                  <select name="solution" class="form-control" [(ngModel)]="case.solutionId">
+                    <option value="null">选择方案</option>
+                    <option *ngFor="let solution of solutions" value="{{solution.md5}}">{{solution.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="font-bold">案例详情:</label>
+            <div class="col-12">
+              <ckeditor name="ckeditor" [(ngModel)]="case.detail" [config]="editorConf" [readonly]="false" debounce="500">
+              </ckeditor>
+            </div>
+          </div>
+
+          <div class="form-group text-center margin-b-6">
+            <button class="btn col-lg-4 col-md-6 col-sm-10 col-xs-12 ark-form-btn" [disabled]="isSubmiting" (click)="onSave()">
+              保存
+            </button>
+          </div>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

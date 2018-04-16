@@ -1,0 +1,71 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item active"><a href="javascript: void(0)">企业</a></li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-header class="margin-b-10">
+      <mat-card-title class="full-height flex-v-center" style="display: flex; margin-bottom: 0;">
+        <span class="font-16 margin-r-20">企业数量 <strong class="text-danger">{{totalRecords}}</strong></span>
+      </mat-card-title>
+      <div class="flex flex-v-center ml-auto">
+        <select class="form-control margin-r-20" #type [(ngModel)]="queryParam.type" (change)="onChangeType(type.value)">
+          <option value="null">全部</option>
+          <option value="2">研究员</option>
+          <option value="3">企业用户</option>
+        </select>
+        <select class="form-control margin-r-4" #stype [(ngModel)]="queryParam.stype" (change)="onChangeSearchType(stype.value)">
+          <option value="key">搜索企业</option>
+          <option value="owner">搜索操作人</option>
+        </select>
+      </div>
+      <div class="flex-inline">
+        <mat-form-field>
+          <input type="text" matInput #keyword [(ngModel)]="queryParam.key" (keyup.enter)="onSearch(keyword.value)" placeholder="{{queryParam.stype === 'owner' ? '请输入操作人' : '请输入企业名称'}}">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="onSearch(keyword.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table class="table ark-admin-table">
+        <tbody>
+          <tr>
+            <th class="ark-main-col">企业名称</th>
+            <th>操作人</th>
+            <th>用户类型</th>
+            <th>
+              时间
+              <a href="javascript: void(0)" (click)="onChangeSort()">
+                <i class="fa text-info" [ngClass]="{'fa-sort-amount-desc': queryParam.sort === 0, 'fa-sort-amount-asc': queryParam.sort === 1}"></i>
+              </a>
+            </th>
+            <th>操作</th>
+          </tr>
+          <tr *ngFor="let ent of ents" [@flyInOutAnimation]>
+            <td>{{ent.name}}</td>
+            <td>{{ent.owner}}</td>
+            <td>{{ent.accountType === 3 ? '企业用户' : (ent.accountType === 2 ? '研究员' : ent.accountType)}}</td>
+            <td>{{ent.updateTime | date: 'y-MM-dd'}}</td>
+            <td>
+              <a class="btn btn-warning btn-sm" [routerLink]="['/manage/public/ent/edit']" [queryParams]="{md5: ent.md5}" matTooltip="编辑" matTooltipPosition="above">
+                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+              </a>
+              <a href="javascript: void(0)" class="btn btn-danger btn-sm" (click)="onDelete(ent.md5)" matTooltip="删除" matTooltipPosition="above">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+
+    <mat-card-footer class="padding-b-20">
+      <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+    </mat-card-footer>
+  </mat-card>
+</section>

@@ -1,0 +1,16 @@
+<section>
+  <div class="input-group nav-search">
+    <input id="keywords" name="keywords" class="form-control" autocomplete="off" type="search" maxlength="40" [(ngModel)]="keywords" (keyup.enter)="onSearch()" (keyup)="onChange()" (focus)="onFocusIn()" (focusout)="onFocusOut()" [placeholder]="placeholder">
+    <div class="input-group-addon">
+      <a href="javascript: void(0)" (click)="onSearch()">
+        <img src="../../../asset/image/solution/search.png"  alt="Search">
+      </a>
+    </div>
+  </div>
+
+  <div class="nav-list">
+    <ul>
+      <li *ngFor="let item of typeList"><a [routerLink]="item.routerLink" [queryParams]="keywords ? {key: keywords} : {}" routerLinkActive="active">{{item.title}}</a></li>
+    </ul>
+  </div>
+</section>

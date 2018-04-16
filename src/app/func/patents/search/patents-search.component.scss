@@ -1,0 +1,74 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+.goods-graph {
+  height: 240px;
+  width: 100%;
+}
+
+// 加载页面
+.patents-looding {
+  background: #fff;
+  height: 345px;
+  position: relative;
+  width: 100%;
+  z-index: 120;
+
+  img {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+
+figure.ark-img {
+  height: 120px;
+  margin-top: 0 !important;
+  width: 120px;
+
+  img {
+    max-height: 110px;
+    max-width: 110px;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.text-max-line-1 {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-max-line-2 {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.keep-all {
+  word-break: keep-all;
+}
+
+.compatible-width {
+  width: calc(100% - 80px);
+}

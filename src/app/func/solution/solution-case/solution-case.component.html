@@ -1,0 +1,98 @@
+<ark-header headerTitle="案例详情"></ark-header>
+
+<section class="flex-1 body-bgc padding-t-20 padding-b-20">
+  <div class="container">
+    <div class="row no-margin">
+      <div class="col-lg-9 col-md-12 margin-b-20">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" routerLink="/solution/search">解决方案</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a (click)="goBack()">方案详情</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>案例详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="ark-search-detail">
+          <!-- 顶部简介 -->
+          <div class="row">
+            <!-- Logo -->
+            <div class="col-lg-4 col-md-12">
+              <figure class="logo">
+                <img *ngIf="case?.logo; else showImage" alt="case" [src]="case.logo | ImgPathPre | trustURL">
+                <ng-template #showImage>
+                  <img alt="case" src="../../../../asset/image/default/solution_default.png">
+                </ng-template>
+                <figcaption>
+                  <div class="view">
+                    <i class="proudsmart ps-focus"></i><span>{{case.pageview}}</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- 详情简述 -->
+            <div class="col-lg-8 col-md-12">
+              <div class="detail-intro">
+                <h3>{{case.name}}</h3>
+                <div><label>实施地址: </label><span>{{case.address}}</span></div>
+                <div><label>实施时间: </label><span>{{case.startDate | date:'yyyy-MM-dd'}}</span></div>
+                <div><label>客户: </label><span>{{case.customerName}}</span></div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Tab 详情 -->
+          <div class="row margin-t-30">
+            <div class="col-12 detail">
+              <div class="detail-nav">
+                <ul class="tab">
+                  <li><a [ngClass]="selItem==0 ? 'active' : ''" (click)="onItemClick(0)">案例详情</a></li>
+                </ul>
+              </div>
+
+              <div class="detail-content">
+                <div [style.display]="selItem==0 ? 'block' : 'none'">
+                  <div class="detail-container" [innerHtml]="case.detail | trustHtml">
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="case.detail"></ark-no-data>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--类似方案-->
+      <div class="col-lg-3 col-md-12">
+        <div class="morelike">
+          <div class="morelike-head">
+            <h3>公司其他案例</h3>
+          </div>
+          <div class="morelike-body" *ngFor="let case of cases">
+            <figure>
+              <a [routerLink]="" [queryParams]="{md5: case.md5}">
+                <img *ngIf="case?.logo; else showImage"  alt="case" [src]="case.logo | ImgPathPre | trustURL">
+                <ng-template #showImage>
+                    <img alt="case" src="../../../../asset/image/default/solution_default.png">
+                </ng-template>
+              </a>
+              <figcaption>
+                <h3><a [routerLink]="" [queryParams]="{md5: case.md5}" [title]="case.name" [innerHtml]="case.name | trustHtml"></a></h3>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ark-footer></ark-footer>

@@ -1,0 +1,52 @@
+[
+  [{
+      "img": "src/asset/image/home/product/info-industry.png",
+      "icon": "ps-info-industry",
+      "desc": "信息产业",
+      "key": "信息"
+    },
+    {
+      "img": "src/asset/image/home/product/jichuang.png",
+      "icon": "ps-jichuang",
+      "desc": "数控机床",
+      "key": "机床"
+    },
+    {
+      "img": "src/asset/image/home/product/robot.png",
+      "icon": "ps-robot",
+      "desc": "机器人",
+      "key": "机器人"
+    },
+    {
+      "img": "src/asset/image/home/product/aerospace.png",
+      "icon": "ps-aerospace",
+      "desc": "航空航天",
+      "key": "航空航天"
+    }
+  ],
+  [{
+      "img": "src/asset/image/home/product/ocean.png",
+      "icon": "ps-ocean",
+      "desc": "海洋工程",
+      "key": "海洋"
+    },
+    {
+      "img": "src/asset/image/home/product/traffic.png",
+      "icon": "ps-traffic",
+      "desc": "轨道交通",
+      "key": "轨道交通"
+    },
+    {
+      "img": "src/asset/image/home/product/car.png",
+      "icon": "ps-car",
+      "desc": "汽车",
+      "key": "汽车"
+    },
+    {
+      "img": "src/asset/image/home/product/power.png",
+      "icon": "ps-power",
+      "desc": "电力",
+      "key": "电力"
+    }
+  ]
+]

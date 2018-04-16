@@ -1,0 +1,34 @@
+<div class="relation" style="overflow: hidden">
+  <div class="rightWrap" [ngStyle]="{display: showChart === true ? 'block' : 'none'}">
+    <div class="tools mouseout">
+      <button class="btn btn-secondary" (click)="chartData.zoomin()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+      <button class="btn btn-secondary" (click)="chartData.zoomout()">
+        <i class="fa fa-minus" aria-hidden="true"></i>
+      </button>
+      <button class="btn btn-secondary" (click)="chartData.rotate(true)">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <button class="btn btn-secondary" (click)="chartData.rotate(false)">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </button>
+      <button class="btn btn-secondary" (click)="chartData.refresh()">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="stratifyWrap" [ngStyle]="{display: showChart === true ? 'block' : 'none'}">
+    <div id="stratify"></div>
+  </div>
+
+  <!-- <div class="detailEnterprise" id="detailInfo"></div> -->
+  <div [ngClass]="{hide: showChart !== false}" class="nodata">
+    <!-- <span class="fa fa-exclamation-circle" style="font-size: 18px;font-weight: bold; color : #666;"></span> -->
+    <span style="font-size: 18px;font-weight: bold; color : #666;">暂无企业关系信息</span>
+  </div>
+
+  <!-- 展示图表 -->
+  <div id="chartContainer" class="svgWrap"></div>
+</div>

@@ -1,0 +1,146 @@
+<section id="ark-theme" class="home-body theme-1 animated fadeIn">
+  <!-- Header and Body-->
+  <div class="flex-1 flex" style="min-height: 460px;">
+    <div class="full-width flex flex-column">
+      <header>
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="navbar navbar-expand-lg">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/solution/search']">方案</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/product/search']">产品</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/company/search']">供应商</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/patents/search']">专利</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/park/search']">园区</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/standard/search']">标准</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/policy/search']">政策</a>
+                  </li>
+                </ul>
+
+                <ul class="navbar-nav form-inline">
+                    <li class="nav-item">
+                      <a class="nav-link sup-custom" href="http://180.76.147.159/login/login.html" target="_blank"><sup>TOP</sup> 方案体验</a>
+                    </li>
+                  </ul>
+
+                <!-- 引入公共的头部个人信息 -->
+                <ark-header-account></ark-header-account>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <section class="flex flex-1 relative flex-column" style="margin-top: -48px; margin-bottom: -56px">
+        <div id="bgCarouselControls" class="carousel slide home-carousel full-width flex-1" data-interval="86400000" data-ride="carousel">
+          <div class="carousel-inner" style="height: 100vh">
+            <div class="carousel-item theme-bgc-1 active">
+              <div class="theme-bg-1"></div>
+              <div class="theme-footer-bgc-1"></div>
+            </div>
+            <div class="carousel-item theme-bgc-2">
+              <div class="theme-bg-2"></div>
+              <div class="theme-footer-bgc-2"></div>
+            </div>
+            <div class="carousel-item theme-bgc-3">
+              <div class="theme-bg-3"></div>
+              <div class="theme-footer-bgc-3"></div>
+            </div>
+            <div class="carousel-item theme-bgc-4">
+              <div class="theme-bg-4"></div>
+              <div class="theme-footer-bgc-4"></div>
+            </div>
+            <div class="carousel-item theme-bgc-5">
+              <div class="theme-bg-5"></div>
+              <div class="theme-footer-bgc-5"></div>
+            </div>
+            <div class="carousel-item theme-bgc-6">
+              <div class="theme-bg-6"></div>
+              <div class="theme-footer-bgc-6"></div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#bgCarouselControls" role="button" data-slide="prev">
+              <img class="animated fadeInRight" src="../../../asset/image/home/arrowL.png" alt="prev">
+              <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#bgCarouselControls" role="button" data-slide="next">
+              <img class="animated fadeInLeft" src="../../../asset/image/home/arrowR.png" alt="next">
+              <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        <div class="home-search">
+          <figure>
+            <img src="../../../asset/image/home/logo.svg" width="184" alt="Logo">
+          </figure>
+          <p>Imagination makes things happen</p>
+          <form>
+            <div class="input-group">
+              <input type="text" autocomplete="off" class="form-control" maxlength="40" placeholder="请输入方案名称" #solution (keyup.enter)="onSearch(solution.value)">
+              <div class="input-group-addon">
+                <a href="javascript: void(0)" (click)="onSearch(solution.value)">
+                    <img src="../../../asset/image/home/search.png" alt="Search">
+                </a>
+              </div>
+            </div>
+          </form>
+
+          <!-- 方案8行业 -->
+          <div class="slide-product">
+            <div id="carouselProductIndicators" class="carousel slide" data-ride="carousel" data-pause="false">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselProductIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselProductIndicators" data-slide-to="1"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item" [ngClass]="{'active': i === 0}" *ngFor="let items of productData; let i = index" [attr.data-index]="i">
+                  <div>
+                    <ul>
+                      <li *ngFor="let item of items">
+                        <a class="product-item" [routerLink]="['/solution/search']" [queryParams]="{key: item.desc, page: 1}">
+                          <figure>
+                            <i class="proudsmart" [ngClass]="item.icon"></i>
+                          </figure>
+                          <div class="circle-info">{{item.key}}</div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ./方案8行业 -->
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="animated fadeIn">
+    <ul>
+      <li><a routerLink="/about" [queryParams]="{type: 'us'}">关于我们</a></li>
+      <li><a routerLink="/about" [queryParams]="{type: 'contact'}">联系方式</a></li>
+      <li><a href="javascript: void(0)">隐私声明</a></li>
+      <li><a href="javascript: void(0)">数据来源</a></li>
+      <li><a href="javascript: void(0)">友情链接</a></li>
+    </ul>
+    <p>©2017-2027 www.proudsmart.com 上海智能制造系统创新中心有限公司 版权所有 京ICP备17006960号</p>
+  </footer>
+</section>

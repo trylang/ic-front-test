@@ -1,0 +1,77 @@
+ 
+  .ark-sort-item {
+    max-width: 1040px;
+    width: 100%;
+    height: 44px;
+    padding: 0;
+    margin: 0 auto;
+    line-height: 44px;
+    border-radius: 2.4rem;
+    background-color: #fff;
+
+
+    li {
+      list-style-type: none;
+      text-align: center;
+      cursor: pointer;
+      float: left;
+
+      &>a {
+        font-size: 14px;
+        font-family: Microsoft Yahei;
+        color: #333;
+        padding: 0 20px;
+        text-decoration: none;
+
+
+        &.active {
+          color: #eba52b;
+          font-weight: bold;
+        }
+
+        &:hover {
+          color: #f60;
+          font-weight: bold;
+        }
+      }
+
+      &:nth-child(-n+2) {
+        width: 110px;
+        border-right: 1px solid #eae8e8;
+      }
+
+      &:nth-last-child(2) {
+        width: 160px;
+        border-right: 1px solid #eae8e8;
+
+        i {
+          width: 16px;
+          height: 9px;
+          color: #888;
+          vertical-align: middle;
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          transform: rotate(180deg);
+        }
+
+        a {
+          &::after {
+            content: none;
+          }
+        }
+
+        .region {
+          height: 300px;
+          line-height: 28px;
+          overflow-y: scroll;
+          overflow-x: hidden;
+        }
+      }
+
+      &:last-child {
+        float: right;
+        margin-right: 16px;
+      }
+    }
+  }
+  

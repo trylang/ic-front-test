@@ -1,0 +1,135 @@
+{
+  "supplier" : ["机床与机器人", "增材制造", "智能传感与控制", "智能检测与装配", "智能物流与仓储", "工业互联网", "工业软件", "其他" ],
+  "cats":[{
+    "label": "增材制造",
+    "icon": "ps-additive-manufacturing-equipment"
+  }, {
+    "label": "智能物流与仓储",
+    "icon": "ps-logistics-management" 
+  }, {
+    "label": "智能检测与装配",
+    "icon": "ps-intelligent-energy-management"
+  }, {
+    "label": "机床与机器人",
+    "icon": "ps-numerical-control-machine"
+  }, {
+    "label":  "工业软件",
+    "icon":"ps-industrial-software"
+  }, {
+    "label": "智能传感与控制",
+    "icon": "ps-sensor-and-control"
+  }, {
+    "label": "工业互联网",
+    "icon": "ps-networked-collaborative-manufacturing"
+  }, {
+    "label": "其他",
+    "icon": "ps-networked-collaborative-manufacturing"
+  }],
+  "catChild": [
+    [ "增材制造装备部件", "金属增材制造", "非金属增材制造", "个性化增材制造", "其他"],
+    [ "智能物流", "智能仓储", "其他"],
+    [ "智能检测", "智能装配", "其他"],
+    [ "数控机床", "工业机器人", "机器人部件", "其他"],
+    [ "设计及工艺仿真", "工业控制软件", "业务管理", "数据管理", "人工智能", "其他"],
+    [ "机器人用传感器", "采集系统", "控制系统", "传动系统", "其他"],
+    [ "工业以太网", "现场总线", "信息安全", "无线通讯", "云计算", "大数据服务", "其他"]],
+
+  "productCats": [
+    {
+      "label": "机床与机器人",
+      "data": "机床与机器人",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "数控机床", "data": "数控机床", "icon": "fa-cube" },
+        { "label": "工业机器人", "data": "工业机器人", "icon": "fa-cube" },
+        { "label": "机器人部件", "data": "机器人部件", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "增材制造",
+      "data": "增材制造",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "增材制造装备部件", "data": "增材制造装备部件", "icon": "fa-cube" },
+        { "label": "金属增材制造", "data": "金属增材制造", "icon": "fa-cube" },
+        { "label": "非金属增材制造", "data": "非金属增材制造", "icon": "fa-cube" },
+        { "label": "个性化增材制造", "data": "个性化增材制造", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "智能传感与控制",
+      "data": "智能传感与控制",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "机器人用传感器", "data": "机器人用传感器", "icon": "fa-cube" },
+        { "label": "采集系统", "data": "采集系统", "icon": "fa-cube" },
+        { "label": "控制系统装备", "data": "控制系统装备", "icon": "fa-cube" },
+        { "label": "传动系统", "data": "传动系统", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "智能检测与装配",
+      "data": "智能检测与装配",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "智能检测", "data": "智能检测", "icon": "fa-cube" },
+        { "label": "智能装配", "data": "智能装配", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "智能物流与仓储",
+      "data": "智能物流与仓储",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "智能物流", "data": "智能物流", "icon": "fa-cube" },
+        { "label": "智能仓储", "data": "智能仓储", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "工业互联网",
+      "data": "工业互联网",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "工业以太网", "data": "工业以太网", "icon": "fa-cube" },
+        { "label": "现场总线", "data": "现场总线", "icon": "fa-cube" },
+        { "label": "信息安全", "data": "信息安全", "icon": "fa-cube" },
+        { "label": "无线通讯", "data": "无线通讯", "icon": "fa-cube" },
+        { "label": "云计算", "data": "云计算", "icon": "fa-cube" },
+        { "label": "大数据服务", "data": "大数据服务", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "工业软件",
+      "data": "工业软件",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "设计及工艺仿真软件", "data": "设计及工艺仿真软件", "icon": "fa-cube" },
+        { "label": "工业控制软件", "data": "工业控制软件", "icon": "fa-cube" },
+        { "label": "业务管理", "data": "业务管理", "icon": "fa-cube" },
+        { "label": "数据管理", "data": "数据管理", "icon": "fa-cube" },
+        { "label": "人工智能", "data": "人工智能", "icon": "fa-cube" },
+        { "label": "其他", "data": "其他", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "其他",
+      "data": "其他",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": []
+    }
+  ]
+}

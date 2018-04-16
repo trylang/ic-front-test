@@ -1,0 +1,107 @@
+<section>
+  <div class="container">
+    <div class="row ark-aside-layout margin-b-20">
+
+      <!-- 侧边栏 -->
+      <div class="aside">
+        <ul>
+          <li><a routerLink="./" [queryParams]="{type: 'info'}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-park-data"></i></span> <span>园区资料</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'basic', md5: md5}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-park-essential-information"></i></span> <span>基本信息</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'preferential', md5: md5}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-park-introduction-policy"></i></span> <span>园区介绍及政策</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'company', md5: md5}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-settled-enterprise1"></i></span> <span>入驻企业</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'advantage', md5: md5}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-park-advantage"></i></span> <span>园区优势</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'property', md5: md5}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-property"></i></span> <span>物业</span> </a></li>
+        </ul>
+      </div>
+
+      <!-- 主内容区域 -->
+      <div class="main">
+        <div class="main-header">
+          <h3>
+            {{tabTitle}}
+          </h3>
+        </div>
+
+        <div class="main-content">
+          <!-- 基本资料 -->
+          <div *ngIf="showType === 'info' || !showType">
+            <form role="form">
+              <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">园区名称：</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext full-width" id="name" value="{{parkInfo.parkName}}">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="address" class="col-sm-2 col-form-label">园区地址：</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext full-width" id="address" value="{{parkInfo.address}}">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="area" class="col-sm-2 col-form-label">所属地区：</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext full-width" id="area" value="{{parkInfo.region}}">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="exe" class="col-sm-2 col-form-label">运营商：</label>
+                <div class="col-sm-10">
+                  <input type="text" readonly class="form-control-plaintext full-width" id="exe" value="{{parkInfo.operator}}">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="relperson" class="col-sm-2 col-form-label must-input">联系人：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="relperson" name="relperson" [(ngModel)]="parkInfo.contactPerson">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="group" class="col-sm-2 col-form-label must-input">所属部门：</label>
+                <div class="col-sm-10">
+                  <select name="group" id="group" class="form-control" [(ngModel)]="parkInfo.personDepartment">
+                      <option value="null">请选择联系人职能部门</option>
+                      <option value="高管">高管</option>
+                      <option value="技术(产品、研发、维护、工程、生产)">技术(产品、研发、维护、工程、生产)</option>
+                      <option value="销售(市场、商务、销售)">销售(市场、商务、销售)</option>
+                      <option value="采购">采购</option>
+                      <option value="其他">其他</option>
+                    </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="phone" class="col-sm-2 col-form-label must-input">手机：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="parkInfo.contactPhone">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="tel" class="col-sm-2 col-form-label">园区电话：</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="tel" name="tel" [(ngModel)]="parkInfo.parkPhone">
+                </div>
+              </div>
+
+              <div class="form-group text-center margin-t-48">
+                <a href="javascript: void(0)" (click)="onSubmit()" class="btn col-lg-5 col-md-8 col-sm-10 col-xs-12 ark-form-btn">保存</a>
+              </div>
+            </form>
+          </div>
+
+          <park-basic *ngIf="showType === 'basic'"></park-basic>
+          <park-preferential *ngIf="showType === 'preferential'"></park-preferential>
+          <park-company *ngIf="showType === 'company'"></park-company>
+          <park-advantage *ngIf="showType === 'advantage'"></park-advantage>
+          <park-property *ngIf="showType === 'property'"></park-property>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

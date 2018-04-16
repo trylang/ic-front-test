@@ -1,0 +1,277 @@
+$text-color: #333333;
+$white-color: #ffffff;
+$border-color: #ccc;
+
+$side-color: #666;
+$noselect-font: #333;
+$hover-color: #eba52b;
+$icon-normal: #d4d4d4;
+$icon-hoverlist: (1: #b995de, 2: #1695f5, 3: #3ec1c9, 4: #e3b029);
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@mixin hoverIcon($value: #d4d4d4) {
+  .item-wrapper a:hover,
+  .item-wrapper a.active {
+    i {
+      color: $value;
+    }
+  }
+}
+
+@mixin catWidth($value1, $value2) {
+  .item-wrapper {
+    .cat1name {
+      width: $value1;
+    }
+    ol {
+      width: $value2
+    }
+  }
+}
+
+@mixin noborderBottom() {
+  border-bottom: 0;
+}
+
+aside {
+  width: 1040px;
+  border: 1px solid $border-color;
+  margin: 2rem auto;
+  background-color: #fff;
+
+  .nav {
+    
+    .product-icon {
+      font-size: 3rem;
+      position: absolute;
+      top: 9rem;
+      left: 3.6rem;
+      color: $side-color;
+    }
+    p {
+      width: 120px;
+      display: inline-block;
+      margin-bottom: 0;
+      line-height: 336px;
+      font-size: 2rem;
+      font-weight: 600;
+      font-family: Helvetica, Arial, "Microsoft Yahei";
+      color: $side-color;
+      text-align: center;
+      border-right: 1px solid $border-color;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+      margin-bottom:0;
+
+      .prduct-item {
+        text-align:center;
+        list-style: none;
+        border-bottom: 1px solid $border-color;
+
+        &:nth-of-type(1),
+        &:nth-of-type(5){
+          @include catWidth(60px, 260px);
+        }
+        &:nth-of-type(2),
+        &:nth-of-type(3) {
+          @include catWidth(90px, 144px);
+        }
+        &:nth-of-type(4) {
+          @include catWidth(90px, 160px);
+          .item-wrapper {
+            ol {
+              border-right: 0;
+            }
+          }
+        }
+        &:nth-of-type(6) {
+          @include catWidth(90px, 235px);
+          @include noborderBottom();
+        }
+        &:nth-of-type(7) {
+          @include catWidth(84px, 260px);
+          @include noborderBottom();
+        }
+        &:nth-of-type(5),
+        &:nth-of-type(8) {
+          @include noborderBottom();
+        }
+
+        &:nth-of-type(8) {
+          &:hover,
+          &.active {            
+            .item-wrapper>a {
+              span {
+               color: $hover-color;
+              }
+            }
+          }
+          .item-wrapper {
+            a {
+              .cat1name {
+                width: 4rem;
+                cursor: pointer;
+              }
+            }                     
+            ol {
+              border: 0;
+            }
+          }
+        }
+
+        @each $i, $color in $icon-hoverlist {
+          &:nth-of-type(4n-#{$i}) {
+            @include hoverIcon($color);
+          }
+        }
+
+        .item-wrapper {
+          display: flex;
+          margin: 7px auto;
+          a {
+            display: inline-block;
+            i {
+              position: relative;
+              top: 0.5rem;
+              font-size: 3rem;
+              color: $icon-normal;
+            }            
+            .cat1name {
+              display: inline-block;
+              padding: 0.5rem 1.2rem;
+              cursor: text;
+              font-size: 1.4rem;
+              font-weight: 600;
+              font-family: Helvetica, Arial, "Microsoft Yahei";
+              color: $side-color;
+            }
+
+          }
+
+          ol {
+            list-style-type: none;
+            padding:0;
+            display: flex;
+            flex-flow: wrap;
+            justify-content: flex-start;
+            border-left: 1px solid $border-color;
+            border-right: 1px solid $border-color;
+
+            .nav-child {             
+              display: inline-block;
+              margin-left: 1.2rem;
+              height: 2rem;
+              line-height: 2rem;
+              list-style-type: none;
+              &>a {
+                text-decoration: none;
+                border: 0;
+                .cat2name {
+                  font-size: 1.2rem;
+                  color: $noselect-font;
+                  font-family: Helvetica, Arial, "Microsoft Yahei";
+                }
+                &:hover,
+                &.active {
+                  span {
+                    font-weight: bold;
+                    color: $hover-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+article {
+  width: 1040px;
+  display: block;
+  float: left;
+  position: relative;
+
+  .product-item {
+    max-width: 1040px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 30px;
+
+    .items {
+
+      figure {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 190px;
+        padding: 30px 0;
+        margin: 0;
+        border-bottom: 1px solid #d4d4d4;
+        
+        span {
+          display: block;
+          overflow: hidden;
+          margin-right: 1%;
+          width: 19%;
+       
+
+          img {
+            width: 184px;
+            height: 130px;
+            text-align: center;
+            transition: width 0.3s ease-in, height 0.3s ease-in;
+            -webkit-transition: width 0.3s ease-in, height 0.3s ease-in;
+            &:hover {
+              transform: scale(1.06);
+              transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in;
+            }
+          }
+      }
+
+
+        figcaption {
+          width: 80%;
+          padding: 0;
+
+          h3 {
+            margin: auto;
+            padding: 0;
+
+            a {
+              font-size: 1.6rem;
+              font-weight: bold;
+              color: #000;
+            }
+          }
+
+          p { 
+            font-size: 1.4rem;
+            display: inline;
+            overflow : hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+
+          }
+        }
+      }
+    }
+  }
+}

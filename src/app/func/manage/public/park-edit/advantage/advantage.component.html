@@ -1,0 +1,32 @@
+<form role="form">
+  <div class="form-group">
+    <label for="serviceAdv" class="col-form-label margin-b-4">服务优势</label>
+    <textarea id="serviceAdv" name="serviceAdv" class="form-control font-12" rows="10" [(ngModel)]="serviceAdv"></textarea>
+  </div>
+  <div class="form-group text-center margin-t-20">
+    <a href="javascript: void(0)" (click)="onChangeServiceAdv()" class="btn col-lg-5 col-md-8 col-sm-10 col-xs-12 ark-form-btn">保存</a>
+  </div>
+</form>
+<div>
+  <label for="" class="col-form-label margin-b-4">
+    品牌优势
+    <button class="btn btn-primary btn-lg margin-l-10" (click)="onOpenBrandDialog()">
+      新增品牌优势
+    </button>
+  </label>
+  <div class="row">
+    <div class="col-sm-4 col-xs-12" *ngFor="let brand of brands">
+      <figure>
+        <img src="{{brand.logo | ImgPathPre}}" style="max-width: 100%" alt="BrandLogo">
+        <figcaption>
+          <h4>品牌描述：{{brand.title}}</h4>
+
+          <div class="text-right">
+            <a href="javascript: void(0)" (click)="onOpenBrandDialog(brand)">编辑</a>
+            <a href="javascript: void(0)" (click)="onDeleteBrand(brand.id)">删除</a>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</div>

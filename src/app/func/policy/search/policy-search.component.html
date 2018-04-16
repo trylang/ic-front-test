@@ -1,0 +1,84 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+
+<div class="body-bgc padding-t-20 padding-b-40 flex-1">
+  <div class=" container">
+    <section class="ark-search-filter">
+      <!-- 搜索类型 -->
+      <div class="filter-list">
+        <div class="filter-label">{{headlist[0].title}}</div>
+        <div class="col-sm-10 search-element">
+          <ul>
+            <li>
+              <a *ngFor="let item of headlist[0].group; let ind = index;" [ngClass]="{'active': queryParam.isTitle === ind + 1}" [routerLink]="['/policy/search']" [queryParams]="{isTitle: ind + 1, page:1}" queryParamsHandling="merge">{{item}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 发布时间 -->
+      <div class="filter-list">
+        <div class="filter-label">{{headlist[1].title}}</div>
+        <div class="col-sm-10 search-element">
+          <ul>
+            <li>
+              <a [ngClass]="{'active': !queryParam.pubDate || queryParam.pubDate === 'null'}" [routerLink]="['/policy/search']" [queryParams]="{pubDate: null}" queryParamsHandling="merge">全部</a>
+              <a *ngFor="let item of headlist[1].group; let ind = index;" [ngClass]="{'active': queryParam.pubDate === ind + 1}" [routerLink]="['/policy/search']" [queryParams]="{pubDate: ind + 1, page: 1}" queryParamsHandling="merge">{{item}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 适用地区 -->
+      <div class="filter-list">
+        <div class="filter-label">{{headlist[2].title}}</div>
+        <div class="col-sm-10 search-element">
+          <ul>
+            <li>
+              <a [ngClass]="{'active': !queryParam.province || queryParam.province === 'null'}" [routerLink]="['/policy/search']" [queryParams]="{province: null}" queryParamsHandling="merge">全部</a>
+              <a *ngFor="let item of headlist[2].group; let ind = index;" [ngClass]="{'active': queryParam.province === item}" [routerLink]="['/policy/search']" [queryParams]="{province: item, page: 1}" queryParamsHandling="merge">{{item}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="show-data-size-box" *ngIf="totalRecords">
+      <p>
+        为您找到 <span>{{totalRecords >= 200 ? '200+' : totalRecords}}</span> 条结果
+      </p>
+    </div>
+
+    <article class="ark-card" *ngIf="totalRecords > 0">
+      <ul class="ark-card-header">
+        <li class="col-md-7 text-left">标题</li>
+        <li class="col-md-3 text-center">信息来源</li>
+        <li class="col-md-2 text-center">发布时间</li>
+      </ul>
+
+      <div class="ark-card-content">
+        <ul class="ark-list" *ngFor="let slide of recdata.resultList">
+          <li class="col-md-7 text-left">
+            <div class="omit-content">
+              <a class="text-active block text-bold" [routerLink]="['/policy/detail']" [queryParams]="{md5: slide.md5}" [innerHTML]="slide.name | trustHtml"></a>
+              <p class="margin-t-8 no-margin-b" *ngIf="queryParam.isTitle === 2" [innerHTML]="slide.content | trustHtml"></p>
+            </div>
+          </li>
+          <li class="col-md-3 text-center">{{slide.source}}</li>
+          <li class="col-md-2 text-center">{{slide.publish_date}}</li>
+        </ul>
+      </div>
+
+      <div class="ark-paginator">
+        <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords >= 200 ? 200 : totalRecords }}" (onPageChange)="paginate($event)"></ark-paginator>
+      </div>
+    </article>
+    
+    <div class="margin-t-20" *ngIf="totalRecords === 0">
+      <!-- Data not found -->
+      <ark-no-data showType="search" [searchKey]="queryParam.key" [hideSign]="totalRecords"></ark-no-data>
+    </div>
+  </div>
+</div>
+
+<ark-footer></ark-footer>

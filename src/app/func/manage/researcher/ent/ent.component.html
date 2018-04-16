@@ -1,0 +1,75 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item active"><a href="javascript: void(0)">企业</a></li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-header class="margin-b-10">
+      <mat-card-title class="full-height flex-v-center" style="display: flex; margin-bottom: 0;">
+        <span class="font-16 margin-r-20">企业数量 <strong class="text-danger">{{totalRecords}}</strong></span>
+      </mat-card-title>
+      <div class="flex flex-v-center mr-auto">
+        <a class="btn btn-lg btn-primary" [routerLink]="['../../public/ent/edit']">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          新增企业
+        </a>
+      </div>
+      <div class="flex-inline">
+        <mat-form-field>
+          <input type="text" matInput #keyword [(ngModel)]="queryParam.key" (keyup.enter)="onSearch(keyword.value)" placeholder="请输入企业名称">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="onSearch(keyword.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table class="table ark-admin-table">
+        <tbody>
+          <tr>
+            <th class="ark-main-col">企业名称</th>
+            <th class="flex flex-row">
+              <span>状态 </span>
+              <div class="col-sm-6">
+                <select class="form-control" #status [(ngModel)]="queryParam.status" (change)="onChangeStatus(status.value)">
+                  <option value="0">全部</option>
+                  <option value="1">已认领</option>
+                  <option value="2">未认领</option>
+                </select>
+              </div>
+            </th>
+            <th>
+              时间
+              <a href="javascript: void(0)" (click)="onChangeSort()">
+                <i class="fa text-info" [ngClass]="{'fa-sort-amount-desc': queryParam.time === 0, 'fa-sort-amount-asc': queryParam.time === 1}"></i>
+              </a>
+            </th>
+            <th>操作</th>
+          </tr>
+          <tr *ngFor="let ent of ents" [@flyInOutAnimation]>
+            <td>{{ent.name}}</td>
+            <td>
+              <span class="badge" [ngClass]="{'badge-primary': ent.isClaimed === true, 'badge-secondary': ent.isClaimed === false}">{{ent.isClaimed === true ? '已认领' : '未认领'}}</span>
+            </td>
+            <td>{{ent.createTime | date: 'y-MM-dd'}}</td>
+            <td>
+              <button type="button" class="btn btn-info" matTooltip="认领" matTooltipPosition="above" (click)="toggleClaime(ent.md5, ent.isClaimed)">
+                <i class="fa fa-link" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-warning" (click)="onValidateAuthEdit(ent.isClaimed, ent.md5)" matTooltip="编辑" matTooltipPosition="above">
+                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+
+    <mat-card-footer class="padding-b-20">
+      <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" first="20" (onPageChange)="paginate($event)"></ark-paginator>
+    </mat-card-footer>
+  </mat-card>
+</section>

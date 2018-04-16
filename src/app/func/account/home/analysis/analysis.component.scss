@@ -1,0 +1,131 @@
+$main-bg: #fff;
+
+$yellow: #f39c12 !default;
+$red: #f00 !default;
+$blue: #0073b7 !default;
+$green: #00a65a !default;
+$info: #14997b !default;
+$warning:  #8a6d3b !default;
+$content: #777 !default;
+$text-color: #666666;
+
+.go-back {
+  width: 100%;
+  padding-left: 0;
+  font-size: 1.6rem;
+  list-style-type: none;
+  background: transparent;
+
+  li {
+    display: inline-block;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+    }
+
+    &:last-child::before {
+      color: $text-color;
+      content: '>\00a0';
+      padding: 0.5rem;
+    }
+  }
+}
+
+.nav-wrap {
+  width: 100%;
+  min-height: 700px;
+  background: $main-bg;
+  padding: 20px;
+ 
+
+  .nav-items {
+  
+    ul {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 1rem;
+      list-style: none;
+      padding: 0;
+      background: #f9f9f9;
+      border-bottom: 1px solid #efb933;
+    }
+    .item {
+      display: inline-flex;
+      justify-content: center;
+      padding-top: 12px;
+      height: 44px;
+      width: 100%;
+
+      a {
+        font-size: 18px;
+        color: #333;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+
+      }
+
+      &.select {
+        a {
+          color: #e9a90b;
+          font-weight: bold;
+        }
+        border-bottom: 6px solid #efb933;
+      }
+   
+      &:fist-child {
+        font-weight: bold;
+        border-bottom-color: 6px solid #EFB830;
+      }
+    }
+
+  }
+}
+
+.imgwrapper {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  .entitywrapper {
+    margin-left: 1rem;
+  }
+  figure {    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -1rem;
+
+    img {
+      width: 100px;
+      height: 100px;
+      margin: 20px;
+      border-radius: 50px;
+    }
+
+    figcaption {
+      margin-left: 2rem;
+    }
+
+    h3 {
+      line-height: 3rem;
+      font-weight: bold;
+      color: #000; 
+      font-size:2rem;
+    }
+    h5 {
+      color: #bdbdbd; 
+      font-size:1.4rem;
+      font-weight: 600;
+    }
+    label {
+      padding-right: .5rem;
+      color: #b5b5b5;
+      font-weight: 600;
+    }
+    span {
+      color: #777;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+}

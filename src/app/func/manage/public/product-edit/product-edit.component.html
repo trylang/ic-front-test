@@ -1,0 +1,143 @@
+<link rel="stylesheet" href="/src/asset/css/primeng/primeng.min.css">
+<link rel="stylesheet" href="/src/asset/css/primeng/theme.css">
+
+<!-- Modal -->
+<div class="modal fade" id="technologyModal" tabindex="-1" role="dialog" aria-labelledby="technologyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="technologyModalLabel">产品分类:</h3>
+      </div>
+      <div class="modal-body">
+        <!-- <label for="" class="col-form-label full-width industry-model-head-title">产品分类</label> -->
+        <p-tree [value]="productCats" selectionMode="single" [(selection)]="selectedProductCats" (onNodeSelect)="onNodeSelect($event)"></p-tree>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <a href="javascript: void(0)" class="btn btn-lg btn-primary" data-dismiss="modal">确定</a>
+        <a href="javascript: void(0)" class="btn btn-lg btn-outline-secondary" data-dismiss="modal">取消</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ./ Modal END -->
+
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)" routerLink="{{parentRouter.routerLink}}" [queryParams]="parentRouter.queryParams">{{parentRouter.cat1}}</a></li>
+      <li class="breadcrumb-item active">{{parentRouter.cat2}}</li>
+    </ol>
+  </div>
+  <div class="margin-b-20">
+    <mat-card>
+      <mat-card-content class="container">
+        <form role="form">
+          <div class="row justify-content-between">
+            <div class="col-md-5">
+              <div class="form-group row">
+                <label for="name" class="col-form-label ">产品名称:</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" autocomplete="off" id="name" name="name" [(ngModel)]="product.name" placeholder="产品名称">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="" for="">产品图片:</label>
+                <div class="col-md-9">
+                  <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+                  <!-- 预览照片 -->
+                  <div class="full-width padding-t-26" *ngIf="product.logo">
+                    <img [src]="product.logo | ImgPathPre | trustURL" alt="logo">
+                  </div>
+                </div>
+              </div>
+              <!-- 产品分类 -->
+              <div class="form-group row">
+                <label for="" class="col-form-label ">产品分类:</label>
+                <div class="col-md-9">
+                  <button class="btn btn-primary primary-btn" data-toggle="modal" data-target="#technologyModal">选择分类</button>
+                </div>
+
+                <!-- show container -->
+                <div class="col-12 no-padding-r">
+                  <div class="ark-list-area-container margin-t-20">
+                    <div class="ark-list-area">
+                      <label for="" class="col-form-label">一级分类:</label>
+                      <div class="list-area">
+                        <span class="text-success">{{product.productCategory1}}</span>
+                      </div>
+                    </div>
+                    <div class="ark-list-area">
+                      <label for="" class="col-form-label">二级分类:</label>
+                      <div class="list-area">
+                        <span class="text-info">{{product.productCategory2}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="" class="col-form-label col-md-2">关键词:</label>
+                <div class="col-md-10">
+                  <input type="text" class="form-control" autocomplete="off" name="keyword" [(ngModel)]="product.keywords" placeholder="关键词（多关键词请用“，”或“,”隔开)">
+                </div>
+              </div>
+              <!-- 相关产品 -->
+              <div class="form-group row">
+                <label for="" class="col-form-group ">相关方案:</label>
+                <button class="btn btn-primary primary-btn" type="button" (click)="onOpenSolutionDialog()">关联方案</button>
+
+                <div class="col-12">
+                  <div class="ark-list-area-container margin-t-20">
+                    <div class="ark-list-area">
+                      <label for="" class="col-form-label">相关方案</label>
+                      <div class="list-area">
+                        <ul>
+                          <li *ngFor="let item of relativeSolution">
+                            <span>{{item.name}}</span>
+                            <i class="fa fa-times" aria-hidden="true" (click)="removeItem(item.md5, 'solution')"></i>
+                          </li>
+                        </ul>
+                      </div>
+                      <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-form-label " for="">产品简介:</label>
+                <div class="col-12">
+                  <textarea name="sumary" placeholder="请写简介" [(ngModel)]="product.summary" class="form-control" id="" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="userType !== 3 " class="form-group flex">
+            <label for="" class="col-form-label">所属企业</label>
+            <div class="margin-l-10">
+              <button class="btn btn-lg btn-primary" (click)="onOpenEntDialog()">关联企业</button>
+              <span>{{product.companyName}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="">产品详情</label>
+            <div class="col-12">
+              <ckeditor name=" ckeditor " [(ngModel)]="product.detail " [config]="editorConf " [readonly]="false " debounce="500 ">
+              </ckeditor>
+            </div>
+          </div>
+
+          <div class="form-group text-center margin-b-6">
+            <button class="btn col-lg-4 col-md-6 col-sm-10 col-xs-12 ark-form-btn " [disabled]="isSubmiting" (click)="onSave()">
+                保存
+              </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

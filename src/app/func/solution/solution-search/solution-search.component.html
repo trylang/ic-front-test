@@ -1,0 +1,106 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+<section class="flex-1 body-bgc">
+  <div class="container col-sm-12" style="padding:0;">
+    <div class="row search-main">
+      <!-- 侧边栏 -->
+      <aside>
+        <div class="nav">
+          <p>行业</p>
+          <ul class="industry">
+            <li *ngFor="let industry of industries; let i=index" routerLinkActive="active">
+              <a href="#" routerLinkActive="active" [routerLink]="['/solution/search']" [queryParams]="{industry: industry.label}" queryParamsHandling="merge" (click)="toggleUrl('industry', industry.label)">
+            <span>{{industry.label}}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav">
+          <p>功能</p>
+          <ul class="function no-border-right">
+            <li *ngFor="let function of functions let i=index" routerLinkActive="active">
+              <a href="#" routerLinkActive="active" [routerLink]="" [queryParams]="{function: function.label}" queryParamsHandling="merge" (click)="toggleUrl('function', function.label)">
+          <span>{{function.label}}</span>
+        </a>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+      <article>
+        <div class="clear-fix col-sm-12">
+          <div class="row">
+            <!--筛选栏-->
+            <ul class="ark-sort-item">
+              <li><a [ngClass]="{'active' : sort == -1}" routerLinkActive="active" [routerLink]="" [queryParams]="{sort: -1, page: 1}" queryParamsHandling="merge">默认排序</a></li>
+              <li><a [ngClass]="{'active' : sort == 1}" routerLinkActive="active" [routerLink]="" [queryParams]="{sort: 1, page: 1}" queryParamsHandling="merge">热度</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" href="javascript: void(0);" id="regionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span *ngIf="province === '全部' || province === null; else showProvince " >地区</span>
+                  <ng-template #showProvince>
+                    <span>{{province}}</span>
+                  </ng-template>
+                  <i class="proudsmart ps-top"></i>
+                </a>
+                <ul class="region dropdown-menu"  aria-labelledby="regionDropdown">
+                  <li style="margin:0;"> 
+                    <a class="dropdown-item font-14 padding-0"  *ngFor="let province of provinces" [routerLink]="" [queryParams]="{province: province, page: 1}" queryParamsHandling="merge">{{province}}</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span class="input-group"  style="color: rgb(22, 20, 20);font-size: 14px;font-family:'微软雅黑';border:0px;">
+                为您找到
+                <span  style="color: #ff4e00;border:0px;">{{size}}</span> 条结果
+                </span>
+              </li>
+            </ul>
+
+            <!--列表区-->
+            <div class="solution-item" *ngIf="totalRecords">
+              <div class="items" *ngFor="let solution of solutions">
+                <figure>
+                  <a [routerLink]="['/solution/detail']" [queryParams]="{md5: solution.md5, name: solution.title, industry: solution.industry}">
+                    <img *ngIf="solution?.logo; else showImage"  alt="solution" [src]="solution.logo | ImgPathPre | trustURL">
+                    <ng-template #showImage>
+                        <img alt="solution" src="../../../../asset/image/default/solution_default.png">
+                    </ng-template>
+                  </a>
+                  <figcaption>
+                    <h3>
+                      <b><a class="e2e-inner-html-bound" [routerLink]="['/solution/detail']" [queryParams]="{md5: solution.md5, name: solution.name, industry: solution.industry}"  [title]="solution.title"  [innerHtml]="solution.name | trustHtml"></a></b>
+                    </h3>
+                    <h4>
+                      <span>行业:</span>
+                      <span>{{solution.industry}}</span>
+                    </h4>
+                    <h4>
+                      <span>技术:</span>
+                      <span>{{solution.technologies}}</span>
+                    </h4>
+                    <h4>
+                      <span>产品:</span>
+                      <span>{{solution.products}}</span>
+                    </h4>
+                    <h4>
+                      <span>供应商:</span>
+                      <span style="margin-left: -1em;color: #459ada;">{{solution.company_name}}</span>
+                    </h4>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+            <div style="padding-top:14px;width: 100%;margin: 0 auto;padding-bottom: 66px;" *ngIf="totalRecords">
+              <ark-paginator rows="18" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+            </div>
+            <div style="margin: 0 auto;">
+              <ark-no-data showType="search" [searchKey]="keywords" bgc="transparent" [hideSign]="totalRecords"></ark-no-data>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<ark-footer></ark-footer>

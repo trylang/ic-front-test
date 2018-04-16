@@ -1,0 +1,162 @@
+<section class="full-height flex flex-column">
+  <ark-header headerTitle="注册"></ark-header>
+
+  <section class="flex-1">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12 ark-sign-up">
+          <ul class="nav" id="signUpTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="personal-tab" data-toggle="pill" href="#personal" role="tab" aria-controls="personal" aria-expanded="true">个人注册</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="ent-tab" data-toggle="pill" href="#ent" role="tab" aria-controls="ent" aria-expanded="true">企业（园区）注册</a>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="signUpTabContent">
+            <!-- 个人注册 -->
+            <div class="tab-pane fade show active ark-signup-form" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+              <form role="form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="form-group tip" data-tip="仅支持中英文、数字和下划线，且不能为纯数字">
+                  <input type="text" class="form-control" autocomplete="off" formControlName="username" [(ngModel)]="account.username" (keyup)="onChange(account.username, 'name')" required placeholder="请输入您的用户名">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.username">{{formErrors.username}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group tip" data-tip="密码长度6-16位，支持字母、数字和字符">
+                  <input type="password" class="form-control" autocomplete="off" formControlName="password" [(ngModel)]="account.password" required placeholder="请输入您的密码">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.password">{{formErrors.password}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" autocomplete="off" formControlName="phone" [(ngModel)]="account.phone" (keyup)="onChange(account.phone, 'phone')" required placeholder="请输入您的手机号">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.phone">{{formErrors.phone}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="text" class="form-control" autocomplete="off" formControlName="verifyCode" [(ngModel)]="account.verifyCode" [readonly]="canGetCode" required placeholder="请输入手机验证码">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn" (click)="getAuthCode()" [disabled]="!canGetCode">{{codeMessage}}</button>
+                    </span>
+                  </div>
+
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.verifyCode">{{formErrors.verifyCode}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="kaptcha-input">
+                    <input type="text" class="form-control" autocomplete="off" required placeholder="请输入图片验证码" [(ngModel)]="account.kaptcha" formControlName="kaptcha">
+                    <img class="kaptcha" [src]="kaptchaImg">
+                    <a href="javascript: void(0)" class="toggle-btn" (click)="getkaptcha()">看不清？换一张</a>
+                  </div>
+
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.kaptcha">{{formErrors.kaptcha}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" checked="checked" formControlName="check" required [(ngModel)]="agreeProtocol"> <span class="text-sub font-12 margin-l-2">我已仔细阅读并接受<a routerLink="/about" target="_blank" [queryParams]="{type: 'agreement'}">创新中心用户协议</a></span>
+                    </label>
+                  </div>
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.check">{{formErrors.check}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-primary signup-btn" type="submit" [disabled]="!signUpForm.valid">注册</button>
+                </div>
+
+                <div class="form-group margin-t-12">
+                  <a routerLink="/login" class="redirect-login">已有帐号，点此登录</a>
+                </div>
+              </form>
+            </div>
+
+            <!-- 企业注册 -->
+            <div class="tab-pane fade ark-signup-form" id="ent" role="tabpanel" aria-labelledby="ent-tab">
+              <form role="form" [formGroup]="entSignUpForm" (ngSubmit)="onSubmitEnt()" novalidate>
+                <div class="form-group tip" data-tip="仅支持中英文、数字和下划线，且不能为纯数字">
+                  <input type="text" class="form-control" autocomplete="off" formControlName="username" [(ngModel)]="entAccount.username" (keyup)="onChange(entAccount.username, 'entname')" required placeholder="请输入您的用户名">
+                  <div class="error-tip">
+                    <span *ngIf="entFormErrors.username">{{entFormErrors.username}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group tip" data-tip="密码长度6-16位，支持字母、数字和字符">
+                  <input type="password" class="form-control" autocomplete="off" formControlName="password" [(ngModel)]="entAccount.password" required placeholder="请输入您的密码">
+                  <div class="error-tip">
+                    <span *ngIf="entFormErrors.password">{{entFormErrors.password}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="email" class="form-control" autocomplete="off" formControlName="email" [(ngModel)]="entAccount.email" (keyup)="onChange(entAccount.email, 'email')" required placeholder="请输入您的邮箱">
+                  <div class="error-tip">
+                    <span *ngIf="entFormErrors.email">{{entFormErrors.email}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <select name="type" id="type" class="form-control" formControlName="type" [(ngModel)]="entAccount.type">
+                    <option value="null">请选择用户类型</option>
+                    <option value="3">企业用户</option>
+                    <option value="4">园区用户</option>
+                  </select>
+
+                  <div class="error-tip">
+                    <span *ngIf="entFormErrors.type">{{entFormErrors.type}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="kaptcha-input">
+                      <input type="text" class="form-control" autocomplete="off" required placeholder="请输入图片验证码" [(ngModel)]="entAccount.kaptcha" formControlName="kaptcha">
+                      <img class="kaptcha" [src]="kaptchaImg">
+                      <a href="javascript: void(0)" class="toggle-btn" (click)="getkaptcha()">看不清？换一张</a>
+                    </div>
+  
+                    <div class="error-tip">
+                      <span *ngIf="entFormErrors.kaptcha">{{entFormErrors.kaptcha}}</span>
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" checked="checked" formControlName="check" required [(ngModel)]="agreeProtocol"> <span class="text-sub font-12 margin-l-2">我已仔细阅读并接受<a routerLink="/about" target="_blank" [queryParams]="{type: 'agreement'}" >创新中心用户协议</a></span>
+                    </label>
+                  </div>
+                  <div class="error-tip">
+                    <span *ngIf="entFormErrors.check">{{entFormErrors.check}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-primary signup-btn" type="submit" [disabled]="!entSignUpForm.valid">注册</button>
+                </div>
+
+                <div class="form-group margin-t-12">
+                  <a routerLink="/login" class="redirect-login">已有帐号，点此登录</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ark-footer></ark-footer>
+</section>

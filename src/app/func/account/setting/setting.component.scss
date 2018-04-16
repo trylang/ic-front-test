@@ -1,0 +1,39 @@
+.container {
+  min-height:300px;
+  padding: 4rem 2rem;
+  border-top: 1px solid #eee;
+  .form-group {
+  	.form-label {
+  		font-size: 1.5rem;
+  		color: #b0b0b0;
+  	}
+  	.form-text {
+  		font-size: 1.5rem;
+  		font-weight: 600;
+  		color: #333;
+  	}
+  	.editbtn {
+  		border: 2px solid #ffba59;
+      margin-left: 1rem;
+      width: 86px;
+      padding: 5px 10px;
+      color: #ffba59;
+      border-radius: 15px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: inline-block;
+  	}
+  }
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+fieldset {
+  margin-bottom: 4rem;
+}
+
+img {
+  border-radius: 5rem;
+}

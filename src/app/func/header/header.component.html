@@ -1,0 +1,30 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" routerLink="/">
+            <img src="../../../asset/image/home/logo.svg" width="160" height="46" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item page-title" *ngIf="headerTitle">
+              <a class="nav-link">{{headerTitle}}</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav form-inline">
+            <li class="nav-item">
+              <a class="nav-link sup-custom" href="http://180.76.147.159/login/login.html" target="_blank"><sup>TOP</sup> 方案体验</a>
+            </li>
+          </ul>
+ 
+          <!-- 引入公共的头部个人信息 -->
+          <ark-header-account></ark-header-account>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

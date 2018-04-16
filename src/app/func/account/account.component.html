@@ -1,0 +1,128 @@
+<section class="full-height flex flex-column">
+  <ark-header headerTitle="个人中心"></ark-header>
+
+  <section class="flex-1 body-bgc">
+    <div class="container col-sm-12 margin-b-40 margin-t-20">
+      <div class="nav-wrap">
+        <div class="nav-header row">
+          <div class="col-md-4 col-sm-12 col-xs-12 imgwrapper">
+            <figure class="account-info">
+              <img *ngIf="account?.logo; else showImage" [src]="account.logo|ImgPathPre|trustURL" width="100" alt="UserLogo">
+              <ng-template #showImage>
+                <img alt="UserLogo" src="../../../asset/image/common/person.svg">
+              </ng-template>
+              <figcaption>
+                <h3>{{account.username}}</h3>
+                <h5>({{headTitle}})</h5>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="col-md-8 col-sm-12 col-xs-12 imgwrapper no-border-right" *ngIf="account.hasAudit">
+            <figure class="entitywrapper">
+              <img *ngIf="entity?.logo; else showImage" [src]="entity.logo | ImgPathPre | trustURL" width="100" alt="EntUserLogo">
+              <ng-template #showImage>
+                <img *ngIf="account?.type===3" src="../../../asset/image/default/company_default.png">
+                <img *ngIf="account?.type===4" src="../../../asset/image/default/park_default.png">
+              </ng-template>
+              <figcaption>
+                <h3>{{entity.name}}</h3>
+                <label>企业地址：</label><span>{{entity.address}}</span>
+                <div *ngIf="account?.type===4">                                   
+                  <label>运营商：</label><span>{{entity.operator}}</span>                  
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <ul class="nav-items">
+          <li class="item nav-bgc-1">
+            <a (click)="validateHasAuth('home')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-my-homepage"></i>
+              </figure>
+              <div class="nav-tip">我的主页
+              </div>
+            </a>
+             <a class="edit" (click)="validateHasAuth('homeEdit')">定制</a>
+          </li>
+
+          <!-- For general user -->
+          <li *ngIf="account.type===1" class="item nav-bgc-2">
+            <a (click)="validateHasAuth('microAnalyze')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-my-enterprise"></i>
+              </figure>
+              <div class="nav-tip">宏观分析</div>
+            </a>
+          </li>
+          <!-- ./ End for general user -->
+
+          <!-- For ent user -->
+          <li class="item nav-bgc-2" *ngIf="account.type === 3">
+            <a (click)="validateHasAuth('ent')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-my-enterprise"></i>
+              </figure>
+              <div class="nav-tip">企业信息</div>
+            </a>
+          </li>
+          <!-- ./ END For ent user -->
+
+          <!-- For park user  -->
+          <li class="item nav-bgc-2" *ngIf="account.type === 4">
+            <a (click)="validateHasAuth('park')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-my-enterprise"></i>
+              </figure>
+              <div class="nav-tip">我的园区</div>
+            </a>
+          </li>
+
+          <li class="item nav-bgc-6" *ngIf="account.type === 4">
+            <a (click)="validateHasAuth('parkAnalyze')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-park-enterprise-analysis"></i>
+              </figure>
+              <div class="nav-tip">园区企业分析</div>
+            </a>
+          </li>
+          <!-- ./End for park user -->
+
+          <li class="item nav-bgc-3">
+            <a (click)="validateHasAuth('collect')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-my-collection"></i>
+              </figure>
+              <div class="nav-tip">我的收藏</div>
+            </a>
+          </li>
+
+          <li class="item nav-bgc-4" *ngIf="(account.type==3 || account.type==4) && (entity === 'null' || entity === null)">
+            <a (click)="validateHasAuth('audit')" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-audit-information"></i>
+              </figure>
+              <div class="nav-tip">审核信息</div>
+            </a>
+          </li>
+
+          <li class="item nav-bgc-5">
+            <a routerLink="/account/setting" routerLinkActive="active">
+              <figure>
+                <i class="proudsmart ps-account-setting"></i>
+              </figure>
+              <div class="nav-tip">账号设置</div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-content">
+          <!-- 根路由 -->
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ark-footer></ark-footer>
+</section>

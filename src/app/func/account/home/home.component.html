@@ -1,0 +1,48 @@
+<section>
+  <div class="container">
+    <div class="row ark-aside-layout">
+
+      <!-- 侧边栏 -->
+      <div class="aside">
+        <ul>
+          <li *ngIf="account.type !== 4"><a routerLink="./" [queryParams]="{type: 'solution'}"  routerLinkActive="active"><i class="proudsmart ps-latest-program"></i> <span>最新方案</span> </a></li>
+          <li *ngIf="account.type === 4"><a routerLink="./" [queryParams]="{type: 'parkNews'}"  routerLinkActive="active"><i class="proudsmart ps-park-data"></i> <span>我的舆情</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'policy'}"  routerLinkActive="active"><i class="proudsmart ps-favoured-policy"></i> <span>最新政策</span> </a></li>
+          <li *ngIf="account.type !== 3"><a routerLink="./" [queryParams]="{type: 'park'}" routerLinkActive="active"><i class="proudsmart ps-park-advantage"></i> <span>园区订阅</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'company'}"  routerLinkActive="active"><i class="proudsmart ps-settled-enterprise1"></i> <span>企业订阅</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'vendor'}"  routerLinkActive="active"><i class="proudsmart ps-supplier-collection"></i> <span>供应商动态
+          </span> </a></li>
+        </ul>
+      </div>
+
+      <!-- 主内容区域 -->
+      <div class="main table-wrapper">
+        <div class="main-header main-title">
+          <span *ngIf="subTitle==='试运营'">{{subTitle}}</span>
+          <a *ngIf="subTitle==='更多'" [attr.href]="subUrl">{{subTitle}}</a>
+        </div>
+        <div class="main-content" style="padding:0 1.5rem;">
+          <div *ngIf="showType === 'solution'">
+            <park-table [data]="solutionTable" (onPageNumber)="pageSolutionNumber($event)"></park-table>
+          </div>
+          <div *ngIf="showType === 'parkNews'">
+            <park-table [data]="parkNewsTable" (onPageNumber)="pageNameNumber('parkNews',$event)"></park-table>
+          </div>
+          <div *ngIf="showType === 'policy'">
+            <park-table [data]="policyTable" (onPageNumber)="pagePolicyNumber($event)"></park-table>
+          </div>
+          <div *ngIf="showType === 'park'">
+            <park-table [data]="parkTable"></park-table>
+           </div>
+          <div *ngIf="showType === 'company'">
+            <park-table [data]="companyTable"></park-table>
+          </div>
+          <div *ngIf="showType === 'vendor'">
+            <park-table [data]="vendorTable"  (onPageNumber)="pageVendorNumber($event)" (onModelChange)="selecteType($event)"></park-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ent-analysis *ngIf="account.type==3"></ent-analysis>

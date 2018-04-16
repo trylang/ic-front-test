@@ -1,0 +1,151 @@
+<!-- JS 文件需要提前加载，目前在首页 index.html 加载 -->
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QFS2yst9zZ1knodcwbysytFimYUHl1hL"></script> -->
+<!--加载鼠标绘制工具-->
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script> -->
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+<!--加载检索信息窗口-->
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script> -->
+<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+
+<section class="relative margin-b-20">
+  <!-- DrawTool  -->
+  <div class="drawtool animated fadeIn">
+    <a href="javascript: void(0)" [ngClass]="{'active': drawThis === 'hand'}" (click)="changeDrawType('hand')"><i class="fa fa-hand-pointer-o"></i></a>
+    <a href="javascript: void(0)" [ngClass]="{'active': drawThis === 'circle'}" (click)="changeDrawType('circle')"><i class="fa fa-circle-o"></i></a>
+  </div>
+
+  <!-- SearchTool  -->
+  <div class="searchtool animated fadeIn" (click)="clickSearchtoolContent($event)">
+    <div class="relative input-group">
+      <!-- (focusout)="onToggleFocusInput(false)"  -->
+      <input type="text" class="form-control" placeholder="输入园区名称" [(ngModel)]="keyword" (focus)="onToggleFocusInput(true, $event)" (keyup.enter)="onSearch()" aria-label="输入园区名称" aria-describedby="addon">
+      <a href="javascript: void(0)" class="input-group-addon" id="addon" (click)="onSearch()">
+        <img src="../../../../../asset/image/common/search.png" alt="Search">
+      </a>
+    </div>
+
+    <!-- 搜索结果列表 -->
+    <div class="result animated fadeIn card" *ngIf="showSearchResult === true">
+      <h4 class="card-header">园区列表</h4>
+      <div class="card-body" *ngIf="parkList && parkList.length > 0">
+        <ul>
+          <li *ngFor="let park of parkList"><a href="javascript: void(0)" (click)="onSelectPark(park.name, park.address)">{{park.sortId}} <span [innerHtml]="park.name | trustHtml"></span></a></li>
+        </ul>
+
+        <!-- Paginator -->
+        <div class="margin-t-16 margin-b-16">
+          <ark-paginator styleClass="small" rows="10" totalRecords="{{searchTotalRecords}}" (onPageChange)="searchPaginate($event)"></ark-paginator>
+        </div>
+      </div>
+      <div class="card-body" *ngIf="!parkList || parkList.length < 1">
+        <span *ngIf="!keyword">请您输入园区名称</span>
+        <span *ngIf="keyword">暂无数据，请您尝试修改或更换园区名称</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BMap -->
+  <div id="allmap" style="overflow:hidden;zoom:1;position:relative;">
+    <div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;"></div>
+  </div>
+
+  <!-- 展示画圈之后的企业列表信息 *ngIf="showAnalyse === true"-->
+  <div class="resultanalyse animated bounceInRight" *ngIf="showAnalyse === true">
+    <div>
+      <a href="javascript: void(0)" (click)="toggleAnalysePane()">
+          <i class="fa font-24" [ngClass]="{'fa-chevron-right': analysePaneState, 'fa-chevron-left': !analysePaneState}"></i>
+        </a>
+    </div>
+    <div class="box" [ngClass]="{'hide': !analysePaneState}">
+      <div class="card padding-l-20 padding-r-20 padding-t-10">
+        <form role="form">
+          <div class="form-group sup-filter">
+            <label for="">距离筛选</label>
+            <span class="name">{{centerName}}</span>
+            <div class="inline-flex align-items-center">
+              <span>附近</span>
+              <input type="text" class="form-control inline-block input-sm" name="radius" [(ngModel)]="radius" (change)="changeMapCircle()" style="width: 80px;">
+              <span>KM</span>
+            </div>
+          </div>
+          <div class="form-group container">
+            <div class="row ark-filter-content">
+              <div class="filter-title">企业状态</div>
+              <div class="col-sm-10 filter-list">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0)" class="badge" [ngClass]="{'badge-primary' : !selectedAggList.type}" (click)="selectFilterItem(null, 'type')">全部</a>
+                  </li>
+                  <li *ngFor="let type of aggList.type">
+                    <a href="javascript: void(0)" class="badge" [ngClass]="{'badge-primary': selectedAggList.type === type}" (click)="selectFilterItem(type, 'type')">{{type}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="pull-right ark-btn-more" [dataListenter]="aggList.type" moreBtn></div>
+            </div>
+
+            <div class="row ark-filter-content">
+              <div class="filter-title">注册资本</div>
+              <div class="col-sm-10 filter-list">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0)" class="badge" [ngClass]="{'badge-primary' : !selectedAggList.capi}" (click)="selectFilterItem(null, 'capi')">全部</a>
+                  </li>
+                  <li *ngFor="let capi of aggList.capi">
+                    <a href="javascript: void(0)" class="badge" [ngClass]="{'badge-primary': selectedAggList.capi === capi.value}" (click)="selectFilterItem(capi.value, 'capi')">{{capi.name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="pull-right ark-btn-more" [dataListenter]="aggList.capi" moreBtn></div>
+            </div>
+
+            <div class="row ark-filter-content">
+              <div class="filter-title">成立日期</div>
+              <div class="col-sm-10 filter-list">
+                <ul>
+                  <li>
+                    <a href="javascript: void(0)" class="badge" [ngClass]="{'badge-primary' : !selectedAggList.createdAt}" (click)="selectFilterItem(null,  'createdAt')">全部</a>
+                  </li>
+                  <li *ngFor="let date of aggList.createdAt">
+                    <a href="javascript: void(0)" class="badge" [ngClass]="{'badge-primary': selectedAggList.createdAt === date.value}" (click)="selectFilterItem(date.value, 'createdAt')">{{date.name}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="pull-right ark-btn-more" [dataListenter]="aggList.createdAt" moreBtn></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="box-body">
+        <div class="col-sm-12 margin-t-20 margin-b-20" style="padding: 0 5px; font-size: 12px;">
+          <span>为您找到 </span> <strong class="text-danger">{{entTotalRecords >= 200 ? '200+' : entTotalRecords}}</strong> <span>条结果</span>
+        </div>
+      </div>
+      <div class="box-body">
+        <table class="table table-responsive table-bordered">
+          <tbody>
+            <tr class="table-active">
+              <th>企业名称</th>
+              <th>法人</th>
+              <th>注册资本</th>
+              <th>成立时间</th>
+              <th>状态</th>
+            </tr>
+            <tr *ngFor="let ent of parkEntList">
+              <td>{{ent.name}}</td>
+              <td>{{ent.leg_rep}}</td>
+              <td>{{ent.reg_capi}}</td>
+              <td>{{ent.start_at}}</td>
+              <td>{{ent.state}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box-footer padding-t-10 padding-b-10">
+        <!-- paginator -->
+        <ark-paginator rows="10" [currentPage]="currentPage" totalRecords="{{entTotalRecords}}" (onPageChange)="entPaginate($event)"></ark-paginator>
+      </div>
+    </div>
+  </div>
+
+</section>

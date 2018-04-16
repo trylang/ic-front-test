@@ -1,0 +1,39 @@
+$text-color: #555;
+$btn-color: #e9a90b;
+$white: #fff;
+
+a {
+  text-decoration: none;
+}
+
+p {
+  color: $text-color;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.btn {
+  border-radius: 0;
+  font-size: 14px;
+  margin: auto 1.2rem;
+  padding: 7px 16px;
+}
+
+.btn-entity {
+  background-color: $btn-color;
+  color: $white;
+}
+
+.btn-outline {
+  border-color: $btn-color;
+  color: $btn-color;
+}

@@ -1,0 +1,49 @@
+.listbox-wrap {
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 100%;
+}
+
+.mb4 {
+  margin-bottom: 4px;
+}
+
+.mt15bai {
+  margin-top: 15%;
+}
+
+.listbox-main {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 20px;
+}
+
+.listbox-cont {
+  padding-left: 20px;
+}
+
+.list-title-slide {
+  font-size: 16px;
+  font-weight: 600;
+  height: 42px;
+  line-height: 42px;
+  border-bottom: 1px solid #eee;
+
+  .slide-name {
+    color: #000;
+    padding-left: 10px;
+  }
+}
+
+.list-slide {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 2em;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box
+}
+
+.slide-name {
+  color: #8cc0e7;
+  padding-left: 10px;
+}

@@ -1,0 +1,49 @@
+#tree-container {
+  svg {
+    cursor: move;
+  }
+
+  .node {
+    cursor: pointer;
+  }
+
+  .overlay {
+    background-color: #eee;
+  }
+
+  .node circle {
+    cursor: pointer;
+    fill: rgb(34, 176, 217);
+    stroke: #22b0d9;
+    stroke-width: 8px;
+    stroke-opacity: 0.4;
+  }
+
+  .node text {
+    color: #666666;
+    cursor: default;
+    font-size: 13px;
+    font-family: 'Microsoft Yahei';
+  }
+
+  .link {
+    fill: none;
+    stroke: rgb(34, 176, 217);
+    stroke-width: 1.5px;
+  }
+
+  .templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .ghostCircle.show {
+    display: block;
+  }
+
+  .ghostCircle,
+  .activeDrag .ghostCircle {
+    display: none;
+  }
+}

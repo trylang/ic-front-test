@@ -1,0 +1,21 @@
+$sub-color: #888;
+$main-color: #555;
+
+section {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  text-align: center;
+}
+
+h3 {
+  color: $main-color;
+  font-size: 14px;
+  margin: 20px auto 14px;
+}
+
+p {
+  color: $sub-color;
+  font-size: 12px;
+  margin: auto;
+}

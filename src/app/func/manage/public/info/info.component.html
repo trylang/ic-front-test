@@ -1,0 +1,59 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item active"><a href="javascript: void(0)">账户设置</a></li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <form role="form">
+        <div class="form-group row">
+          <label for="logo" class="col-md-2 col-sm-4 col-xs-12 col-form-label">头像</label>
+          <div class="col-md-10 col-sm-8 col-xs-12">
+            <figure>
+              <img [src]="account.logo | ImgPathPre | trustURL" width="100" alt="Logo">
+            </figure>
+            <div>
+              <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-md-2 col-sm-4 col-xs-12 col-form-label">用户名</label>
+          <div class="col-md-10 col-sm-8 col-xs-12">
+            <span>{{account.username}}</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-md-2 col-sm-4 col-xs-12 col-form-label">用户类型</label>
+          <div class="col-md-10 col-sm-8 col-xs-12">
+            <span class="badge badge-warning">{{account.typeName}}</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-md-2 col-sm-4 col-xs-12 col-form-label">手机号</label>
+          <div class="col-md-10 col-sm-8 col-xs-12">
+            <span>{{account.phone}}</span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-md-2 col-sm-4 col-xs-12 col-form-label">密码</label>
+          <div class="col-md-10 col-sm-8 col-xs-12">
+            <a href="javascript: void(0)" class="btn btn-lg btn-secondary" (click)="onChangePass()">修改密码</a>
+          </div>
+        </div>
+
+        <!-- <div class="form-group row">
+              <div class="full-width text-center">
+                <a href="javascript: void(0)" class="btn btn-primary">保存修改</a>
+              </div>
+            </div> -->
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

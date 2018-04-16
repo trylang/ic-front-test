@@ -1,0 +1,19 @@
+﻿$main-color: #eeb330;
+
+.container {
+	.aside {
+		width: 24rem;
+	}
+	.main {
+		padding: 1rem 3rem;
+		.title {
+			font-size: 2rem;
+			padding-bottom: 1rem;
+			border-bottom: 1px solid #ddd;
+		}
+		p {
+			font-size: 1.4rem;
+			padding: 1rem;
+		}
+	}
+}

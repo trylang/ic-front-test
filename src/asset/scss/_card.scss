@@ -1,0 +1,90 @@
+// 目前应用于标准政策园区等搜索页面的布局
+$bg-color: #fff;
+$border-color: #d5d5d5;
+$main-color: #333;
+$secondary-color: #777;
+$sup-color: #b0b0b0;
+$hr-color: #ebebeb;
+$active-color: #3f7ebd;
+$img-border-color: #e4e4e4;
+$badge-color: #eba52b;
+$badge-border-color: #eeb330;
+
+.ark-card {
+  background: $bg-color;
+  border: 1px solid $border-color;
+  color: $main-color;
+
+  .ark-card-header {
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .ark-card-content {
+    padding: 0 20px;
+
+    .ark-list {
+      align-items: center;
+      display: flex;
+      font-size: 14px;
+      margin: auto;
+      padding: 20px 0;
+      position: relative;
+
+      &::after {
+        background: $hr-color;
+        bottom: 0;
+        content: '';
+        height: 1px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
+    }
+
+    .ark-img {
+      border: 1px solid $img-border-color;
+      margin: auto;
+      padding: 4px;
+    }
+
+    .ark-badge {
+      align-items: center;
+      border: 1px solid $badge-border-color;
+      color: $badge-color;
+      display: flex;
+      height: 26px;
+      justify-content: center;
+      width: 80px;
+    }
+  }
+
+  .ark-paginator {
+    margin: 44px auto 66px;
+  }
+
+  .text-active {
+    color: $active-color;
+  }
+
+  .text-sup {
+    color: $sup-color;
+  }
+
+  .text-secondary {
+    color: $secondary-color;
+  }
+
+  .text-main {
+    color: $main-color;
+  }
+
+  .text-theme {
+    color: $badge-color;
+  }
+}
+

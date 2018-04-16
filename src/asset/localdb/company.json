@@ -1,0 +1,35 @@
+{
+	"oldCompanyList": [{
+      "label": "智能控制",
+      "icon": "ps-industry"
+    }, {
+      "label": "智能制造装备",
+      "icon": "ps-manufacturing-materials"
+    }, {
+      "label": "机器人",
+      "icon": "ps-robot1"
+    }, {
+      "label": "3D打印",
+      "icon": "ps-D-printer"
+    }, {
+      "label": "物联网",
+      "icon": "ps-internetof-things"
+    }, {
+      "label": "电气设备|工业电器",
+      "icon": "ps-electrical-equipment"
+    }, {
+      "label": "仪器仪表",
+      "icon": "ps-instruments-and-apparatuses"
+    }, {
+      "label": "云计算",
+      "icon": "ps-cloud-computing"
+    }, {
+      "label": "相关设备",
+      "icon": "ps-related-equipment"
+    }, {
+      "label": "制造材料",
+      "icon": "ps-manufacturing-materials"
+    }],
+	"productComp": ["机床与机器人", "智能检测与装备", "增材制造", "工业互联网", "智能物流与仓储", "智能传感与控制", "工业软件", "其他"],
+	"solutionComp": ["信息产业", "数控机床", "机器人", "航空航天", "海洋工程", "轨道交通", "汽车", "医疗器械", "电力", "生物医药", "化工", "食品轻工", "其他"]
+}

@@ -1,0 +1,58 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+figure {
+  height: 120px;
+  vertical-align: middle;
+  width: 180px;
+
+  a {
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+
+    img {
+      height: 100%;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+
+      &:hover {
+        transform: scale(1.06);
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+  }
+}
+
+.park-list-content {
+  h3 {
+    align-items: center;
+    display: flex;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  div,
+  label,
+  div > span {
+    font-size: 14px;
+    line-height: 14px;
+  }
+
+  label {
+    margin: auto;
+  }
+
+  .park-badge {
+    font-size: 14px;
+    line-height: 14px;
+  }
+}

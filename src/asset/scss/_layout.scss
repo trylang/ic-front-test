@@ -1,0 +1,102 @@
+// ====== Padding Margin Float Width Height  =======//
+$layoutsizelist: 1, 2, 4, 5, 6, 8, 10, 12, 15, 16, 18, 20, 22, 24, 26, 28, 30, 32, 36, 40, 42, 48, 64, 72, 100, 120;
+$directions: ('l', 'left'), ('r', 'right'), ('t', 'top'), ('b', 'bottom');
+$types: 'padding', 'margin';
+
+@mixin initLayout($type, $size, $isOmni: false) {
+  @if $isOmni == true {
+    .#{$type}-#{$size} {
+      #{$type}: #{$size / 10}rem;
+    }    
+  } @else {
+    @each $shortname, $fullname in $directions {
+      .#{$type}-#{$shortname}-#{$size} {
+        #{$type}-#{$fullname}: #{$size / 10}rem;
+      }
+    }
+  }
+}
+
+// init padding-* margin-*
+@each $size in $layoutsizelist {
+  @each $type in $types {
+    @include initLayout($type, $size, true);
+    @include initLayout($type, $size, false);
+  }
+}
+
+// init no-padding-*,no-margin-*
+@each $shortname, $fullname in $directions {
+  @each $type in $types {
+    .no-#{$type}-#{$shortname} {
+      #{$type}-#{$fullname}: 0;
+    }
+  }
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+// ======== MARGIN PADDING END ============//
+
+// Float, Flex, Position
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+.no-decoration {
+  text-decoration: none;
+}
+
+$layouts: flex, inline-flex, block, inline-block;
+@each $layout in $layouts {
+  .#{$layout} {
+    display: $layout;
+  }
+}
+
+$flexdirections: ('start', flex-start), ('center', center), ('end', flex-end), ('between', space-between), ('around', space-around), ('initial', initial), ('inherit', inherit);
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+@each $name, $property in $flexdirections {
+  .flex-v-#{$name} {
+    align-items: $property;
+  }
+  .flex-h-#{$name} {
+     justify-content: $property;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+// Width Height
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}

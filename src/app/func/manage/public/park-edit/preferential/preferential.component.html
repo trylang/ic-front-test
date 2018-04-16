@@ -1,0 +1,15 @@
+<form role="form">
+    <div class="form-group">
+      <label for="" class="col-form-label margin-b-4">园区介绍</label>
+      <ckeditor name="introduction" [(ngModel)]="intro.introduction" [config]="editorConf" [readonly]="false" debounce="500">
+      </ckeditor>
+    </div>
+    <div class="form-group margin-t-20">
+      <label for="" class="col-form-label margin-b-4">园区政策</label>
+      <textarea class="form-control" rows="10" name="preferential" [(ngModel)]="intro.preferential"></textarea>
+    </div>
+
+    <div class="form-group text-center margin-t-28">
+      <a href="javascript: void(0)" (click)="onSubmitVerify()" class="btn col-lg-5 col-md-8 col-sm-10 col-xs-12 ark-form-btn">保存</a>
+    </div>
+  </form>

@@ -1,0 +1,112 @@
+<ark-header headerTitle="专利详情"></ark-header>
+
+<div class="ark-search-detail-2 body-bgc padding-t-20 padding-b-40 flex-1">
+  <div class="container">
+    <div class="row no-margin">
+      <div class="col-lg-8 col-mg-12">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" routerLink="/patents/search">专利检索</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>专利详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <article>
+          <header>
+            <div class="tool">
+              <h3>[ {{detailsdata.leixing}}专利 ] <span [innerHTML]="detailsdata.mingcheng | trustHtml"></span></h3>
+              <div class="share">
+                <ark-share sharePic="" shareDesc="{{detailsdata.indivoduction}}"></ark-share>
+                <span><add-collect type="1" [md5]="recdata.md5"></add-collect></span>
+              </div>
+            </div>
+          </header>
+
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td class="td-label">申请号：</td>
+                <td>{{detailsdata.shenqinghao}}</td>
+                <td class="td-label">申请日：</td>
+                <td>{{detailsdata.shenqingri}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">公开（公告）号：</td>
+                <td>{{detailsdata.shouquanGonggaohao}}</td>
+                <td class="td-label">公开（公告）日：</td>
+                <td>{{detailsdata.shouquanGonggaori}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">发明人：</td>
+                <td [innerHTML]="detailsdata.shejiren | trustHtml"></td>
+                <td class="td-label">申请（专利权）人：</td>
+                <td>{{detailsdata.zhuanliQuanren}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">优先权号：</td>
+                <td colspan="3">{{detailsdata.youxianquan}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">分类号：</td>
+                <td colspan="3">{{detailsdata.fenleihao}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">申请人地址：</td>
+                <td colspan="3">{{detailsdata.dizhi}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">申请人邮编：</td>
+                <td colspan="3">{{detailsdata.youbian}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">代理机构：</td>
+                <td colspan="3">{{detailsdata.zhuanyeDailiJigou}}</td>
+              </tr>
+              <tr>
+                <td class="td-label">代理人：</td>
+                <td colspan="3">{{detailsdata.dailiren}}</td>
+              </tr>
+              <tr>
+                <td class="td-label" colspan="4">摘要：</td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <div class="row no-margin padding-t-20 padding-b-20">
+                    <div class="col-lg-6 col-sm-12">
+                      {{detailsdata.zhaiyao}}
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                      <figure>
+                        <img src="http://epub.sipo.gov.cn/{{detailsdata.suolvetu}}" alt="">
+                      </figure>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+
+      <aside class="col-lg-4 col-md-12">
+        <header>
+          <h3>类似专利</h3>
+        </header>
+
+        <div class="detail-list">
+          <div class="list-item" *ngFor="let slide of leisidata.resultList">
+            <h3>
+              <a [routerLink]="['/patents/detail']" [queryParams]="{md5:slide.md5,key:recdata.key}" [innerHTML]="slide.name | trustHtml"></a>
+            </h3>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<ark-footer></ark-footer>

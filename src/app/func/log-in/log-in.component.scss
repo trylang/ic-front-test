@@ -1,0 +1,155 @@
+$title-color: #e9a90b;
+$title-default-color: #333;
+$border-default-color: #e4e4e4;
+$border-color: #efb933;
+$fill-color: #f9f9f9;
+$readonly-color: #f5f5f5;
+$sub-text: #b0b0b0;
+$sub-blue: #459ada;
+$btn-color: $title-color;
+$line-color: #e4e4e4;
+$box-shadow: 0 0 1rem rgba(#444545, .2);
+$error-color: #ff4e00;
+$white: #fff;
+
+.ark-log-in {
+  box-shadow: $box-shadow;
+  margin: 8.2rem 0;
+  padding: 3.4rem 4rem;
+
+  ul {
+    border-bottom: 1px solid $line-color;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3.2rem;
+
+    a {
+      color: $title-default-color;
+      font-size: 1.6rem;
+      font-weight: bold;
+      line-height: 1.6rem;
+      padding: 2.6rem 0;
+      text-align: center;
+      transition: color .3s ease;
+      width: 14rem;
+
+      &.active,
+      &:hover {
+        border-bottom: .4rem solid $border-color;
+        color: $title-color;
+        transition: color .2s ease-in-out;
+      }
+    }
+  }
+
+}
+
+.ark-signup-form {
+  &.active {
+    display: flex;
+    justify-content: center;
+  }
+
+  form {
+    width: 32rem;
+
+    .form-group {
+      margin-bottom: 0;
+    }
+
+    button,
+    input,
+    select {
+      font-size: 1.4rem;
+      height: 3.8rem;
+
+      &:focus,
+      &:active:focus,
+      &.active:focus {
+        box-shadow: none;
+      }
+    }
+
+    input,
+    select {
+      border-color: $border-default-color;
+      padding-left: 1.2rem;
+
+      &:focus,
+      &:active {
+        border-color: $border-color;
+      }
+
+      &[readonly] {
+        background-color: $readonly-color;
+      }
+    }
+
+    .form-check {
+      input {
+        height: auto;
+      }
+    }
+
+    .input-group-btn {
+      button {
+        background-color: $fill-color;
+        border: 1px solid $border-default-color;
+      }
+    }
+
+    .signup-btn {
+      background-color: $btn-color;
+      border: 0;
+      font-size: 1.6rem;
+      font-weight: bold;
+      height: 3.8rem;
+      width: 100%;
+    }
+  }
+
+  .error-tip {
+    height: 26px;
+    padding-top: 6px;
+
+    span {
+      color: $error-color;
+      font-size: 12px;
+      line-height: 12px;
+    }
+  }
+
+  .login-input {
+    position: relative;
+
+    input {
+      padding-left: 34px;
+    }
+    
+    i {
+      color: $sub-text;
+      font-size: 16px;
+      height: 16px;
+      left: 12px;
+      position: absolute;
+      top: 11px;
+      width: 14px;
+    }
+  }
+  
+}
+
+.sub-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+
+  a {
+    color: $sub-blue;
+    font-size: 12px;
+  }
+}
+
+.text-sub {
+  color: $sub-text;
+}

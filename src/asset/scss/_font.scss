@@ -1,0 +1,21 @@
+$fontsize: 10 12, 14, 16, 18, 20, 22, 24, 28, 30, 32, 36, 48, 64, 72;
+
+@mixin initFont($size) {
+  font-size: #{$size / 10}rem;
+}
+
+/**
+  * Usage: Just put font-12 to class property, that means the font size is 1.2rem;
+  */
+@each $size in $fontsize {
+  .font-#{$size} {
+    @include initFont($size);
+  }
+}
+
+$text-weight: lighter, normal, bold, bolder;
+@each $w in $text-weight {
+  .text-#{$w} {
+    font-weight: $w;
+  }
+}

@@ -1,0 +1,18 @@
+<section class="full-height flex flex-column">
+  <ark-header headerTitle="404"></ark-header>
+
+  <div class="container">
+    <figure class="margin-t-32 margin-b-32 text-center">
+      <img src="../../../asset/image/common/404.svg" width="240" alt="404">
+      <figcaption class="flex flex-h-center flex-column">
+        <p>抱歉，您要查看的网页不存在或已被删除。</p>
+        <div>
+          <a href="javascript: void(0)" (click)="goBack()" class="btn btn-entity">返回上一页</a>
+          <a routerLink="/" class="btn btn-outline">返回首页</a>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+
+  <ark-footer></ark-footer>
+</section>

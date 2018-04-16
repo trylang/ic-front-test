@@ -1,0 +1,88 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)">园区列表</a></li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-header class="margin-b-10">
+      <mat-card-title class="full-height flex-v-center" style="display: flex; margin-bottom: 0;">
+        <span class="font-16 margin-r-20">园区数量 <strong class="text-danger">{{totalRecords}}</strong></span>
+      </mat-card-title>
+      <div class="flex flex-v-center ml-auto">
+        <select class="form-control margin-r-20" [(ngModel)]="queryParam.province" #province (change)="onChangeProvince(province.value)">
+          <option value="null">省份(全部)</option>
+          <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
+        </select>
+        <select class="form-control margin-r-20" [(ngModel)]="queryParam.level" #level (change)="onChangeLevel(level.value)">
+          <option value="null">级别(全部)</option>
+          <option value="国家级">国家级</option>
+          <option value="省级">省级</option>
+          <option value="市级">市级</option>
+          <option value="市级以下">市级以下</option>
+        </select>
+        <select class="form-control margin-r-20" #type [(ngModel)]="queryParam.type" (change)="onChangeType(type.value)">
+          <option value="null">用户类型(全部)</option>
+          <option value="2">研究员</option>
+          <option value="4">园区用户</option>
+        </select>
+        <select class="form-control margin-r-4" #stype [(ngModel)]="queryParam.stype" (change)="onChangeSearchType(stype.value)">
+          <option value="key">搜索园区</option>
+          <option value="owner">搜索操作人</option>
+        </select>
+      </div>
+      <div class="flex-inline">
+        <mat-form-field>
+          <input type="text" matInput #keyword (keyup.enter)="onSearch(keyword.value)" [(ngModel)]="queryParam.key" [placeholder]="queryParam.stype === 'owner' ? '请输入操作人' : '请输入园区名称'">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="onSearch(keyword.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table class="table ark-admin-table">
+        <tbody>
+          <tr>
+            <th class="ark-main-col">园区名称</th>
+            <th>省市</th>
+            <th>级别</th>
+            <th>操作人</th>
+            <th>用户类型</th>
+            <th>
+              <span>时间</span>
+              <a href="javascript: void(0)" (click)="onChangeSort()">
+                <i class="fa text-primary" [ngClass]="{'fa-sort-amount-desc': queryParam.sort === 0, 'fa-sort-amount-asc': queryParam.sort === 1}"></i>
+              </a>
+            </th>
+            <th>操作</th>
+          </tr>
+          <tr *ngFor="let park of parks" [@flyInOutAnimation]>
+            <td>{{park.name}}</td>
+            <td>{{park.province}}</td>
+            <td>{{park.level}}</td>
+            <td>{{park.owner}}</td>
+            <td>
+                {{park.accountType === 3 ? '企业用户' : (park.accountType === 4 ? '园区用户' : (park.accountType === 2 ? '研究员' : park.accountType))}}  
+            </td>
+            <td>{{park.updateTime | date: 'y-MM-dd'}}</td>
+            <td>
+              <a class="btn btn-warning btn-sm" [routerLink]="['/manage/public/park/edit']" [queryParams]="{md5: park.md5}" matTooltip="编辑" matTooltipPosition="above">
+                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+              </a>
+              <a href="javascript: void(0)" class="btn btn-danger btn-sm" (click)="onDelete(park.md5)" matTooltip="删除" matTooltipPosition="above">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+
+    <mat-card-footer class="padding-b-20">
+      <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+    </mat-card-footer>
+  </mat-card>
+</section>

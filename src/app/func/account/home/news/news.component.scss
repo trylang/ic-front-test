@@ -1,0 +1,60 @@
+$nav-bgc-list : #cacfd4, #a1a9b1;
+$nac-text-color: #ffffff;
+$main-bg: #fff;
+$aside-bgs: #cacfd4, #a1a9b1;
+$background-color: #fff;
+$border-color: #eee;
+$text-color: #666666;
+
+.go-back {
+  width: 100%;
+  padding-left: 0;
+  font-size: 1.6rem;
+  list-style-type: none;
+  background: transparent;
+
+  li {
+    display: inline-block;
+
+    a {
+      color: $text-color;
+      text-decoration: none;
+    }
+
+    &:last-child::before {
+      color: $text-color;
+      content: '>\00a0';
+      padding: 0.5rem;
+    }
+  }
+}
+
+.tab-wrapper {
+	background-color: $background-color;
+
+	h2 {
+		padding: 2rem;
+		border-bottom: 1px solid #eee;
+	}
+
+	park-table {
+		width: 100%;
+	}
+}
+
+// bgc-color
+@for $i from 1 through 2 {
+  .nav-bgc-#{$i} {
+    background-color: nth($nav-bgc-list, $i);
+  }
+}
+
+// border-color
+@for $i from 1 through 2 {
+  .nav-bgc-#{$i, } {
+    background-color: nth($nav-bgc-list, $i);
+  }
+}
+
+
+

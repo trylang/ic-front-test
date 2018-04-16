@@ -1,0 +1,145 @@
+<section class="full-hight">
+  <div class="main" [ngClass]="{'min-hight' : parkUser.state === 2 || parkUser.state === 1}">
+    <div class="main-header">
+      <legend>审核信息<span *ngIf="parkUser.state === 0">*未通过审核 原因: {{parkUser.remark}}</span></legend>
+    </div>
+    <div class="row flex-column  main-content" *ngIf="parkUser?.state === null || parkUser?.state === 0">
+      <form role="form" [formGroup]="parkUserForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="parkName" class="col-sm-3 col-form-label must-input">园区名称</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="parkName" [(ngModel)]="parkUser.parkName" required placeholder="请输入园区名称">
+            <div class="error-tip">
+              <span *ngIf="formErrors.parkName">{{formErrors.parkName}}</span>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="contactPerson" class="col-sm-3 col-form-label must-input">联系人</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="contactPerson" [(ngModel)]="parkUser.contactPerson" required placeholder="请输入联系人">
+            <div class="error-tip">
+              <span *ngIf="formErrors.contactPerson">{{formErrors.contactPerson}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="address" class="col-sm-3 col-form-label must-input">园区地址</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="address" [(ngModel)]="parkUser.address" required placeholder="请输入园区地址">
+            <div class="error-tip">
+              <span *ngIf="formErrors.address">{{formErrors.address}}</span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="personDepartment" class="col-sm-3 col-form-label must-input">所属部门</label>
+            <select class="col-sm-9 form-control" formControlName="personDepartment" [(ngModel)]="parkUser.personDepartment" required>
+              <option value="">选择联系人的职能部门</option>
+              <option *ngFor="let department of departments" value="{{department}}">{{department}}</option>
+            </select>
+            <div class="error-tip">
+              <span *ngIf="formErrors.personDepartment">{{formErrors.personDepartment}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="region" class="col-sm-3 col-form-label must-input">所属地区</label>
+            <select class="col-sm-9 form-control" formControlName="region" [(ngModel)]="parkUser.region" required>
+                <option value="">选择省份</option>
+                <option *ngFor="let province of provinces" value="{{province}}">{{province}}</option>
+            </select>
+            <div class="error-tip">
+              <span *ngIf="formErrors.region">{{formErrors.region}}</span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="contactPhone" class="col-sm-3 col-form-label must-input">手机</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="contactPhone" [(ngModel)]="parkUser.contactPhone" required placeholder="请输入手机号">
+            <div class="error-tip">
+              <span *ngIf="formErrors.contactPhone">{{formErrors.contactPhone}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="operator" class="col-sm-3 col-form-label must-input">运营商</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="operator" [(ngModel)]="parkUser.operator" required placeholder="请输入运营商">
+            <div class="error-tip">
+              <span *ngIf="formErrors.operator">{{formErrors.operator}}</span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="parkPhone" class="col-sm-3 col-form-label">园区电话</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="parkPhone" [(ngModel)]="parkUser.parkPhone" placeholder="请输入固定电话">
+            <div class="error-tip">
+              <span *ngIf="formErrors.parkPhone">{{formErrors.parkPhone}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 inherit">
+            <label for="license" class="col-sm-3 col-form-label must-input">营业执照</label>
+            <div class="col-sm-9 no-padding">
+              <button type="button" class="btn btn-primary ark-upload-btn-primary" id="basic-addon" onclick="document.getElementById('license').click()">上传文件</button>
+              <input type="file" id="license" class="hide" hidden (change)="uploadLogo($event)">
+              <!-- <div class="input-group">
+                <input type="text" class="form-control col-sm-9" readonly="readonly" aria-label="园区图片" aria-describedby="basic-addon">
+                <button type="button" class="input-group-addon" id="basic-addon" onclick="document.getElementById('license').click()">上传文件</button>
+                <input type="file" id="license" class="hide" hidden (change)="uploadLogo($event)">
+              </div> -->
+
+              <!-- 预览照片 -->
+              <div class="full-width margin-t-20" *ngIf="parkUser?.license">
+                <figure class="ark-preview-image">
+                  <img [src]="parkUser.license | ImgPathPre | trustURL" style="max-height: 180px; max-width: 300px;" alt="license">
+                </figure>
+              </div>
+              <div class="error-tip" style="padding-left:0px;">
+                <span *ngIf="!parkUser.license">请上传营业执照</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group margin-t-10">
+          <label for="parkCertificateLogo" class="col-sm-12 col-form-label must-input">场地证明材料
+            <span class="declare">*说明：自有产权的园区，请上传您的产权证照片；其他情况，请上传您的租赁合同和房产证照片。</span>
+          </label>
+          <image-upload [max]="20" [url]="imageUrl" [partName]="'upload'" [withCredentials]="true" [buttonCaption]="'选择上传图片'" [clearButtonCaption]="'清空'" [dropBoxMessage]="''" [maxFileSize]="1048576" [extensions]="['jpg','png']" [uploadedFiles]="uploaded" (removed)="onRemoved($event)"
+            (uploadFinished)="onUploadFinished($event)" (uploadStateChanged)="onUploadStateChanged($event)">
+          </image-upload>
+          <div class="error-tip" style="padding-left:0px;">
+            <span *ngIf="uploaded.length === 0">请上传场地证明材料</span>
+          </div>
+        </div>
+        <div class="form-group text-center" style="padding-top: 42px; padding-bottom: 66px;">
+          <button class="btn ark-form-btn" type="submit" [disabled]="parkUserForm.invalid || !parkUser.license || uploaded.length === 0 ">提交</button>
+        </div>
+      </form>
+    </div>
+    <div class="row flex-column main-content" *ngIf="parkUser.state === 1">
+      <div class="check-notice">
+        <div>
+          <img src="../../../../../asset/image/default/success.png" alt="" />
+          <span>通过审核</span>
+        </div>
+        <p>尊敬的用户，您提交的信息已通过审核。</p>
+        <a class="btn ark-form-btn" [routerLink]="['/account/setting']">确定</a>
+      </div>
+    </div>
+    <div class="row flex-column" *ngIf="parkUser.state === 2">
+      <div class="check-notice">
+        <div>
+          <img src="../../../../../asset/image/default/success.png" alt="" />
+          <span>提交成功,审核中...</span>
+        </div>
+        <p>提交审核资料之后需要24小时的审核期，请耐心等待...</p>
+      </div>
+    </div>
+  </div>
+</section>

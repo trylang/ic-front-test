@@ -1,0 +1,35 @@
+$footer-bgc: #8b929a;
+$footer-text-color: #fff;
+
+footer {
+  background: $footer-bgc;
+  padding: 21px 0;
+
+  ul {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+
+    & li {
+      display: inline-flex;
+      list-style-type: none;
+      padding: 0 14px;
+
+      a {
+        color: $footer-text-color;
+        font-size: 14px;
+        line-height: 14px;
+      }
+    }
+  }
+
+  & > p {
+    color: $footer-text-color;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 10px 0 0;
+    text-align: center;
+  }
+}

@@ -1,0 +1,175 @@
+
+$main-bg: #fff;
+$border-color: #eee;
+$form-label-color: #333;
+$form-text-color: #b0b0b0;
+$must-input-color: #e56963;
+$bg-color: #eee;
+$btn-color-blue: #1695f5;
+
+
+$border-color: #ccc;
+$text-color: #b0b0b0;
+$btn-color: #1695f5;
+
+label,
+input,
+select,
+button {
+  font-size: 1.6rem;
+}
+
+label{
+  font-weight: 600;
+}
+
+input,
+select.form-control:not([size]):not([multiple]) {
+  color: $text-color;
+  height: 3.8rem;
+}
+
+.primary-btn {
+  background-color: $btn-color;
+  border: 0;
+  height: 3.8rem;
+  width: 120px;
+}
+
+
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+}
+
+.check-notice {
+  margin: 0 auto;
+  padding-top: 4.2rem;
+
+  image {
+    width: 2.2rem; 
+    height: 2.2rem;
+  }
+
+  span {
+    color: #e9a90b;
+    font-size: 1.6rem;    
+    font-weight: bold;
+    margin-left: .6rem;
+  }
+ 
+  p {
+    font-size: 1.4rem;
+    color: #333;
+    margin-top: 2.6rem;
+  }
+
+  a {
+    margin-top: 2.6rem;
+    font-size: 1.2rem;
+    color: #fff;
+    width: 14rem;
+  }
+}
+
+.min-hight {
+  min-height: 300px;
+}
+
+.main {
+  background: $main-bg;
+  width: 100%;
+  margin-bottom: 20px;
+  
+  .main-header {
+    legend {
+      align-items: center;
+      display: flex;
+      font-size: 24px;
+      line-height: 24px;
+      margin: auto;
+      padding: 20px 50px;
+    }
+    span {
+      margin-left: 30px;
+      color: #ff4e00;  
+      font-size: 12px;
+      line-height: 12px;
+    }
+  }
+
+  .main-content {
+    margin: 0;
+    border-top: 1px solid $border-color;
+    padding: 20px 50px;
+
+    input,
+    select {
+      color: $form-text-color;
+      display: inline-block;
+      font-size: 14px;
+      height: 38px;
+      max-width: 320px;
+    }
+
+    .input-group {
+      & input {
+        max-width: 200px;
+      }
+
+      & .input-group-addon {
+        background-color: $btn-color-blue;
+        border: 0;
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+        color: $main-bg;
+        display: inline-flex;
+        font-size: 14px;
+        justify-content: center;
+        width: calc(320px - 200px);
+      }
+    }
+
+    label.col-form-label {
+      color: $form-label-color;
+      font-size: 16px;
+
+      &.must-input {
+        position: relative;
+
+        &::before {
+          color: $must-input-color;
+          content: '*';
+          left: 0;
+          position: absolute;
+          top: 6px;
+        }
+      }
+    }
+
+    .inherit {
+      display: inherit
+    } 
+
+    .ark-form-btn {
+      width: 300px;
+    }
+
+    .error-tip {
+      height: 26px;
+      padding-left: 14rem;
+      &>span {
+        color: #ff4e00;  
+        font-size: 12px;
+        line-height: 12px;
+      }
+    }  
+  }
+}

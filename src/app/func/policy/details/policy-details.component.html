@@ -1,0 +1,62 @@
+<ark-header headerTitle="政策详情"></ark-header>
+
+<div class="ark-search-detail-2 padding-t-20 padding-b-40 body-bgc flex-1">
+  <div class="container">
+    <div class="row no-margin">
+      <div class="col-lg-8 col-md-12">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" [routerLink]="['/policy/search']">政策搜索</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>政策详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <article>
+          <header>
+            <h3 class="title" [innerHTML]="detailsdata.title | trustHtml"></h3>
+
+            <div class="tool">
+              <h3><label for="">发布时间：</label> {{detailsdata.time}}</h3>
+              <h3><label for=""> 来源：</label> {{detailsdata.yuan}}</h3>
+
+              <div class="share">
+                <ark-share sharePic="" shareDesc="{{detailsdata.content | TrimHTML}}"></ark-share>
+                <span class="ml10"><add-collect type="6" [md5]="recdata.md5"></add-collect></span>
+              </div>
+            </div>
+          </header>
+
+          <!-- 用于详情的显示 -->
+          <div class="detail-container" [innerHTML]="detailsdata.content | trustHtml"></div>
+        </article>
+
+      </div>
+
+      <aside class="col-lg-4 col-md-12">
+        <header>
+          <h3>类似政策</h3>
+        </header>
+
+        <div class="detail-list">
+          <div class="list-item" *ngFor="let slide of leisidata.resultList">
+            <h3>
+              <a class="break-all-word" [routerLink]="['/policy/detail']" [queryParams]="{md5:slide.md5.trim()}" [innerHTML]="slide.name | trustHtml"></a>
+            </h3>
+            <div>
+              <label for="">时间：</label> <span>{{slide.publish_date}}</span>
+            </div>
+            <div>
+              <label for="">来源：</label> <span>{{slide.source}}</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<ark-footer></ark-footer>

@@ -1,0 +1,77 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)">园区列表</a></li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-header class="margin-b-10">
+      <mat-card-title class="full-height flex-v-center" style="display: flex; margin-bottom: 0;">
+        <span class="font-16 margin-r-20">园区数量 <strong class="text-danger">{{totalRecords}}</strong></span>
+      </mat-card-title>
+      <div class="flex flex-v-center mr-auto">
+        <a class="btn btn-lg btn-primary" [routerLink]="['../../public/park/edit']">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          新增园区
+        </a>
+      </div>
+      <div class="flex-inline">
+        <mat-form-field>
+          <input type="text" matInput #keyword (keyup.enter)="onSearch(keyword.value)" placeholder="请输入园区名称">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="onSearch(keyword.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <table class="table ark-admin-table">
+        <tbody>
+          <tr>
+            <th class="ark-main-col">园区名称</th>
+            <th class="ark-second-col">
+              <div class="inline-flex">
+                <span class="margin-r-10">状态</span>
+                <div>
+                  <select class="form-control" [(ngModel)]="queryParam.status" #status (change)="onChangeStatus(status.value)">
+                    <option value="0">全部</option>
+                    <option value="1">已认领</option>
+                    <option value="2">未认领</option>
+                  </select>
+                </div>
+              </div>
+            </th>
+            <th>
+              <span>时间</span>
+              <a href="javascript: void(0)" (click)="onChangeSort()">
+                <i class="fa text-primary" [ngClass]="{'fa-sort-amount-desc': queryParam.sort === 0, 'fa-sort-amount-asc': queryParam.sort === 1}"></i>
+              </a>
+            </th>
+            <th>操作</th>
+          </tr>
+          <tr *ngFor="let park of parks" [@flyInOutAnimation]>
+            <td>{{park.name}}</td>
+            <td>
+              <span class="badge" [ngClass]="{'badge-primary': park.owner, 'badge-secondary': !park.owner}">{{!park.owner ? '未认领' : '已认领'}}</span>
+            </td>
+            <td>{{park.createTime | date: 'y-MM-dd'}}</td>
+            <td>
+              <button type="button" (click)="toggleClaime(park.md5, park.owner)" class="btn btn-info" matTooltip="认领" matTooltipPosition="above">
+                <i class="fa fa-link" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="btn btn-warning" (click)="onValidateAuthEdit(park.owner, park.md5)" matTooltip="编辑" matTooltipPosition="above">
+                  <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+
+    <mat-card-footer class="padding-b-20">
+      <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+    </mat-card-footer>
+  </mat-card>
+</section>

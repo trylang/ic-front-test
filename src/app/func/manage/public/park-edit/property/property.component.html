@@ -1,0 +1,22 @@
+<div class="margin-b-10">
+  <button type="button" class="btn btn-primary btn-lg" (click)="onOpenPropertyDialog()">
+    新增物业
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 col-xs-12" *ngFor="let property of properties">
+    <figure>
+      <img src="{{property.logo | ImgPathPre}}" style="max-width: 100%" alt="PropertyLogo">
+      <figcaption>
+        <h4>物业类型： {{property.type}}</h4>
+        <h4>描述: {{property.description}}</h4>
+
+        <div class="text-right">
+          <a href="javascript: void(0)" (click)="onOpenPropertyDialog(property)">编辑</a>
+          <a href="javascript: void(0)" (click)="onDeleteProperty(property.id)">删除</a>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</div>

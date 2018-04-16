@@ -1,0 +1,43 @@
+
+$border-color: #ccc;
+$text-color: #b0b0b0;
+$btn-color: #1695f5;
+
+label,
+input,
+select,
+button {
+  font-size: 1.6rem;
+}
+
+input,
+select.form-control:not([size]):not([multiple]) {
+  color: $text-color;
+  height: 3.8rem;
+}
+
+label {
+  width: 8rem;
+
+  .col-form-label {
+    padding: 6px 15px;
+  }
+}
+
+img {
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  height: 160px;
+  width: 290px;
+}
+
+.form-group:not(:last-child) {
+  margin-bottom: 2.6rem;
+}
+
+.primary-btn {
+  background-color: $btn-color;
+  border: 0;
+  height: 38px;
+  width: 120px;
+}

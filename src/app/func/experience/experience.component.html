@@ -1,0 +1,27 @@
+<ark-header headerTitle="方案体验"></ark-header>
+<section class="flex-1 body-bgc">
+  <div class="container col-md-12 col-sm-12">
+    <div class="row">
+      <h2>方案体验</h2>
+      <div class="wrapper">
+        <div class="items col-md-4 col-sm-4" *ngFor="let item of experienceList">
+          <figure>
+            <span>
+              <img [attr.src]="item.img">
+            </span>
+            <figcaption>
+              <h3 class="title">
+                {{item.title}}
+              </h3>
+              <p>{{item.desc}}</p>
+            </figcaption>
+            <a class="" href="">立即体验</a>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

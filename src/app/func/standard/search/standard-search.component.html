@@ -1,0 +1,66 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+
+<div class="ark-search-detail-2 body-bgc padding-t-20 padding-b-40 flex-1">
+  <div class="container">
+
+    <section>
+      <div class="ark-search-filter">
+        <div *ngFor="let i of headlist" class="filter-list">
+            <div class="filter-label">{{i.title}}</div>
+            <div class="col-sm-10 search-element">
+              <ul>
+                <li>
+                  <a [ngClass]="{'active': searchParam.status == null}" [routerLink]="['/standard/search']" [queryParams]="{status: null}" queryParamsHandling="merge"> 全部</a>
+                </li>
+                <li *ngFor="let item of i.group">
+                  <a [ngClass]="{active: searchParam.status === item}" [routerLink]="['/standard/search']" [queryParams]="{status: item, page: 1}" queryParamsHandling="merge">{{item}}</a>
+                </li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="show-data-size-box" *ngIf="totalRecords">
+      <p>
+        为您找到 <span>{{totalRecords >= 200 ? '200+' : totalRecords}}</span> 条结果
+      </p>
+    </div>
+
+    <section class="ark-card" *ngIf="totalRecords > 0">
+      <ul class="ark-card-header">
+        <li class="col-md-2">标准编号</li>
+        <li class="col-md-4" style="max-width: 340px;">标准名称</li>
+        <li class="col-md-3 no-padding-r">发布部门</li>
+        <li class="col-md-2 text-center">实施日期</li>
+        <li class="full-width flex flex-h-center">状态</li>
+      </ul>
+
+      <div class="ark-card-content">
+        <ul class="ark-list" *ngFor="let standard of standards">
+          <li class="col-md-2" [innerHTML]="standard.code | trustHtml"></li>
+          <li class="col-md-4" style="max-width: 340px;">
+            <a class="text-active text-bold" [routerLink]="['/standard/detail']" [queryParams]="{md5:standard.md5}" [innerHtml]="standard.name | trustHtml"></a>
+          </li>
+          <li class="col-md-3 no-padding-r">
+            <span class="block" *ngFor="let item of standard.department">
+                  {{item}}
+                </span>
+          </li>
+          <li class="col-md-2 text-center"> {{standard.push_date}}</li>
+          <li class="full-width flex flex-h-center"> <span class="ark-badge">{{standard.status}}</span></li>
+        </ul>
+      </div>
+      <div class="ark-paginator">
+        <ark-paginator *ngIf="totalRecords!==0" rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords>200? 200 : totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+      </div>
+    </section>
+    <!-- Data not found -->
+    <div class="margin-t-20" *ngIf="totalRecords < 1">
+      <ark-no-data showType="search" [searchKey]="searchParam.key" [hideSign]="totalRecords"></ark-no-data>
+    </div>
+  </div>
+</div>
+
+<ark-footer></ark-footer>

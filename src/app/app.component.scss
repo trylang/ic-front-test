@@ -1,0 +1,472 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+.subscribe-edit-theme {
+  $ark-primary: mat-palette($mat-indigo, A200, A100, A300);
+  $ark-accent: mat-palette($mat-indigo, A200, A100, A300);
+  $ark-theme: mat-light-theme($ark-primary, $ark-accent);
+
+  @include angular-material-theme($ark-theme);
+}
+
+// 定义整个Application styles
+$bg-color: #eee;
+$btn-color: #efb933;
+$btn-color-blue: #1695f5;
+$border-color: $btn-color;
+$white: #fff;
+$border-color: #aaa;
+
+@media (min-width: 1230px) {
+  .container {
+    max-width: 1230px;
+  }
+}
+
+.ark-admin-table {
+  th,
+  td {
+    font-size: 1.4rem;
+    vertical-align: middle;
+  }
+
+  .ark-main-col {
+    width: 30%;
+  }
+
+  .ark-second-col {
+    width: 25%;
+  }
+
+  .ark-btn-warning {
+    border-radius: 2.4rem;
+    font-weight: bold;
+    padding: 0.5rem 2.5rem;
+  }
+}
+
+.body-bgc {
+  background-color: $bg-color;
+}
+
+// 用户中心 左边列表，右边内容布局
+$main-bg: #fff;
+$aside-bgs: #cacfd4, #a1a9b1;
+$aside-color: #fff;
+$border-color: #eee;
+$form-label-color: #333;
+$form-text-color: #b0b0b0;
+$must-input-color: #e56963;
+
+.ark-aside-layout {
+  .aside {
+    width: 300px;
+
+    ul {
+      list-style-type: none;
+      margin: auto;
+      padding: 0;
+    }
+
+    a {
+      align-items: center;
+      color: $aside-color;
+      display: flex;
+      font-size: 1.6rem;
+      height: 60px;
+      padding: 0 48px 0 24px;
+      position: relative;
+      text-decoration-line: none;
+
+      &.active,
+      &:hover {
+        &::after {
+          border-color: transparent transparent transparent nth($aside-bgs, 2);
+          border-style: solid;
+          border-width: 20px;
+          content: '';
+          height: 0;
+          position: absolute;
+          right: -42px;
+          top: 10px;
+          width: 0;
+        }
+      }
+    }
+
+    i {
+      font-size: 24px;
+      margin-right: 12px;
+    }
+
+    .font-container {
+      display: inline-flex;
+      justify-content: flex-start;
+      width: 36px;
+
+      i {
+        margin-right: 0;
+      }
+    }
+
+    li {
+      &:nth-child(2n + 1) {
+        background-color: nth($aside-bgs, 1);
+      }
+
+      &:nth-child(2n) {
+        background-color: nth($aside-bgs, 2);
+      }
+    }
+  }
+
+  .main {
+    background: $main-bg;
+    width: calc(100% - 300px);
+
+    .main-header {
+      h3 {
+        align-items: center;
+        display: flex;
+        font-size: 18px;
+        line-height: 18px;
+        margin: auto;
+        padding: 20px 50px;
+      }
+    }
+
+    .main-content {
+      border-top: 1px solid $border-color;
+      padding: 20px 50px;
+
+      input,
+      select {
+        color: $form-text-color;
+        display: inline-block;
+        font-size: 14px;
+        height: 38px;
+        max-width: 320px;
+      }
+
+      .input-group {
+        & input {
+          max-width: 200px;
+        }
+
+        & .input-group-addon {
+          background-color: $btn-color-blue;
+          border: 0;
+          border-bottom-right-radius: 2px;
+          border-top-right-radius: 2px;
+          color: $white;
+          display: inline-flex;
+          font-size: 14px;
+          justify-content: center;
+          width: calc(320px - 200px);
+        }
+      }
+
+      label.col-form-label {
+        color: $form-label-color;
+        font-size: 16px;
+
+        &.must-input {
+          position: relative;
+
+          &::before {
+            color: $must-input-color;
+            content: '*';
+            left: 0;
+            position: absolute;
+            top: 6px;
+          }
+        }
+      }
+
+      .ui-multiselect {
+        font-size: 12px;
+        width: 320px;
+
+        .ui-inputtext {
+          height: 24px;
+        }
+
+        .ui-multiselect-panel {
+          width: 320px;
+        }
+      }
+    }
+  }
+}
+
+.ark-form-btn {
+  background-color: $btn-color;
+  border: 0;
+  color: $bg-color;
+  font-size: 16px;
+  font-weight: bold;
+  height: 38px;
+  line-height: 28px;
+  padding: 5px 15px;
+
+  &:hover {
+    box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
+    color: $bg-color;
+  }
+}
+
+.ark-preview-image {
+  align-items: center;
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  max-width: 320px;
+  padding: 10px;
+}
+
+// multi-select style
+.ark-p-multi-select {
+  width: 100%;
+}
+// multi-select style END
+
+.ark-upload-btn,
+.ark-cancel-btn {
+  $boxshadow: #aaa;
+  $text: #ffba59;
+  $bgc: #fff;
+
+  align-items: center;
+  border-radius: 18px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 16px;
+  padding: 8px 16px;
+
+  &:hover {
+    background-color: $bgc;
+    border: 2px solid $text;
+    box-shadow: 0 1px 4px $boxshadow;
+    color: $text;
+  }
+
+  &:focus {
+    background: $bgc !important;
+    border: 2px solid $text !important;
+    box-shadow: 0 2px 6px $boxshadow !important;
+    color: $text !important;
+  }
+}
+
+// 主要用于收藏按钮
+.ark-upload-btn {
+  $bgc: #fff;
+  $text: #ffba59;
+
+  background-color: $bgc;
+  border: 2px solid $text;
+  color: $text;
+}
+
+// 取消收藏按钮样式
+.ark-cancel-btn {
+  $text: #fff;
+  $bgc: #ffba59;
+
+  background-color: $bgc;
+  border: 2px solid $bgc;
+  color: $text;
+}
+
+// 上传按钮
+.ark-upload-btn-primary {
+  align-items: center;
+  background-color: #1695f5;
+  border: 0;
+  display: flex;
+  font-size: 16px;
+  height: 38px;
+  justify-content: center;
+  width: 120px;
+}
+
+// 自定义 收藏模块及表格样式
+.collect-table-title-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.collect-table-btn-icon {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  background: #ffbc5d;
+  cursor: pointer;
+  position: relative;
+  right: -5%;
+  text-align: center;
+  color: #fff;
+}
+
+// 自定义 编辑页面 产品供应商，方案集成商 等选择区域 样式
+$shadow-color: #aaa;
+
+$icon-bg: #f0f0f0;
+$icon-color: #b0b0b0;
+$icon-bg-active: #007bff;
+$icon-color-active: #fff;
+
+$text-color: #b0b0b0;
+$line-color: #eee;
+
+.ark-list-area-container {
+  box-shadow: 0 1px 4px $shadow-color;
+  padding: 10px 20px;
+}
+
+.ark-list-area {
+  align-items: center;
+  display: flex;
+  position: relative;
+
+  &:not(:last-child) {
+    &::after {
+      background: $line-color;
+      bottom: -8px;
+      content: '';
+      height: 1.2px;
+      position: absolute;
+      width: 100%;
+    }
+
+    & {
+      margin-bottom: 16px;
+    }
+  }
+
+  label {
+    color: $text-color;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  .list-area {
+    flex: 1;
+    margin-right: 20px;
+
+    ul {
+      display: flex;
+      flex-flow: wrap;
+      margin: auto;
+      padding: 0;
+    }
+
+    li {
+      color: $text-color;
+      list-style: none;
+      margin: 3px 6px 3px 0;
+      padding: 2px 4px;
+
+      i {
+        display: none;
+      }
+    }
+
+    &.edit {
+      li {
+        border: 1px solid;
+        border-radius: 2px;
+        transition: all 0.2s ease-in-out;
+
+        i {
+          color: $icon-bg-active;
+          cursor: pointer;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .toggle-icon {
+    align-items: center;
+    background: $icon-bg;
+    border: 1px solid $icon-color;
+    border-radius: 18px;
+    color: $icon-color;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    text-decoration-line: none;
+    width: 30px;
+
+    &:hover,
+    &.active {
+      border: 0;
+      color: $icon-color-active;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      background-color: rgba($icon-bg-active, 0.7);
+    }
+
+    &.active {
+      background-color: $icon-bg-active;
+    }
+  }
+}
+// 自定义 编辑页面 产品供应商，方案集成商 等选择区域 样式 END
+
+// 重置bootstrap 默认样式
+.form-control {
+  &:focus,
+  &:active:focus {
+    border-color: $btn-color;
+    box-shadow: none;
+  }
+}
+
+// 为您搜索了多少条数据样式
+.show-data-size-box {
+  padding: 20px 0;
+
+  p {
+    color: #333;
+    font-size: 14px;
+    line-height: 14px;
+    margin: auto;
+    padding: 0;
+
+    span {
+      color: #ff4e00;
+    }
+  }
+}
+
+.text-active {
+  color: #3f7ebd;
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.max-1-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.max-2-line {
+  font-size: 1.4rem;
+  max-height: 4rem;
+  overflow: hidden;
+}
+
+.break-all-word {
+  word-break: break-all;
+}

@@ -1,0 +1,73 @@
+$box-shadow: 0 0 1rem rgba(#444545, 0.2);
+$bg_color: #fff;
+
+
+
+.container {
+  min-height:300px;
+  padding: 4rem 2rem;
+  border-top: 1px solid #eee;
+}
+
+fieldset {
+  margin-bottom: 4rem;
+}
+
+label {
+  color: #b5b5b5;
+}
+.app-email {
+  margin: 0 auto;
+  padding-top: 50px;
+  
+  h4 {
+    margin-bottom: 30px;
+    color: #333;
+    font-family: '微软雅黑'
+  }
+
+  .mail-tip {
+    p {
+      font-size: 12px;
+      line-height: 24px;
+      color: #b0b0b0;
+    }
+  }
+ 
+
+  .col-form-label {
+    width: 120px;
+    padding: 0;
+  }
+
+  .col-form-input {
+    display: inline-block;
+    padding: 0;
+    input {
+      width: 260px;
+    }
+  }
+ 
+
+  button {
+    line-height: 26px;
+    width: 260px;
+    background: #1695f5;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .error-tip {
+      margin-left: 12rem;
+      height: 26px;
+      padding-top: 6px;
+    
+      &>span {
+        color: #ff4e00;  
+        font-size: 12px;
+        line-height: 12px;
+      }
+  }
+}

@@ -1,0 +1,83 @@
+<!-- 登录注册 -->
+<ul class="navbar-nav form-inline log-in-out" *ngIf="!account.username">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/login">
+      <!-- <i class="proudsmart ps-log-in"></i> -->
+      登录
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/signup">
+      <!-- <i class="proudsmart ps-register"></i> -->
+      注册
+    </a>
+  </li>
+</ul>
+
+<!-- 登录成功后显示 -->
+<ul class="navbar-nav form-inline account" *ngIf="account.username">
+  <li class="nav-item dropdown">
+    <img [src]="account.logo | ImgPathPre | trustURL" width="30" alt="UserLogo">
+    <a class="dropdown-toggle account-name" href="javascript: void(0)" id="userDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{account.username}}
+    </a>
+    <div class="dropdown-menu margin-t-10" aria-labelledby="userDropdownMenuLink">
+      <!-- 园区 -->
+      <ng-template [ngIf]="account.type === 4">
+        <a class="dropdown-item" routerLink="/account/home" [queryParams]="{type:'parkNews'}"><i class="proudsmart ps-my-homepage" aria-hidden="true"></i> 我的主页</a>
+        <a class="dropdown-item" routerLink="/account/park/owner" [queryParams]="{type: 'info'}"><i class="proudsmart ps-my-enterprise" aria-hidden="true"></i> 我的园区</a>
+        <a class="dropdown-item" routerLink="/account/park/analyze"><i class="proudsmart ps-park-enterprise-analysis" aria-hidden="true"></i> 园区企业分析</a>
+        <a class="dropdown-item" routerLink="/account/collect" [queryParams]="{type: 'solution'}"><i class="proudsmart ps-my-collection" aria-hidden="true"></i> 我的收藏</a>
+      </ng-template>
+
+      <ng-template [ngIf]="!accountEntity && account.type === 4">
+        <a class="dropdown-item" routerLink="/account/park/check"><i class="proudsmart ps-audit-information" aria-hidden="true"></i> 审核信息</a>
+      </ng-template>
+      <!-- 园区 END -->
+
+      <!-- 企业 -->
+      <ng-template [ngIf]="account.type === 3">
+        <a class="dropdown-item" routerLink="/account/home" [queryParams]="{type:'solution'}"><i class="proudsmart ps-my-homepage" aria-hidden="true"></i> 我的主页</a>
+        <a class="dropdown-item" routerLink="/account/ent/ent/message" [queryParams]="{rootname: '企业资料'}"><i class="proudsmart ps-my-enterprise" aria-hidden="true"></i> 企业信息</a>
+        <a class="dropdown-item" routerLink="/account/collect" [queryParams]="{type: 'solution'}"><i class="proudsmart ps-my-collection" aria-hidden="true"></i> 我的收藏</a>
+      </ng-template>
+
+      <ng-template [ngIf]="!accountEntity && account.type === 3">
+        <a class="dropdown-item" routerLink="/account/ent/check"><i class="proudsmart ps-audit-information" aria-hidden="true"></i> 审核信息</a>
+      </ng-template>
+      <!-- 企业 END -->
+
+      <!-- 个人用户 -->
+      <ng-template [ngIf]="account.type === 1">
+        <a class="dropdown-item" routerLink="/account/home" [queryParams]="{type:'solution'}"><i class="proudsmart ps-my-homepage" aria-hidden="true"></i> 我的主页</a>
+        <a class="dropdown-item" routerLink="/account/person/macro"><i class="proudsmart ps-my-enterprise" aria-hidden="true"></i> 宏观分析</a>
+          <a class="dropdown-item" routerLink="/account/collect" [queryParams]="{type: 'solution'}"><i class="proudsmart ps-my-collection" aria-hidden="true"></i> 我的收藏</a>        
+      </ng-template>
+      <!-- 个人用户 END -->
+
+      <!-- 研究员，管理员 -->
+      <ng-template [ngIf]="account.type === 2">
+        <a class="dropdown-item" routerLink="/manage/researcher/ent"><i class="fa fa-building" aria-hidden="true"></i> 企业列表</a>
+        <a class="dropdown-item" routerLink="/manage/researcher/solution"><i class="fa fa-file" aria-hidden="true"></i> 方案列表</a>
+        <a class="dropdown-item" routerLink="/manage/researcher/case"><i class="fa fa-file-text" aria-hidden="true"></i> 案例列表</a>
+        <a class="dropdown-item" routerLink="/manage/researcher/product"><i class="fa fa-cubes" aria-hidden="true"></i> 产品列表</a>
+        <a class="dropdown-item" routerLink="/manage/researcher/park"><i class="fa fa-university" aria-hidden="true"></i> 园区列表</a>
+      </ng-template>
+
+      <ng-template [ngIf]="account.type === 5">
+        <a class="dropdown-item" routerLink="/manage/admin/ent"><i class="fa fa-building" aria-hidden="true"></i> 企业列表</a>
+        <a class="dropdown-item" routerLink="/manage/admin/solution"><i class="fa fa-file" aria-hidden="true"></i> 方案列表</a>
+        <a class="dropdown-item" routerLink="/manage/admin/case"><i class="fa fa-file-text" aria-hidden="true"></i> 案例列表</a>
+        <a class="dropdown-item" routerLink="/manage/admin/product"><i class="fa fa-cubes" aria-hidden="true"></i> 产品列表</a>
+        <a class="dropdown-item" routerLink="/manage/admin/park"><i class="fa fa-university" aria-hidden="true"></i> 园区列表</a>
+        <a class="dropdown-item" routerLink="/manage/admin/user/person"><i class="fa fa-users" aria-hidden="true"></i> 用户管理</a>
+        <a class="dropdown-item" routerLink="/manage/admin/audit/list"  [queryParams]="{type: 'ent'}"><i class="fa fa-gavel" aria-hidden="true"></i> 审核管理</a>
+      </ng-template>
+
+      <!-- 通用 -->
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="javascript: void(0)" (click)="redirectToSetting()"><i class="fa fa-cog" aria-hidden="true"></i> 帐号设置</a>
+      <a class="dropdown-item" href="javascript: void(0)" (click)="onLogout()"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a>
+    </div>
+  </li>
+</ul>

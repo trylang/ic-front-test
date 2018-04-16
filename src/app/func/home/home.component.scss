@@ -1,0 +1,296 @@
+// 背景渐变色
+$gradient-list : linear-gradient(to top, #79bac7, #067e95, #096a7d),
+linear-gradient(to top, #0992e1, #155abf, #133da6),
+linear-gradient(to top, #4a3a2c, #342921, #231b14),
+linear-gradient(to top, #c7c3df, #6f6fa8, #6464a1),
+linear-gradient(to top, #11172c, #161c30, #252c41),
+linear-gradient(to top, #b2b2b2, #898989, #797979);
+
+
+// 背景图片
+$theme-bg-list: url('../../../asset/image/home/banner1.png'),
+url('../../../asset/image/home/banner2.png'),
+url('../../../asset/image/home/banner3.png'),
+url('../../../asset/image/home/banner4.png'),
+url('../../../asset/image/home/banner5.png'),
+url('../../../asset/image/home/banner6.png');
+
+
+// 底部背景颜色
+$footer-bgc-list: #005b6d, #134aa6, #231b14, #6464a1, #11172c, #898989;
+$footer-text-color: #fff;
+
+$text-color: #fff;
+$supcolor: #ffd430;
+$supbgc: rgba(240, 251, 255, 0.2);
+
+.home-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  header {
+    z-index: 2;
+
+    .navbar {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    ul {
+      li {
+        align-items: center;
+        display: flex;
+        padding: 0 1.5rem;
+      }
+    }
+
+    a.nav-link {
+      color: $text-color;
+      font-size: 14px;
+
+      @media (max-width: 980px) {
+        & {
+          color: #3f7ebd;
+        }
+      }
+
+      sup {
+        color: $supcolor;
+        font-family: 'Microsoft Yahei';
+        font-size: 1rem;
+        font-weight: 700;
+        margin-right: 8px;
+      }
+
+      &.sup-custom {
+        align-items: center;
+        background-color: $supbgc;
+        border-radius: 15px;
+        display: flex;
+        font-size: 14px;
+        height: 30px;
+        justify-content: center;
+        padding: 0;
+        width: 120px;
+      }
+    }
+  }
+
+  .home-carousel {
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+
+    .carousel-item {
+      min-height: 300px;
+
+      &.active {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .home-search {
+    padding-top: 7rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    figure {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    p {
+      color: $text-color;
+      font-family: 'Roboto', sans-serif;
+      font-size: 32px;
+      line-height: 32px;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+
+      .input-group {
+        height: 40px;
+        max-width: 690px;
+        padding: 0 15px;
+
+        input {
+          border: 0;
+          border-bottom-left-radius: 2.4rem;
+          border-top-left-radius: 2.4rem;
+          font-size: 1.4rem;
+          padding-left: 2rem;
+
+          &:focus,
+          &:active:focus {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+
+        .input-group-addon {
+          background: transparent;
+          border: 0;
+          border-bottom-right-radius: 2.4rem;
+          border-top-right-radius: 2.4rem;
+          padding: 0;
+          width: 11.4rem;
+
+          img {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    line-height: 12px;
+    padding: 12px 0;
+    z-index: 1;
+
+    ul {
+      display: flex;
+      flex-flow: wrap;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      & li {
+        display: inline-flex;
+        list-style-type: none;
+        padding: 0 19px;
+
+        a {
+          color: $footer-text-color;
+          font-size: 12px;
+        }
+      }
+    }
+
+    & > p {
+      color: rgba($footer-text-color, .6);
+      margin: 8px 0 0;
+      text-align: center;
+    }
+  }
+
+  // 8 Industries
+  .slide-product {
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+
+    @media (max-width: 520px) {
+      display: none;
+    }
+
+    .carousel {
+      width: auto;
+
+      ol > li {
+        border-radius: 5px;
+        height: 10px;
+        margin-left: 8px;
+        margin-right: 8px;
+        width: 10px;
+      }
+
+      .carousel-inner {
+        height: 120px;
+      }
+    }
+
+    .product-item {
+      color: $text-color;
+      text-decoration: none;
+
+      figure {
+        margin-bottom: 1rem;
+      }
+
+      i {
+        font-size: 55px;
+      }
+
+      .circle-info {
+        font-size: 1.4rem;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+
+      li {
+        list-style: none;
+        padding: 0 3.5rem;
+      }
+    }
+
+    .carousel-indicators {
+      bottom: 0;
+    }
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 7.5rem;
+  z-index: 1;
+
+  img {
+    display: none;
+    transition: all .5s ease-in;
+  }
+
+  &:hover {
+    img {
+      display: flex;
+      transition: all 2s ease;
+    }
+  }
+}
+
+.carousel-control-prev {
+  padding-left: 1.5rem;
+}
+
+.carousel-control-next {
+  padding-right: 1.5rem;
+}
+
+// theme
+@for $i from 1 through 6 {
+  .theme-bgc-#{$i} {
+    background: nth($gradient-list, $i);
+    height: 100%;
+  }
+
+  .theme-bg-#{$i} {
+    background-image: nth($theme-bg-list, $i);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: calc(100% - 56px);
+    width: 100%;
+  }
+
+  .theme-footer-bgc-#{$i} {
+    background: nth($footer-bgc-list, $i);
+    height: 56px;
+    width: 100%;
+  }
+}

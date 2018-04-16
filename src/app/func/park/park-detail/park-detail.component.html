@@ -1,0 +1,259 @@
+<ark-header headerTitle="园区详情"></ark-header>
+
+<!-- modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">图片展示</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img [src]="activeLargeImg | ImgPathPre | trustURL" alt="Logo">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal ./ END -->
+
+<section class="flex-1 body-bgc  padding-t-20 padding-b-20">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-md-12 margin-b-20">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" routerLink="/park/search">园区列表</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>园区详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="ark-search-detail">
+          <div class="row">
+            <!-- Logo -->
+            <div class="col-lg-4 col-md-12">
+              <figure class="logo">
+                <img *ngIf="park?.logo; else showImage" alt="park" [src]="park.logo | ImgPathPre | trustURL">
+                <ng-template #showImage>
+                  <img alt="park" src="../../../../asset/image/default/park_default.png">
+                </ng-template>
+              </figure>
+            </div>
+
+            <!-- 详情简述 -->
+            <div class="col-lg-8 col-md-12">
+              <div class="detail-intro">
+                <h3 class="title">{{park.name}}</h3>
+                <div class="max-1-line">
+                  <label>主导产业: </label>
+                  <span data-toggle="tooltip" data-placement="top" title="{{park.industries}}">{{park.industries}}</span>
+                </div>
+                <div><label>基础设施: </label><span>{{park.infrastructures}}</span></div>
+                <div><label>面积: </label><span>{{park.area}}</span></div>
+                <div><label>地址: </label><span>{{park.address}}</span></div>
+                <div><label>联系方式: </label><span>{{park?.fixedPhone}}</span></div>
+                <div><label>运营商: </label><span>{{park.operator}}</span></div>
+                <div class="share">
+                  <ark-share sharePic="{{park.logo | ImgPathPre}}" shareDesc="{{introduction | TrimHTML}}"></ark-share>
+                  <add-collect type="3" [md5]="park.md5" (click)="onClick"></add-collect>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 详情 -->
+          <div class="row margin-t-30">
+            <div class="col-12 detail">
+              <div class="detail-nav">
+                <ul>
+                  <li><a [ngClass]="selItem==0 ? 'active' : ''" (click)="onItemClick(0)">园区信息</a></li>
+                  <li><a [ngClass]="selItem==1 ? 'active' : ''" (click)="onItemClick(1)">地理优势</a></li>
+                  <li><a [ngClass]="selItem==2 ? 'active' : ''" (click)="onItemClick(2)">物业</a></li>
+                </ul>
+              </div>
+
+              <div class="detail-content">
+                <!-- 园区信息 -->
+                <div class="con" [style.display]="selItem==0 ? 'block' : 'none'">
+                  <ul class="park-info">
+                    <li [ngClass]="selChildItem==0 ? 'select' : ''" (click)="onChildItemClick(0)"><a><i class="proudsmart ps-park-introduction"></i>园区介绍</a></li>
+                    <li [ngClass]="selChildItem==1 ? 'select' : ''" (click)="onChildItemClick(1)"><a><i class="proudsmart ps-favoured-policy"></i><span>优惠政策</span></a></li>
+                    <li [ngClass]="selChildItem==2 ? 'select' : ''" (click)="onChildItemClick(2)"><a><i class="proudsmart ps-settled-enterprise"></i><span>入驻企业</span></a></li>
+                    <li [ngClass]="selChildItem==3 ? 'select' : ''" (click)="onChildItemClick(3)"><a><i class="proudsmart ps-service-advantage"></i><span>服务优势</span></a></li>
+                    <li [ngClass]="selChildItem==4 ? 'select' : ''" (click)="onChildItemClick(4)"><a><i class="proudsmart ps-brand-advantage"></i><span>品牌优势</span></a></li>
+                  </ul>
+                  <div class="park-content">
+                    <div class="con" [style.display]="selChildItem==0 ? 'block' : 'none'">
+                      <div class="detail-container" *ngIf="introduction" [innerHtml]="introduction | trustHtml">
+                      </div>
+                      <ark-no-data showType="detail" bgc="transparent" [hideSign]="introduction!==null"></ark-no-data>
+                    </div>
+                    <div class="con" [style.display]="selChildItem==1 ? 'block' : 'none'">
+                      <div class="detail-container" *ngIf="preferential" [innerHtml]="preferential | trustHtml">
+                      </div>
+                      <ark-no-data showType="detail" bgc="transparent" [hideSign]="preferential!==null"></ark-no-data>
+                    </div>
+                    <div class="con" [style.display]="selChildItem==2 ? 'block' : 'none'">
+                      <div class="detail" *ngIf="totalRecords">
+                        <ul style="font-size: 18px; line-height: 28px; font-weight: bold; color: #aaa;  list-style-type: none;">
+                          <li *ngFor="let comp of companies">{{comp.name}}</li>
+                        </ul>
+                        <ark-paginator rows="10" *ngIf="totalRecords" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+                      </div>
+                      <ark-no-data showType="detail" bgc="transparent" [hideSign]="totalRecords"></ark-no-data>
+                    </div>
+                    <div class="con" [style.display]="selChildItem==3 ? 'block' : 'none'">
+                      <div class="detail" *ngIf="services" [innerHtml]="services | trustHtml">
+                      </div>
+                      <ark-no-data showType="detail" bgc="transparent" [hideSign]="services!==null"></ark-no-data>
+                    </div>
+                    <div class="con" [style.display]="selChildItem==4 ? 'block' : 'none'">
+                      <div class="detail row" *ngIf="brands">
+                        <div class="brand-items col-sm-4" *ngFor="let brand of brands">
+                          <figure *ngIf="brand.logo">
+                            <a>
+                                  <img alt="brand" [src]="brand.logo | ImgPathPre | trustURL">
+                                </a>
+                            <figcaption>
+                              <h4 class="text-overflow-line-one">
+                                <span data-toggle="tooltip" data-placement="top" title="{{brand.title}}">
+                                        {{brand.title}}
+                                    </span>
+                              </h4>
+                            </figcaption>
+                          </figure>
+                        </div>
+                      </div>
+                      <ark-no-data showType="detail" bgc="transparent" [hideSign]="brands!==null"></ark-no-data>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 地理优势 -->
+                <div class="con" [style.display]="selItem==1 ? 'block' : 'none'">
+                  <ul class="map-info">
+                    <li [ngClass]="selMapItem==0 ? 'select' : ''" (click)="onMapItemClick(0)"><a><i class="proudsmart ps-subway"></i>地铁</a></li>
+                    <li [ngClass]="selMapItem==1 ? 'select' : ''" (click)="onMapItemClick(1)"><a><i class="proudsmart ps-station"></i><span>车站</span></a></li>
+                    <li [ngClass]="selMapItem==2 ? 'select' : ''" (click)="onMapItemClick(2)"><a><i class="proudsmart ps-airport"></i><span>机场</span></a></li>
+                  </ul>
+                  <div class="map-content">
+                    <div class="con" [style.display]="selMapItem==0 ? 'block' : 'none'">
+                      <div class="map">
+                          <h5>距离该园区2公里的地铁
+                              <a  href="javascript: void(0)" (click)="toggleMapPannel(0)">
+                                <i class="proudsmart ps-top" [ngClass]="{'ps-icon-down': mapState[0], 'ps-icon-up': !mapState[0]}"></i>
+                              </a>
+                          </h5>
+                          <div class="result animated fadeIn card"  [ngClass]="{'zindex0': mapState[0], 'zindex1': !mapState[0]}">
+                            
+                            <ul style="padding:0" *ngIf="mapDataTotal1">
+                              <li *ngFor="let map of mapDatas1; let i=index">
+                                <span class="pull-left">{{i+1}}</span>
+                                <span style="display: inline-block;margin-left:10px; max-width: 132px; font-weight: bold;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;"  data-toggle="tooltip" data-placement="top" title="{{map.name}}">{{map.name}}</span>
+                                <span class="pull-right margin-r-10">{{map.detail_info.distance/1000}}km</span>
+                              </li>
+                            </ul>
+                            <!-- Paginator -->
+                            <div class="margin-t-16 margin-b-16" *ngIf="mapDataTotal1">
+                              <ark-paginator styleClass="small" rows="10" currentPage="{{mapDataPage1}}" totalRecords="{{mapDataTotal1}}" (onPageChange)="searchMapDataPaginate($event)"></ark-paginator>
+                            </div>
+                            <div *ngIf="!mapDataTotal1" class="text-center">
+                                您所选的范围内未找到地铁
+                            </div>
+                          </div>
+                        <div id="allmap0" class="allmap"></div>
+                      </div>
+                    </div>
+                    <div class="con" [style.display]="selMapItem==1 ? 'block' : 'none'">
+                      <div class="map">
+                          <h5>距离该园区20公里的车站
+                            <a href="javascript: void(0)" (click)="toggleMapPannel(1)">
+                              <i class="proudsmart ps-top" [ngClass]="{'ps-icon-down': mapState[1], 'ps-icon-up': !mapState[1]}"></i>
+                            </a>
+                          </h5>
+                          <div class="result animated fadeIn card"  [ngClass]="{'zindex0': mapState[1], 'zindex1': !mapState[1]}">
+                            <ul style="padding:0" *ngIf="mapDataTotal2">
+                              <li *ngFor="let map of mapDatas2; let i=index">
+                                <span class="pull-left">{{i+1}}</span>
+                                <span style="display: inline-block;margin-left:10px; max-width: 132px; font-weight: bold;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;"  data-toggle="tooltip" data-placement="top" title="{{map.name}}">{{map.name}}</span>
+                                <span class="pull-right margin-r-10">{{map.detail_info.distance/1000}}km</span>
+                              </li>
+                            </ul>
+                            <!-- Paginator -->
+                            <div class="margin-t-16 margin-b-16" *ngIf="mapDataTotal2">
+                              <ark-paginator styleClass="small" rows="10" currentPage="{{mapDataPage2}}" totalRecords="{{mapDataTotal2}}" (onPageChange)="searchMapDataPaginate($event)"></ark-paginator>
+                            </div>
+                            <div *ngIf="!mapDataTotal2" class="text-center">
+                                您所选的范围内未找到公路
+                            </div>
+                          </div>
+                        <div id="allmap1" class="allmap"></div>
+                      </div>
+                    </div>
+                    <div class="con" [style.display]="selMapItem==2 ? 'block' : 'none'">
+                      <div class="map">
+                          <h5>距离该园区50公里的机场
+                            <a href="javascript: void(0)" (click)="toggleMapPannel(2)">
+                              <i class="proudsmart ps-top" [ngClass]="{'ps-icon-down': mapState[2], 'ps-icon-up': !mapState[2]}"></i>
+                            </a>
+                          </h5>
+                          <div class="result animated fadeIn card"  [ngClass]="{'zindex0': mapState[2], 'zindex1': !mapState[2]}">
+                            <ul style="padding:0" *ngIf="mapDataTotal3">
+                              <li *ngFor="let map of mapDatas3; let i=index">
+                                <span class="pull-left">{{i+1}}</span>   
+                                <span style="display:inline-block;margin-left:10px; max-width: 132px; font-weight: bold;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;"  data-toggle="tooltip" data-placement="top" title="{{map.name}}">{{map.name}}</span>
+                                <span class="pull-right margin-r-10">{{map.detail_info.distance/1000}}km</span>
+                              </li>
+                            </ul>
+                            <!-- Paginator -->
+                            <div class="margin-t-16 margin-b-16" *ngIf="mapDataTotal3">
+                              <ark-paginator styleClass="small" rows="10" currentPage="{{mapDataPage3}}" totalRecords="{{mapDataTotal3}}" (onPageChange)="searchMapDataPaginate($event)"></ark-paginator>
+                            </div>
+                            <div *ngIf="!mapDataTotal3" class="text-center">
+                                您所选的范围内未找到机场
+                            </div>
+                          </div>
+                        <div id="allmap2" class="allmap"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 物业 -->
+                <div [style.display]="selItem==2 ? 'block' : 'none'">
+                  <div class="detail-list row" *ngIf="tenements">
+                    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let prop of tenements">
+                      <div class="detail-list-item">
+                        <figure *ngIf="prop.logo">
+                          <a *ngIf="prop.logo" href="javascript: void(0)" (click)="activeLargeImg = prop.logo" data-toggle="modal" data-target="#exampleModal">
+                            <img  alt="prop" [src]="prop.logo | ImgPathPre | trustURL">
+                            <div class="mask">
+                              点击查看大图
+                            </div>
+                          </a>
+                          <figcaption>
+                            <h3>{{prop.type}}</h3>
+                            <h4 [innerHtml]="prop.description | trustHtml"></h4>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="tenements!==null"></ark-no-data>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ark-footer></ark-footer>

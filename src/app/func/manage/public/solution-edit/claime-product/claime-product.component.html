@@ -1,0 +1,45 @@
+<section>
+    <div class="flex">
+      <div class="mr-auto">
+        <h3>产品列表</h3>
+      </div>
+      <div class="flex-inline">
+        <mat-form-field>
+          <input type="text" class="font-14" matInput #keyword (keyup.enter)="onSearch(keyword.value)" placeholder="请输入产品名称">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="onSearch(keyword.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="margin-l-20">
+        <button class="btn btn-lg" style="background-color: #fff; cursor: pointer" [mat-dialog-close]="cancel"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <table class="table ark-admin-table">
+      <tbody>
+        <tr>
+          <th>产品名称</th>
+          <th>企业名称</th>
+          <th>操作</th>
+        </tr>
+        <tr *ngFor="let product of products">
+          <td><p [innerHtml]="product.name | trustHtml"></p></td>
+          <td>{{product.company_name}}</td>
+          <td>
+            <a href="javascript: void(0)" mat-raised-button color="{{product.isClaimed === true ? 'primary' : 'gray'}}" (click)="toggleClaime(product.md5, product.name)">
+              关联
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="form-group">
+      <ark-paginator rows="10" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+    </div>
+    
+    <div class="form-group text-center">
+      <button class="btn btn-primary btn-lg" (click)="onApply()">确定</button>
+      <button class="btn btn-lg btn-secondary" [mat-dialog-close]="cancel">取消</button>
+    </div>
+</section>

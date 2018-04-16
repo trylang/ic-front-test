@@ -1,0 +1,13 @@
+<!-- parent -->
+<ng-template [ngIf]="node">
+  <div class="item">
+    <a [ngClass]="{'isactive': node.isActive, 'last-item': node.last}" (click)="toggleClick()" [title]="node.name">
+      <i class="fa" [ngClass]="{'fa-caret-right': !node.last, 'fa-circle-o': node.last && !node.isActive, 'fa-circle': node.last && node.isActive}"></i>{{node.name}}
+    </a>
+    <!-- child -->
+    <div class="child-container animated fadeIn" [ngClass]="{'show': node.isActive}">
+      <ark-treenode *ngFor="let children of node.children" [node]="children" (onSelecteLastNode)="emitParent($event)"></ark-treenode>
+    </div>
+  </div>
+</ng-template>
+  

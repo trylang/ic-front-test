@@ -1,0 +1,104 @@
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber';
+
+$contentbgc: #eee;
+$slide-text-color: #3c4858;
+$white: #fff;
+$slidebtn-active-bgc: #673ab7;
+$slidebtn-active-boxshadow: rgba(156, 39, 176, .28), 0 4px 20px 0 rgba(0, 0, 0, .12), 0 7px 8px -5px rgba(156, 39, 176, .2);
+
+* {
+  outline: none;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+.sidebar {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  display: inline-table;
+  width: 26rem;
+
+  h3 {
+    font-size: 2.4rem;
+    padding: 1.5rem;
+    position: relative;
+    text-align: center;
+
+    &::after {
+      background: $contentbgc;
+      bottom: 0;
+      content: '';
+      height: 1px;
+      left: 1.5rem;
+      margin-top: 10px;
+      position: absolute;
+      width: calc(100% - 3rem);
+    }
+  }
+}
+
+.sidenav-content {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: calc(100% - 26rem);
+}
+
+.sidebar-wrapper {
+  // height: calc(100vh - 75px);
+  overflow: auto;
+  position: relative;
+  z-index: 4;
+
+  li {
+    display: flex;
+    & > a {
+      align-items: center;
+      background-color: transparent;
+      border-radius: 3px;
+      color: $slide-text-color;
+      display: flex;
+      font-size: 1.6rem;
+      margin: .8rem 1.5rem;
+      padding: .8rem 1.5rem;
+      text-decoration: none;
+      transition: all .3s ease-in-out;
+      // width: 100%;
+
+      i {
+        width: 16px;
+      }
+
+      span {
+        margin-left: 2rem;
+      }
+
+      &.active,
+      &:hover {
+        background-color: $slidebtn-active-bgc;
+        box-shadow: 0 12px 20px -10px $slidebtn-active-boxshadow;
+        color: $white;
+        transition: all .3s ease;
+      }
+    }
+  }
+}
+
+.sidebar-content {
+  background-color: $contentbgc;
+}
+
+.mat-sidenav-content {
+  overflow-x: hidden;
+}
+
+.mat-drawer.mat-drawer-side {
+  overflow-y: hidden;
+}
+
+.collapsed>.fa-chevron-down {
+  transform: rotate(-90deg);
+  transition: all .3s ease;
+}

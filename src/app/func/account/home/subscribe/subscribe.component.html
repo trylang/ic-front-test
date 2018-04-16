@@ -1,0 +1,69 @@
+
+<section class="subscribe-edit-theme">
+ <div class="flex">
+    <!-- <div class="mr-auto">
+      <h3>{{data.label}}</h3>
+    </div> -->
+    <div class="company-search">
+      <form *ngIf="data.placeholder">
+        <div class="input-group">
+          <input class="form-control" autocomplete="off" type="text" id="keyword" name="keyword" maxlength="40" [attr.placeholder]="data.placeholder" [(ngModel)]="keyword" (keyup.enter)="onSearch(data.type, keyword)" (keyup)="onChange(keyword)">
+          <div class="input-group-addon">
+            <a href="javascript: void(0)" (click)="onSearch(data.type, keyword)">
+                <img src="../../../../../asset/image/solution/search.png"  alt="search">
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="margin-l-20">
+      <button class="btn btn-lg" style="background-color: #fff; cursor: pointer" [mat-dialog-close]="cancel"><i class="fa fa-times" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+  <table *ngIf="data.placeholder&&totalRecords>0" class="table ark-admin-table">
+    <tbody>
+      <tr>
+        <th>{{data.label}}</th>
+        <th class="text-center">操作</th>
+      </tr>
+      <tr *ngFor="let result of products">
+        <td [innerHtml]="result.name | trustHtml"></td>
+        <td class="text-center">
+          <a href="javascript: void(0)" mat-raised-button color="{{result.isClaimed === true ? 'primary' : 'gray'}}" (click)="toggleClaime(result.md5, result.name, data.type)">
+            {{data.options}}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event,data.type, keyword)"></ark-paginator>
+  </div>
+
+  <ark-no-data showType="search" [searchKey]="keyword" [hideSign]="totalRecords" bgc="#fff"></ark-no-data>
+
+  <section class="subscribe-section" *ngIf="data.type === 'group'">
+    <label>修改分组：</label>
+    <div class="checkbox-wrapper">
+      <mat-radio-group [(ngModel)]="productResults[0]">
+      <mat-radio-button color="primary" *ngFor="let result of products" [value]="result">
+        {{result}}
+      </mat-radio-button>
+    </mat-radio-group>
+    </div>   
+  </section>
+
+  <section class="subscribe-section" *ngIf="data.type === 'industry'">
+    <label>方案应用行业：</label>
+    <div class="checkbox-wrapper">
+      <mat-checkbox color="primary" *ngFor="let result of products" [(ngModel)]="result.isClaimed">{{result.name}}</mat-checkbox>
+    </div>    
+  </section>
+
+  <div class="subscribe-btn" *ngIf="data.showButton">
+    <button class="btn btn-lg btn-primary" (click)="onApply(data.type)">确定</button>
+    <button class="btn btn-lg btn-secondary" [mat-dialog-close]="cancel">取消</button>
+  </div>
+
+</section>

@@ -1,0 +1,32 @@
+<section>
+	<div class="container col-sm-12">
+		<div class="wrapper" *ngIf="account.type === 1 || account.type === 3">
+			<div class="box-header">
+				<h3 class="box-title">最新方案</h3>
+				<button class="btn btn-primary box-btn"(click)="onOpenIndustryDialog()">选择方案</button>
+			</div>
+			<div class="box-select">
+				<span>方案应用行业：</span>
+				<span *ngFor="let item of industrys" class="results">
+					{{item}}
+				</span>
+			</div>
+		</div>
+		<div class="wrapper" *ngIf="account.type === 1 || account.type === 4">
+			<div class="box-header">
+				<h3 class="box-title">园区订阅</h3>				
+				<button class="btn btn-primary box-btn"(click)="onOpenParkDialog()">新增订阅</button>
+			</div>
+			<park-table [data]="parkTable"></park-table>
+		</div>
+		<div class="wrapper">
+			<div class="box-container">
+				<div class="box-header">
+					<h3 class="box-title">企业订阅</h3>
+					<button class="btn btn-primary box-btn"(click)="onOpenCompanyDialog()">新增订阅</button>
+			  </div>
+				<park-table [data]="companyTable"></park-table>
+			</div>
+		</div>
+	</div>
+</section>

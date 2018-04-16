@@ -1,0 +1,122 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)" routerLink="{{parentRouter}}">企业</a></li>
+      <li class="breadcrumb-item active">{{editStatus}}</li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-content class="container">
+      <div class="row flex-column">
+        <form>
+          <div class="form-group">
+            <label for="">企业名称</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="ent.name">
+          </div>
+
+          <div class="form-group flex">
+            <label for="logo" class="col-form-label">企业图片</label>
+            <div class="col-sm-10">
+              <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+              <!-- 预览照片 -->
+              <div class="full-width" *ngIf="ent.logo">
+                <img src="{{ent.logo | ImgPathPre}}" width="300" alt="logo">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="flex">
+              <label for="" class="col-form-label">企业类型</label>
+              <div class="col-sm-10">
+                <a href="javascript: void(0)" class="btn btn-primary ark-upload-btn-primary" (click)="openEntTypeModel()">选择</a>
+              </div>
+            </div>
+
+            <!-- container -->
+            <div class="ark-list-area-container margin-t-10">
+              <div class="ark-list-area">
+                <label for="" class="col-form-label">方案集成商：</label>
+                <div class="list-area">
+                  <ul>
+                    <li *ngFor="let s of ent.solutionSupplierCategory">
+                      <span>{{s}}</span>
+                      <i class="fa fa-times" aria-hidden="true" (click)="removeItem(s, 'solution')"></i>
+                    </li>
+                  </ul>
+                </div>
+                <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+              </div>
+
+              <div class="ark-list-area">
+                <label for="" class="col-form-label">产品供应商：</label>
+                <div class="list-area">
+                  <ul>
+                    <li *ngFor="let p of ent.productSupplierCategory">
+                      <span>{{p}}</span>
+                      <i class="fa fa-times" aria-hidden="true" (click)="removeItem(p, 'product')"></i>
+                    </li>
+                  </ul>
+                </div>
+                <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="">企业地址</label>
+            <input type="text" class="form-control" name="address" [(ngModel)]="ent.address">
+          </div>
+
+          <div class="form-group">
+            <label for="">所属地区</label>
+            <select name="province" id="province" class="form-control" [(ngModel)]="ent.province">
+                <option value="null">选择省份</option>
+                <option *ngFor="let province of provinces" value="{{province}}">{{province}}</option>
+              </select>
+          </div>
+
+          <div class="form-group">
+            <label for="">企业电话</label>
+            <input type="text" class="form-control" name="phone" [(ngModel)]="ent.phone">
+          </div>
+
+          <div class="form-group">
+            <label for="">企业邮箱</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="ent.email">
+          </div>
+
+          <div class="form-group">
+            <label for="">企业网址</label>
+            <input type="text" class="form-control" name="website" [(ngModel)]="ent.website">
+          </div>
+
+          <div class="form-group">
+            <label for="product" class="col-form-label">主营产品</label>
+            <input type="text" class="form-control" name="product" [(ngModel)]="ent.mainProduct">
+          </div>
+
+          <div class="form-group">
+            <label for="">企业介绍</label>
+            <!-- Rich text -->
+            <ckeditor name="ckeditor" [(ngModel)]="ent.introduction" [config]="editorConf" [readonly]="false" debounce="500">
+            </ckeditor>
+          </div>
+
+          <div class="form-group text-center">
+            <!-- <a href="javascript: void(0)" class="btn btn-primary" (click)="onSubmit()">保存</a> -->
+            <button class="btn btn-lg btn-primary" [disabled]="isSubmiting" (click)="onSubmit()">
+              <i class="fa fa-save" aria-hidden="true"></i>
+              保存
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

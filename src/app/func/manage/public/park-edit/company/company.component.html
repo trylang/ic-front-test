@@ -1,0 +1,33 @@
+<div class="padding-t-10 padding-b-10">
+  <button type="button" class="btn btn-primary btn-lg" (click)="onOpenEntDialog()">
+    新增企业
+  </button>
+</div>
+<table class="table ark-admin-table">
+  <tbody>
+    <!-- <tr>
+      <th class="ark-main-col">企业名称</th>
+      <th>操作</th>
+    </tr> -->
+    <tr *ngFor="let company of companies">
+      <td class="ark-main-col">
+        <span *ngIf="!company.isEditable">{{company.name}}</span>
+        <input type="text" class="form-control" focus="true" *ngIf="company.isEditable" [(ngModel)]="company.name" [value]="company.name">
+      </td>
+      <td class="text-right">
+        <button *ngIf="company.isEditable" class="btn btn-success btn-sm" (click)="updateCompany(company.id, company.name)" matTooltip="保存" matTooltipPosition="above">
+          <i class="fa fa-save" aria-hidden="true"></i>
+        </button>
+        <button *ngIf="!company.isEditable" class="btn btn-warning btn-sm" (click)="showEditModal(company.id, company.name)" matTooltip="编辑" matTooltipPosition="above">
+          <i class="fa fa-pencil-square" aria-hidden="true"></i>
+        </button>
+        <a href="javascript: void(0)" class="btn btn-danger btn-sm" (click)="onDeleteCompany(company.id)" matTooltip="删除" matTooltipPosition="above">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <ark-paginator rows="10" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+</div>

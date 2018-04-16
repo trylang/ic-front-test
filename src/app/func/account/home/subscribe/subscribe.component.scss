@@ -1,0 +1,87 @@
+.company-search {
+  padding-bottom: 40px;
+  margin: 0 auto;
+  max-width: 560px;
+  width: 100%;
+
+
+  form {
+    width: 560px;
+    display: flex;
+
+    .input-group {
+      max-height: 40px;
+      max-width: 670px;
+
+      input {
+        border: 1px solid #efb933;
+        border-bottom-left-radius: 20px;
+        border-top-left-radius: 20px;
+        font-size: 1.5rem;
+        padding-left: 2rem;
+        width: 560px;
+      }
+
+      .input-group-addon {
+        padding: 0;
+        border: 0;
+        border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px;
+        background: transparent; // background: -webkit-linear-gradient(top, #e78e21, #f1c337);
+        img {
+          height: 40px;
+          width: 110px;
+        }
+      }
+    }
+  }
+}
+
+table {
+  tfoot {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-left: 12rem;
+  }
+}
+
+.apply-color {
+  background-color: #eeaf2e;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.subscribe-section {
+  position: relative;
+  top: -2rem;
+
+  label {
+    width: 100%;
+    height: 3.6rem;
+    font-size: 1.6rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    mat-checkbox,
+    mat-radio-button {
+      width: 10rem;
+      height: 3.6rem;
+      font-size: 1.4rem;
+      font-family: inherit;
+    } 
+  }
+}
+
+.subscribe-btn {
+  position: absolute;
+  left: 50%;
+  margin-top: -1.2rem;
+  margin-left: -9rem;
+}

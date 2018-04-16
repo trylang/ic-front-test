@@ -1,0 +1,172 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+
+<div class="body-bgc padding-t-20 padding-b-40 flex-1">
+  <div class=" container">
+
+    <!-- 头部搜索 -->
+    <section class="ark-search-filter" >
+      <!-- 专利类型 -->
+      <section class="filter-list">
+        <div class="filter-label">专利类型</div>
+        <div class="col-sm-10 search-element">
+          <ul>
+            <li>
+              <a [ngClass]="{'active': !queryParam.patentType || queryParam.patentType === 'null'}" [routerLink]="['/patents/search']" [queryParams]="{patentType: null}" queryParamsHandling="merge">全部</a>
+            </li>
+            <li>
+              <a [ngClass]="{'active': queryParam.patentType === '发明专利'}" [routerLink]="['/patents/search']" [queryParams]="{patentType: '发明专利', page: 1}" queryParamsHandling="merge">发明专利</a>
+              <a [ngClass]="{'active': queryParam.patentType === '实用新型'}" [routerLink]="['/patents/search']" [queryParams]="{patentType: '实用新型', page: 1}" queryParamsHandling="merge">实用新型</a>
+            </li>
+          </ul>
+        </div>
+        <div class="pull-right ark-btn-more" moreBtn></div>
+      </section>
+
+      <section class="filter-list">
+        <div class="filter-label">申请时间</div>
+        <div class="col-sm-10 search-element">
+          <ul>
+            <li>
+            <a [ngClass]="{'active': !queryParam.dateRange || queryParam.dateRange === 'null'}" [routerLink]="['/patents/search']" [queryParams]="{dateRange: 0, page: 1}" queryParamsHandling="merge">全部</a>
+            </li>
+            <li>
+              <a [ngClass]="{'active': queryParam.dateRange === 1}" [routerLink]="['/patents/search']" [queryParams]="{dateRange: 1, page: 1}" queryParamsHandling="merge">半年内</a>
+              <a [ngClass]="{'active': queryParam.dateRange === 2}" [routerLink]="['/patents/search']" [queryParams]="{dateRange: 2, page: 1}" queryParamsHandling="merge">一年内</a>
+              <a [ngClass]="{'active': queryParam.dateRange === 3}" [routerLink]="['/patents/search']" [queryParams]="{dateRange: 3, page: 1}" queryParamsHandling="merge">三年内</a>
+            </li>
+          </ul>
+        </div>
+        <div class="pull-right ark-btn-more" moreBtn></div>
+      </section>
+
+      <section class="filter-list">
+        <div class="filter-label">省份</div>
+        <div class="col-sm-10 search-element">
+          <ul>
+            <li>
+              <a [ngClass]="{'active' : !queryParam.province || queryParam.province === 'null'}" [routerLink]="['/patents/search']" [queryParams]="{province: null, page: 1}" queryParamsHandling="merge">全部</a>
+            </li>
+            <li *ngFor="let province of provinces">
+              <a [ngClass]="{active: queryParam.province === province}" [routerLink]="['/patents/search']" [queryParams]="{province: province, page: 1}" queryParamsHandling="merge">{{province}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="pull-right ark-btn-more" moreBtn></div>
+      </section>
+    </section>
+
+    <!-- 统计总数 -->
+    <div class="show-data-size-box" *ngIf="!looding && totalRecords > 0">
+      <p>
+        为您找到 <span>{{recdata.size>=200? '200+' : recdata.size}}</span> 条结果
+      </p>
+    </div>
+
+    <!-- 专利列表图表数据 -->
+    <div class="row">
+      <div class="col-md-8 col-sm-12" *ngIf="totalRecords > 0 && !looding">
+        <div class="ark-card">
+          <div class="ark-card-header">
+            <div class="col-md-2">
+              <div class="dropdown show">
+                <a class="dropdown-toggle text-theme" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{sortdata[queryParam.sort] || '默认排序'}}
+                  </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item font-14" routerLink="/patents/search" [queryParams]="{sort: ind}" queryParamsHandling="merge" *ngFor="let val of sortdata; let ind=index">{{val}}</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7"></div>
+            <div class="col-md-3">申请人</div>
+          </div>
+
+          <div class="ark-card-content" *ngIf="totalRecords!==0 && !looding">
+            <div class="ark-list" *ngFor="let slide of recdata.resultList">
+              <figure class="ark-img col-md-2 flex flex-center">
+                <img src="http://epub.sipo.gov.cn/{{slide.image}}" alt="PatentLogo">
+              </figure>
+
+              <div class="col-md-7">
+                <h5 class="font-16 text-bold margin-b-15">
+                  <a class="text-max-line-1 text-active" href="javascript: void(0)" (click)="redirectToDetail(slide.md5)">
+                      <span>[ {{slide.type}} ]</span>
+                      <span [innerHTML]="slide.name | trustHtml"></span>
+                    </a>
+                </h5>
+                <p class="flex"><span class="text-sup keep-all">发明摘要：</span><span class="text-secondary text-max-line-2 max-2-line compatible-width">{{slide.summary}}</span></p>
+                <p class="text-secondary"><span class="text-sup">申请号：</span>{{slide.app_no}}<span class="ml10 text-sup">公开号：</span>{{slide.release_no}}</p>
+                <p class="text-secondary no-margin-b"><span class="text-sup">申请日期：</span>{{slide.app_date}}<span class="ml20 text-sup">公开日期：</span>{{slide.release_date}}</p>
+              </div>
+
+              <div class="col-md-3">
+                {{slide.owner}}
+              </div>
+            </div>
+
+            <div class="ark-paginator">
+              <!-- Paginator -->
+              <ark-paginator *ngIf="totalRecords!==0" rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords>200? 200 : totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12" *ngIf="totalRecords > 0 && !looding">
+        <div class="ark-card">
+          <div class="ark-card-header">
+            <span>检索结果排序</span>
+          </div>
+
+          <div class="ark-card-content">
+            <dl class="padding-t-20 padding-b-20">
+              <dt>
+                  <h5 class="font-16 margin-b-15">专利申请人Top10</h5>
+                </dt>
+              <dd>
+                <div class="goods-graph goods-graph-user"></div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                  <h5 class="font-16 margin-b-15">专利申请趋势</h5>
+                </dt>
+              <dd>
+                <div class="goods-graph goods-graph-trend"></div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                  <h5 class="font-16 margin-b-15">专利类型分布</h5>
+                </dt>
+              <dd>
+                <div class="goods-graph goods-graph-pie"></div>
+              </dd>
+            </dl>
+            <dl>
+              <dt>
+                  <h5 class="font-16 margin-b-15">申请区域分布</h5>
+                </dt>
+              <dd>
+                <div class="goods-graph goods-graph-address"></div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- 加载中以及暂无数据 -->
+      <div class="col-12 margin-t-20" *ngIf="totalRecords === 0 || looding">
+        <div class="patents-looding">
+          <!-- 未找到数据 -->
+          <ark-no-data *ngIf="!looding" showType="search" [searchKey]="queryParam.key" [hideSign]="totalRecords"></ark-no-data>
+          <img *ngIf="looding" src="../../../../asset/image/common/loading.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ark-footer></ark-footer>

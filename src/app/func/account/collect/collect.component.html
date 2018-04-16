@@ -1,0 +1,55 @@
+<section>
+  <div class="container">
+    <div class="row ark-aside-layout" style="margin-bottom: 2rem;">
+
+      <!-- 侧边栏 -->
+      <div class="aside">
+        <ul>
+          <li><a routerLink="./" [queryParams]="{type: 'solution'}"  routerLinkActive="active"><i class="proudsmart ps-my-collection"></i> <span>方案收藏</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'product'}"  routerLinkActive="active"><i class="proudsmart ps-product-collection"></i> <span>产品收藏</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'company'}"  routerLinkActive="active"><i class="proudsmart ps-supplier-collection"></i> <span>供应商收藏</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'patents'}" routerLinkActive="active"><i class="proudsmart ps-patent-collection"></i> <span>专利收藏</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'park'}"  routerLinkActive="active"><i class="proudsmart ps-park-collection"></i> <span>园区收藏</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'standard'}"  routerLinkActive="active"><i class="proudsmart ps-standard-collection"></i> <span>标准收藏</span> </a></li>
+          <li><a routerLink="./" [queryParams]="{type: 'policy'}" routerLinkActive="active"><i class="proudsmart ps-policy-collection"></i> <span>政策收藏</span> </a></li>
+        </ul>
+      </div>
+
+      <!-- 主内容区域 -->
+      <div class="main">
+        <div class="main-header">
+          <a [attr.href]="subUrl">{{subTitle}}</a>
+        </div>
+        <div class="main-content" style="padding:0 1.5rem;">
+          <div *ngIf="this.currentType === 'solution'">
+            <park-table [data]="solutionTable" (onPageNumber)="pageNumber('solution', $event)"></park-table>
+          </div>
+
+          <div *ngIf="this.currentType === 'product'">
+            <park-table [data]="productTable" (onPageNumber)="pageNumber('product', $event)"></park-table>
+          </div>
+
+          <div *ngIf="this.currentType === 'company'">
+            <park-table [data]="companyTable" (onPageNumber)="pageNumber('company', $event)"></park-table>
+          </div>
+
+          <div *ngIf="this.currentType === 'patents'">
+            <park-table [data]="patentsTable" (onPageNumber)="pageNumber('patents', $event)"></park-table>
+          </div>
+
+          <div *ngIf="this.currentType === 'park'">
+            <park-table [data]="parkTable" (onPageNumber)="pageNumber('park', $event)"></park-table>
+          </div>
+
+          <div *ngIf="this.currentType === 'policy'">
+            <park-table [data]="policyTable" (onPageNumber)="pageNumber('policy', $event)"></park-table>
+          </div>
+
+          <div *ngIf="this.currentType === 'standard'">
+            <park-table [data]="standardTable" (onPageNumber)="pageNumber('standard', $event)"></park-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

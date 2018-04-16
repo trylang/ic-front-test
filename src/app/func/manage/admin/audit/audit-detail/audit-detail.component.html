@@ -1,0 +1,186 @@
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)">审核管理</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/manage/admin/audit/list']" [queryParams]="{type: isEntDetail ? 'ent' : 'park'}">{{title}}</a></li>
+      <li class="breadcrumb-item active">审核信息</li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+
+      <!-- Ent -->
+      <form *ngIf="isEntDetail === true">
+        <div class="form-group">
+          <label for="">企业名称: </label>
+          <span>{{ent.companyName}}</span>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="margin-l-15">企业类型: </label>
+          <div class="margin-l-10">
+            <div>
+              <label for="">方案集成商：</label> <span class="margin-r-10" *ngFor="let item of ent.solutionSupplierCategory">{{item}}</span>
+            </div>
+            <div>
+              <label for="">产品供应商：</label> <span class="margin-r-10" *ngFor="let item of ent.productSupplierCategory">{{item}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">企业地址: </label>
+          <span>{{ent.address}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">所属地区: </label>
+          <span>{{ent.region}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">联系人: </label>
+          <span>{{ent.contactPerson}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">所属部门: </label>
+          <span>{{ent.personDepartment}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">手机: </label>
+          <span>{{ent.contactPhone}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">企业电话: </label>
+          <span>{{ent.companyPhone}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">营业执照: </label>
+          <div>
+            <figure>
+              <img [src]="ent.license | ImgPathPre | trustURL" width="300" alt="暂无营业执照">
+              <a *ngIf="ent.license" href="javascript: void(0)" (click)="activeLargeImg = ent.license" data-toggle="modal" data-target="#exampleModal">点击查看大图</a>
+            </figure>
+          </div>
+        </div>
+      </form>
+
+      <!-- Park -->
+      <form *ngIf="isEntDetail === false">
+        <div class="form-group">
+          <label for="">园区名称: </label>
+          <span>{{park.parkName}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">园区地址: </label>
+          <span>{{park.address}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">所属地区: </label>
+          <span>{{park.region}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">开发主体: </label>
+          <span>{{park.operator}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">联系人: </label>
+          <span>{{park.contactPerson}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">所属部门: </label>
+          <span>{{park.personDepartment}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">手机: </label>
+          <span>{{park.contactPhone}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">园区电话: </label>
+          <span>{{park.parkPhone}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="">营业执照: </label>
+          <div>
+            <figure>
+              <img [src]="park.license | ImgPathPre | trustURL" width="300" alt="暂无营业执照">
+              <a *ngIf="park.license" href="javascript: void(0)" (click)="activeLargeImg = park.license" data-toggle="modal" data-target="#exampleModal">点击查看大图</a>
+            </figure>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">场地证明材料: </label>
+          <div>
+            <figure *ngFor="let item of park.parkCertificateLogo">
+              <img [src]="item.logo | ImgPathPre | trustURL" width="300" alt="暂无场地证明图片">
+              <a *ngIf="park.parkCertificateLogo" href="javascript: void(0)" (click)="activeLargeImg = item.logo" data-toggle="modal" data-target="#exampleModal">点击查看大图</a>
+            </figure>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- modal -->
+      <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">图片展示</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img [src]="activeLargeImg | ImgPathPre | trustURL" alt="Logo">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal ./ END -->
+
+      <hr>
+
+      <!-- 审核备注 -->
+      <form>
+        <div class="form-group">
+          <label for="">审核结果</label>
+          <div>
+            <label class="form-check-label">
+              <input type="radio" name="audit" [(ngModel)]="req.state" value="1"> 通过
+            </label>
+            <label class="form-check-label">
+              <input type="radio" name="audit" [(ngModel)]="req.state" value="0"> 拒绝
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">结果备注</label>
+          <textarea class="form-control" rows="10" name="remark" [(ngModel)]="req.remark"></textarea>
+        </div>
+
+        <div class="form-group text-center">
+          <button class="btn btn-lg btn-primary" (click)="onSubmit()">
+            <i class="fa fa-save" aria-hidden="true"></i>
+            保存
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+</section>

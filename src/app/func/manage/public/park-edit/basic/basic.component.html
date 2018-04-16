@@ -1,0 +1,94 @@
+<!-- TODO: change down url -->
+<link rel="stylesheet" href="/src/asset/css/primeng/primeng.min.css">
+<link rel="stylesheet" href="/src/asset/css/primeng/theme.css">
+
+<form role="form">
+  <div class="form-group row" *ngIf="userType !== 4">
+    <label for="" class="col-sm-2 col-form-label">园区名称：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="basieName" [(ngModel)]="basic.name">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">园区类型：</label>
+    <div class="col-sm-10">
+      <select name="basicType" class="form-control" [(ngModel)]="basic.type">
+            <option value="产业园区">产业园区</option>
+            <option value="创业园区">创业园区</option>
+          </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">园区级别：</label>
+    <div class="col-sm-10">
+      <select name="basicLevel" class="form-control" [(ngModel)]="basic.level">
+        <option value="国家级">国家级</option>
+        <option value="省级">省级</option>
+        <option value="市级">市级</option>
+        <option value="市级以下">市级以下</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">园区面积：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="basicArea" maxlength="20" [(ngModel)]="basic.area">
+    </div>
+  </div>
+
+  <!-- 园区用户不显示 -->
+  <div class="form-group row" *ngIf="userType !== 4">
+    <label for="" class="col-sm-2 col-form-label">运营商：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="basicOpeartor" [(ngModel)]="basic.operator">
+    </div>
+  </div>
+
+  <div class="form-group row" *ngIf="userType !== 4">
+    <label for="" class="col-sm-2 col-form-label">园区地址：</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="basicAddress" [(ngModel)]="basic.address">
+    </div>
+  </div>
+  <!-- ./END 园区用户不显示 -->
+
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">主导产业：</label>
+    <div class="col-sm-10">
+      <p-multiSelect name="industry" defaultLabel="请选择" selectedItemsLabel="选择了 {0} 个" [options]="industries" [(ngModel)]="basic.industries"></p-multiSelect>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">基础设施：</label>
+    <div class="col-sm-10">
+      <p-multiSelect name="plant" defaultLabel="请选择" selectedItemsLabel="选择了 {0} 个" [options]="plants" [(ngModel)]="basic.infrastructures"></p-multiSelect>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">园区图片：</label>
+    <div class="col-sm-10">
+      <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+      <!-- <div class="input-group">
+        <input type="text" class="form-control" readonly="readonly" placeholder="园区图片" aria-label="园区图片" aria-describedby="basic-addon">
+        <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+      </div> -->
+
+      <!-- 预览照片 -->
+      <div class="full-width margin-t-20" *ngIf="basic.logo">
+        <figure class="ark-preview-image">
+          <img src="{{basic.logo | ImgPathPre}}" style="max-height: 180px; max-width: 300px;" alt="logo">
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group text-center">
+    <a href="javascript: void(0)" class="btn col-lg-5 col-md-8 col-sm-10 col-xs-12 ark-form-btn" (click)="saveBasic()">保存</a>
+  </div>
+
+</form>

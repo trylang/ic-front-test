@@ -1,0 +1,35 @@
+<section>
+    <div class="flex">
+      <div class="mr-auto">
+        <h3>企业列表</h3>
+      </div>
+      <div class="flex-inline">
+        <mat-form-field>
+          <input type="text" class="font-14"  matInput #keyword (keyup.enter)="onSearch(keyword.value)" placeholder="请输入企业名称">
+        </mat-form-field>
+        <a mat-mini-fab color="primary" (click)="onSearch(keyword.value)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="margin-l-20">
+        <button class="btn btn-lg" style="background-color: #fff; cursor: pointer" [mat-dialog-close]="cancel"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <table class="table ark-admin-table">
+      <tbody>
+        <tr>
+          <th>企业名称</th>
+          <th>操作</th>
+        </tr>
+        <tr *ngFor="let ent of ents">
+          <td>{{ent.name}}</td>
+          <td>
+            <a href="javascript: void(0)" class="btn btn-lg btn-primary" (click)="onClaime(ent.md5, ent.name)">关联</a>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <ark-paginator rows="10" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+      </tfoot>
+    </table>
+</section>

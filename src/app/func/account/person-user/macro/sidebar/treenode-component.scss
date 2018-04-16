@@ -1,0 +1,47 @@
+$active-color: #e9a90b;
+$text: #fff;
+
+:host {
+  color: $text;
+  display: flex;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 10px 0;
+}
+
+.child-container {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.item {
+  padding-left: 10px;
+  width: 100%;
+
+  a {
+    cursor: pointer;
+    display: block;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    i {
+      margin-right: 8px;
+    }
+
+    &.isactive {
+      i {
+        transform: rotate(90deg);
+      }
+
+      &.last-item {
+        color: $active-color;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+$title-color: #e9a90b;
+$title-default-color: #333;
+$border-default-color: #e4e4e4;
+$border-color: #efb933;
+$box-shadow: 0 0 1rem rgba(#444545, 0.2);
+$line-color: #e4e4e4;
+$sub-text: #b0b0b0;
+$error-color: #ff4e00;
+$btn-color: $title-color;
+
+.ark-sign-up {
+  box-shadow: $box-shadow;
+  margin: 4.8rem 0;
+  padding: 1.6rem 7rem;
+  text-align: center;
+
+  ul {
+    border-bottom: 1px solid $line-color;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3.2rem;
+
+    a {
+      color: $title-default-color;
+      font-size: 2.4rem;
+      font-weight: bold;
+      line-height: 2.4rem;
+      padding: 2.6rem 0;
+      text-align: center;
+      transition: color .3s ease;
+      width: 26rem;
+
+      &.active,
+      &:hover {
+        // border-bottom: .4rem solid $border-color;
+        color: $title-color;
+        transition: color .2s ease-in-out;
+      }
+    }
+  }
+
+  h3 {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin: 3.2rem auto;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    margin: 1rem auto;
+  }
+
+  .email-subtip {
+    margin: 1.6rem auto;
+  }
+
+  p {
+    color: $sub-text;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    margin-top: .6rem;
+    text-align: left;
+
+    a {
+      color: $error-color;
+    }
+  }
+
+  .signup-btn {
+    align-items: center;
+    background-color: $btn-color;
+    border: 0;
+    display: flex;
+    font-size: 1.6rem;
+    font-weight: bold;
+    height: 3.8rem;
+    justify-content: center;
+    width: 100%;
+  }
+}

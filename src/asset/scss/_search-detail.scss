@@ -1,0 +1,463 @@
+// 主要应用于 方案，案例，产品，供应商 的详情页面
+$logo-bgc: #fff;
+$logo-text: #e9a90b;
+$logo-icon: #c1c1c1;
+$border: #d5d5d5;
+$label-color: #b0b0b0;
+$main-text: #777777;
+$active-text: #3f7ebd;
+$theme-text: $logo-text;
+$theme-border: #efb933;
+$title-color: #333;
+$detail-bgc: $logo-bgc;
+$detail-table-label-bgc: #eee;
+$detail-table-label: $label-color;
+
+.ark-search-breadcrumb {
+  ol.breadcrumb {
+    background: transparent;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 0 0 1rem;
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '>';
+  }
+
+  .breadcrumb-item {
+    color: $active-text;
+    cursor: pointer;
+
+    &.active {
+      color: $main-text;
+      cursor: text;
+    }
+  }
+}
+
+.ark-search-detail {
+  .logo {
+    background-color: $logo-bgc;
+    border: 1px solid $border;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 280px;
+    padding: 4px;
+
+    img {
+      height: 180px;
+      max-width: 100%;
+    }
+
+    .view {
+      align-items: center;
+      display: flex;
+      font-size: 16px;
+      justify-content: center;
+      padding: 10px 0 6px;
+
+      i {
+        color: $logo-icon;
+        margin-right: 4px;
+      }
+
+      span {
+        color: $logo-text;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .detail-intro {
+    .title {
+      color: $title-color;
+      font-size: 2.4rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: $active-text;
+    }
+
+    div {
+      color: $main-text;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+
+      label {
+        color: $label-color;
+        font-weight: bold;
+        width: 7.4rem;
+      }
+
+      &.share {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .detail {
+    .detail-nav {
+      margin-bottom: 20px;
+
+      ul {
+        background: $logo-bgc;
+        border-bottom: 1px solid $theme-border;
+        display: flex;
+        flex-direction: row;
+        flex-flow: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        color: $title-color;
+        cursor: pointer;
+        display: flex;
+        font-size: 1.8rem;
+        padding: 10px 40px;
+        position: relative;
+        text-decoration: none;
+
+        &.active {
+          color: $theme-text;
+          font-weight: bold;
+
+          &::after {
+            background: $theme-border;
+            bottom: 0;
+            content: '';
+            height: 3px;
+            left: 0;
+            position: absolute;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .detail-content {
+
+      .detail-container {
+        * {
+          max-width: 100%;
+        }
+      }
+    }
+
+    // TODO:优化下面代码
+    .detail-list {
+      padding: 0;
+      width: 100%;
+
+      .detail-list-item {
+        background-color: $logo-bgc;
+        border: 1px solid $border;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        position: relative;
+
+        figure {
+          margin: 0;
+          padding: 4px 4px 0;
+          width: 100%;
+
+          & > a {
+            display: block;
+            height: 150px;
+            overflow: hidden;
+            width: 100%;
+
+            img {
+              height: 100%;
+              transition: all 0.3s ease-in-out;
+              width: 100%;
+
+              &:hover {
+                transform: scale(1.03);
+                transition: transform 0.4s ease-in-out;
+              }
+            }
+          }
+
+          figcaption {
+            background-color: $logo-bgc;
+            padding: 14px 10px;
+            position: relative;
+            width: 100%;
+
+            label {
+              color: $label-color;
+              font-weight: bold;
+              width: 56px;
+            }
+
+            h3 {
+              font-size: 1.4rem;
+              font-weight: bold;
+              height: 22px;
+              line-height: 22px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+
+              a {
+                color: $title-color;
+                font-weight: bold;
+              }
+            }
+
+            h4 {
+              color: $main-text;
+              font-size: 1.2rem;
+              height: 22px;
+              line-height: 22px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+
+              a {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.morelike {
+  display: flex;
+  flex-direction: column;
+  flex-flow: wrap;
+  justify-content: space-around;
+  padding: 0;
+  position: relative;
+
+  .morelike-head {
+    background-color: $logo-bgc;
+    border-bottom: 1px solid #1a86c0;
+    margin-bottom: 20px;
+    width: 100%;
+
+    h3 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      height: 43px;
+      line-height: 43px;
+      margin: auto;
+      padding-left: 16px;
+    }
+  }
+
+  .morelike-body {
+    background-color: $logo-bgc;
+    border: 1px solid $border;
+    display: inline-flex;
+    margin-bottom: 20px;
+    max-width: 280px;
+    width: 100%;
+
+    figure {
+      margin: 0;
+      padding: 4px 4px 0;
+      width: 100%;
+
+      a {
+        cursor: pointer;
+        text-decoration-line: none;
+      }
+
+      & > a {
+        display: block;
+        height: 150px;
+        overflow: hidden;
+        width: 100%;
+
+        img {
+          height: 100%;
+          transition: all 0.3s ease-in-out;
+          width: 100%;
+
+          &:hover {
+            transform: scale(1.03);
+            transition: transform 0.4s ease-in-out;
+          }
+        }
+      }
+
+      figcaption {
+        padding: 20px 14px;
+        width: 100%;
+
+        h3 {
+          font-size: 1.6rem;
+          font-weight: bold;
+          margin: auto;
+          overflow: hidden;
+
+          a {
+            color: $active-text;
+
+            &:hover {
+              color: $active-text;
+            }
+          }
+        }
+
+        h4 {
+          color: $main-text;
+          font-size: 1.4rem;
+          line-height: 1.6rem;
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+// 下面代码主要应用于 专利，标准，政策 详情页面的布局
+.ark-search-detail-2 {
+  article {
+    header {
+      .title {
+        color: $title-color;
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 16px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .tool {
+        flex-flow: wrap;
+      }
+
+      .share {
+        align-items: center;
+        display: inline-flex;
+        flex-flow: wrap;
+
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  .detail-container {
+    background-color: $logo-bgc;
+    border: 1px solid $border;
+    padding: 20px 30px;
+  }
+
+  .detail-table-container {
+
+    p {
+      font-size: 14px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+  }
+  
+  .detail-table {
+    background-color: $detail-bgc;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+
+    &.with-border {
+      border-left: 1px solid $border;
+      border-right: 1px solid $border;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      flex-flow: wrap;
+
+      &:first-child {
+        span {
+          border-top: 1px solid $border;
+        }
+      }
+    }
+
+    .table-label {
+      background: $detail-table-label-bgc;
+      color: $detail-table-label;
+    }
+
+    span {
+      align-items: center;
+      border-bottom: 1px solid $border;
+      display: inline-flex;
+      font-size: 12.5px;
+      min-height: 36px;
+      padding: 4px 10px;
+    }
+  }
+
+  .table {
+    background: $logo-bgc;
+
+    & td {
+      border-color: $border;
+      color: $title-color;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .td-label {
+      background: $detail-table-label-bgc;
+      color: $label-color;
+      width: 20%;
+    }
+  }
+
+  aside {
+    header {
+      margin: auto auto 20px;
+
+      h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 30px;
+      }
+    }
+
+    .detail-list {
+      background-color: $logo-bgc;
+      border: 1px solid $border;
+      padding: 10px 30px 50px;
+
+      .list-item {
+        border-bottom: 1px solid $border;
+        padding: 10px 0;
+
+        h3 {
+          font-size: 14px;
+          line-height: 28px;
+
+          a {
+            color: $active-text;
+          }
+        }
+
+        div {
+          color: $title-color;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+// -----END 代码主要应用于 专利，标准，政策 详情页面的布局

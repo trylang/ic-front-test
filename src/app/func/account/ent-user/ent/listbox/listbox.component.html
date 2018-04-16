@@ -1,0 +1,31 @@
+<article class="listbox-wrap">
+  <header class="main-header">
+    <h3>我的{{recdatas.rootname}}
+      <button class="btn btn-primary btn-lg ml10" type="button" routerLink="{{skip}}">上传{{recdatas.rootname}}</button>
+    </h3>
+  </header>
+
+  <div class="main-content listbox-main">
+    <ul class="listbox-cont">
+      <li class="row list-title-slide">
+        <div class="col-md-5 slide-name">{{recdatas.rootname}}名称</div>
+        <div class="col-md-4 text-center slide-date">时间</div>
+        <div class="col-md-3 text-center slide-work">操作</div>
+      </li>
+      <li *ngFor="let item of recdata;let ind=index" class="row list-slide">
+        <div class="col-md-5 slide-name">{{item.name}}</div>
+        <div class="col-md-4 text-center slide-date">{{item.updateTime}}</div>
+        <div class="col-md-3 text-center slide-work">
+          <button class="btn btn-warning btn-sm mb4 mr5" routerLink="{{skip}}" [queryParams]="{md5:item.md5}" matTooltip="编辑" matTooltipPosition="above" type="button">
+            <i aria-hidden="true" class="fa fa-pencil-square fa-2x"></i>
+          </button>
+          <button class="btn btn-danger btn-sm mb4" (click)="onDelete(item.md5)" matTooltip="删除" matTooltipPosition="above" type="button">
+            <i aria-hidden="true" class="fa fa-trash fa-2x"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+
+    <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+  </div>
+</article>

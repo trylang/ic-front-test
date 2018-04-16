@@ -1,0 +1,14 @@
+<ol class="go-back">
+  <li class="active">
+    <a [routerLink]="['/account/home']" [queryParams]="{type: 'park'}" style="color: #3c8dbc;">园区订阅</a>
+  </li>
+  <li class="active">
+    <a>{{parkName}}</a>
+  </li>
+</ol>
+<div class="tab-wrapper">
+  <park-table [data]="newsTable" (onPageNumber)="pageNewsNumber($event)"></park-table>
+</div>
+
+
+

@@ -1,0 +1,86 @@
+$bg-color: #fff;
+$border-color: #d5d5d5;
+$active-color: #3f7ebd;
+$sup-color: #b0b0b0;
+$secondary-color: #333;
+$more-btn: #555;
+
+.ark-search-filter {
+  background: $bg-color;
+  border: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+
+  .filter-list {
+    display: flex;
+    font-size: 16px;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    position: relative;
+
+    .filter-label {
+      color: $sup-color;
+      display: block;
+      font-size: 1.4rem;
+      line-height: 1.4rem;
+      padding: .5rem .8rem;
+      position: relative;
+      width: 8rem;
+    }
+
+    .search-element {
+      padding: 0;
+
+      ul {
+        display: inline-block;
+        list-style: none;
+        margin-bottom: 0;
+        padding-left: 0;
+
+        li {
+          display: inline-block;
+          line-height: 2.6rem;
+          list-style-type: none;
+          text-align: -webkit-match-parent;
+          text-decoration: none;
+
+          a {
+            color: $secondary-color;
+            padding: 5px 10px;
+            text-decoration: none;
+
+            &.active {
+              background-color: $active-color;
+              color: #fff;
+              display: inline;
+              line-height: 1;
+              padding: 4px 8px;
+              text-align: center;
+              vertical-align: baseline;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+
+    .ark-btn-more {
+      font-size: 1.6rem;
+      position: absolute;
+      right: 10px;
+      text-decoration: none;
+      top: .2rem;
+
+      i {
+        color: $more-btn;
+      }
+    }
+
+    .ark-agglist {
+      height: 2.8rem;
+      overflow: hidden;
+    }
+  }
+}

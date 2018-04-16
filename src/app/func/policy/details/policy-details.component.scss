@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+article {
+  header {
+    .tool {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+
+      h3 {
+        color: #333;
+        font-size: 14px;
+        margin: 0;
+
+        label {
+          color: #b0b0b0;
+          font-weight: bold;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+aside {
+  header {
+    margin-top: 68px;
+  }
+}

@@ -1,0 +1,36 @@
+.industry-model-list {
+  list-style-type: none;
+  padding: 0;
+
+  label {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    margin-left: 20px;
+    padding: 0;
+  }
+
+  input {
+    height: auto;
+    margin-left: 0;
+  }
+}
+
+.list-area {
+  span {
+    font-size: 12px;
+  }
+}
+
+figure {
+  border: 1px solid #ccc;
+  height: 132px;
+  padding: 4px;
+  text-align: center;
+  width: 240px;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}

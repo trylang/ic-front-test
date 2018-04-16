@@ -1,0 +1,171 @@
+<ark-header headerTitle="方案详情"></ark-header>
+
+<section class="flex-1 body-bgc padding-t-20 padding-b-20">
+  <div class="container">
+    <div class="row no-margin">
+      <div class="col-lg-9 col-md-12 margin-b-20">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" routerLink="/solution/search">解决方案</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>方案详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="ark-search-detail">
+          <div class="row">
+            <!-- Logo -->
+            <div class="col-lg-4 col-md-12">
+              <figure class="logo">
+                <img *ngIf="solution?.logo; else showSolutionImage" alt="Logo" [src]="solution.logo | ImgPathPre | trustURL">
+                <ng-template #showSolutionImage>
+                  <img alt="solution" src="../../../../asset/image/default/solution_default.png">
+                </ng-template>
+                <figcaption>
+                  <div class="view">
+                    <i class="proudsmart ps-focus"></i><span>{{solution.pageview}}</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- 详情简述 -->
+            <div class="col-lg-8 col-md-12">
+              <div class="detail-intro">
+                <h3 class="title">{{solution.name}}</h3>
+                <div><label>行业: </label><span>{{solution.industryCategory}}</span></div>
+                <div><label>功能: </label><span>{{solution.functionCategory}}</span></div>
+                <div><label>技术: </label><span>{{solution.technologySecondCategories}}</span></div>
+                <div><label>产品: </label><span>{{solution.productSecondCategories}}</span></div>
+                <div><label>供应商: </label>
+                  <a *ngIf="solution?.companyMd5; else showCompanyDetail" [routerLink]="['/company/detail']" [queryParams]="{md5: solution.companyMd5}">{{solution.companyName}}</a>
+                  <ng-template #showCompanyDetail>
+                    <span>{{solution.companyName}}</span>
+                  </ng-template>
+                </div>
+                <div>
+                  <label>地址: </label>
+                  <span>{{solution.companyAddress}}</span>
+                </div>
+                <div class="share">
+                  <ark-share sharePic="{{solution.logo | ImgPathPre}}" [shareDesc]="solution.detail | TrimHTML"></ark-share>
+                  <add-collect type="4" [md5]="solution.md5" (click)="onClick"></add-collect>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 详情 -->
+          <div class="row margin-t-30">
+            <div class="col-12 detail">
+              <div class="detail-nav">
+                <ul>
+                  <li><a [ngClass]="selItem==0 ? 'active' : ''" (click)="onItemClick(0)">方案详情</a></li>
+                  <li><a [ngClass]="selItem==1 ? 'active' : ''" (click)="onItemClick(1)">相关产品</a></li>
+                  <li><a [ngClass]="selItem==2 ? 'active' : ''" (click)="onItemClick(2)">相关案例</a></li>
+                </ul>
+              </div>
+
+              <div class="detail-content">
+                <!-- 详情 -->
+                <div [style.display]="selItem==0 ? 'block' : 'none'">
+                  <div class="detail-container" *ngIf="solution?.detail" [innerHtml]="solution?.detail | trustHtml">
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="solution?.detail"></ark-no-data>
+                </div>
+
+                <!-- 相关产品 -->
+                <div [style.display]="selItem==1 ? 'block' : 'none'">
+                  <div class="detail-list row" *ngIf="products">
+                    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let prod of products">
+                      <div class="detail-list-item">
+                        <figure>
+                          <a [routerLink]="['/product/detail']" [queryParams]="{md5: prod.md5, name: prod.name}">
+                           <img *ngIf="prod?.logo; else showProductImage"  alt="product" [src]="prod.logo | ImgPathPre | trustURL">
+                           <ng-template #showProductImage>
+                               <img alt="product"  src="../../../../asset/image/default/product_default.png">
+                           </ng-template>
+                          </a>
+                          <figcaption>
+                            <h3>
+                              <a [routerLink]="['/product/detail']" [queryParams]="{md5: prod.md5, id: prod.id, name: prod.name}" [title]="prod.title" [innerHtml]="prod.name | trustHtml"></a>
+                            </h3>
+                            <h4>
+                              <label>供应商:</label>
+                              <a *ngIf="prod?.companyMd5; else showCompanyDetail1" [routerLink]="['/company/detail']" [queryParams]="{md5: prod.companyMd5}">{{prod.companyName}}</a>
+                              <ng-template #showCompanyDetail1>
+                                <span>{{prod.companyName}}</span>
+                              </ng-template>
+                            </h4>
+                            <h4 class="max-1-line">
+                              <label>简介: </label>
+                              <span *ngIf="prod.summary" [innerHtml]="prod.summary | trustHtml"></span>
+                            </h4>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="products!==null"></ark-no-data>
+                </div>
+
+                <!-- 相关案例 -->
+                <div [style.display]="selItem==2 ? 'block' : 'none'">
+                  <div class="detail-list row" *ngIf="cases">
+                    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let case of cases">
+                      <div class="detail-list-item">
+                        <figure>
+                          <a [routerLink]="['/solution/detail/case']" [queryParams]="{md5: case.md5, name: case.name}">
+                          <img *ngIf="case?.logo; else showCaseImage"  alt="product" [src]="case.logo | ImgPathPre | trustURL">
+                          <ng-template #showCaseImage>
+                              <img alt="case"  src="../../../../asset/image/default/product_default.png">
+                          </ng-template>
+                          </a>
+                          <figcaption>
+                            <h3><a [routerLink]="['/solution/detail/case']" [queryParams]="{md5: case.md5}">{{case.name}}</a></h3>
+                            <h4><label>实施地址: </label><span>{{case.address}}</span></h4>
+                            <h4><label>实施时间: </label><span>{{case.startDate | date:'yyyy-MM-dd'}}</span></h4>
+                            <h4><label>客户: </label><span>{{case.customerName}}</span></h4>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="cases!== null"></ark-no-data>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--类似方案-->
+      <div class="col-lg-3 col-md-12">
+        <div class="morelike">
+          <div class="morelike-head">
+            <h3>类似方案</h3>
+          </div>
+          <div class="morelike-body" *ngFor="let solution of solutions">
+            <figure>
+              <a (click)="redirectToThis(solution.md5, solution.name, solution.industry)">
+                <img *ngIf="solution?.logo; else showMorelikeImage"  alt="solution" [src]="solution.logo | ImgPathPre | trustURL">
+                <ng-template #showMorelikeImage>
+                    <img alt="solution" src="../../../../asset/image/default/solution_default.png">
+                </ng-template>
+              </a>
+              <figcaption>
+                <h3><a (click)="redirectToThis(solution.md5, solution.name, solution.industry)" [title]="solution.title" [innerHtml]="solution.name | trustHtml"></a></h3>
+                <h4><a>{{solution.company_name}}</a></h4>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ark-footer></ark-footer>

@@ -1,0 +1,239 @@
+{
+  "supplier" : ["信息产业", "数控机床", "机器人", "航空航天", "海洋工程", "轨道交通", "汽车", "电力", "医疗器械", "生物医药", "化工", "食品轻工", "其他"],
+  "industry" : [{
+    "label": "信息产业",
+    "icon": "ps-it-industry"
+  }, {
+    "label": "数控机床",
+    "icon": "ps-numerical-control-machine"
+  }, {
+    "label":"机器人",
+    "icon" : "ps-robot1",
+    "color": ""
+  }, {
+    "label": "航空航天",
+    "icon": "ps-aerospace1"
+  }, {
+    "label":"海洋工程",
+    "icon": "ps-oceanographic-engineering"
+  }, {
+    "label":"轨道交通",
+    "icon": "ps-rail-transit"
+  }, {
+    "label":"汽车",
+    "icon": "ps-car1"
+  }, {
+    "label":"电力",
+    "icon": "ps-power1"
+  }, {
+    "label": "医疗器械",
+    "icon": "ps-medical-instruments"
+  }, {
+    "label":"生物医药",
+    "icon": "ps-biological-medicine"
+  }, {
+    "label": "化工",
+    "icon": "ps-chemical-industry"
+  }, {
+    "label":"食品轻工",
+    "icon": "ps-food-light-industry"
+  }, {
+    "label":"其他",
+    "icon": "ps-food-light-industry"
+  }],
+  "function": [{
+      "label":"离散智能制造" ,
+      "icon":" ps-intelligent-inspection",
+      "color": ""
+    }, {
+      "label":"流程智能制造",
+      "icon":"ps-manufacturing-materials",
+      "color": ""
+    }, {
+      "label":"网络协同制造",
+      "icon":"ps-related-equipment",
+      "color": ""
+    }, {
+      "label":"个性化订制",
+      "icon":"ps-D-printer",
+      "color": ""
+    },  {
+      "label":"智能远程运维",
+      "icon":"ps-oceanographic-engineering",
+      "color": ""
+    },  {
+      "label":"能源智能管理",
+      "icon":"ps-instruments-and-apparatuses",
+      "color": ""
+    }, {
+      "label":"智能工厂物流管理",
+      "icon":"ps-logistics-and-warehousing",
+      "color": ""
+    }, {
+      "label":"其他",
+      "icon":"ps-logistics-and-warehousing",
+      "color": ""
+    }],
+  "productCats": [
+    {
+      "label": "机床与机器人",
+      "data": "机床与机器人",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "数控机床", "data": "数控机床", "icon": "fa-cube" },
+        { "label": "工业机器人", "data": "工业机器人", "icon": "fa-cube" },
+        { "label": "机器人部件", "data": "机器人部件", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "增材制造",
+      "data": "增材制造",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "增材制造装备部件", "data": "增材制造装备部件", "icon": "fa-cube" },
+        { "label": "金属增材制造", "data": "金属增材制造", "icon": "fa-cube" },
+        { "label": "非金属增材制造", "data": "非金属增材制造", "icon": "fa-cube" },
+        { "label": "个性化增材制造", "data": "个性化增材制造", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "智能传感与控制",
+      "data": "智能传感与控制",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "机器人用传感器", "data": "机器人用传感器", "icon": "fa-cube" },
+        { "label": "采集系统", "data": "采集系统", "icon": "fa-cube" },
+        { "label": "控制系统装备", "data": "控制系统装备", "icon": "fa-cube" },
+        { "label": "传动系统", "data": "传动系统", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "智能检测与装配",
+      "data": "智能检测与装配",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "智能检测", "data": "智能检测", "icon": "fa-cube" },
+        { "label": "智能装配", "data": "智能装配", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "智能物流与仓储",
+      "data": "智能物流与仓储",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "智能物流", "data": "智能物流", "icon": "fa-cube" },
+        { "label": "智能仓储", "data": "智能仓储", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "工业互联网",
+      "data": "工业互联网",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "工业以太网", "data": "工业以太网", "icon": "fa-cube" },
+        { "label": "现场总线", "data": "现场总线", "icon": "fa-cube" },
+        { "label": "信息安全", "data": "信息安全", "icon": "fa-cube" },
+        { "label": "无线通讯", "data": "无线通讯", "icon": "fa-cube" },
+        { "label": "云计算", "data": "云计算", "icon": "fa-cube" },
+        { "label": "大数据服务", "data": "大数据服务", "icon": "fa-cube" }
+      ]
+    },
+    {
+      "label": "工业软件",
+      "data": "工业软件",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "设计及工艺仿真软件", "data": "设计及工艺仿真软件", "icon": "fa-cube" },
+        { "label": "工业控制软件", "data": "工业控制软件", "icon": "fa-cube" },
+        { "label": "业务管理", "data": "业务管理", "icon": "fa-cube" },
+        { "label": "数据管理", "data": "数据管理", "icon": "fa-cube" },
+        { "label": "人工智能", "data": "人工智能", "icon": "fa-cube" }
+      ]
+    }
+  ],
+ "technologyCats": [
+    {
+      "label": "智能装备",
+      "data": "智能装备",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "工业机器人", "data": "工业机器人", "icon": "fa-wrench" },
+        { "label": "增材制造", "data": "增材制造", "icon": "fa-wrench" },
+        { "label": "人机交互系统", "data": "人机交互系统", "icon": "fa-wrench" },
+        { "label": "嵌入式系统", "data": "嵌入式系统", "icon": "fa-wrench" },
+        { "label": "控制系统", "data": "控制系统", "icon": "fa-wrench" },
+        { "label": "传感器及仪器仪表", "data": "传感器及仪器仪表", "icon": "fa-wrench" }
+      ]
+    },
+    {
+      "label": "智能工厂",
+      "data": "智能工厂",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "智能优化设计", "data": "智能优化设计", "icon": "fa-wrench" },
+        { "label": "产品设计仿真", "data": "产品设计仿真", "icon": "fa-wrench" },
+        { "label": "先进控制和优化", "data": "先进控制和优化", "icon": "fa-wrench" },
+        { "label": "智能诊断和维护", "data": "智能诊断和维护", "icon": "fa-wrench" },
+        { "label": "立体仓库", "data": "立体仓库", "icon": "fa-wrench" },
+        { "label": "自动引导车", "data": "自动引导车", "icon": "fa-wrench" },
+        { "label": "电子标签", "data": "电子标签", "icon": "fa-wrench" },
+        { "label": "条码", "data": "条码", "icon": "fa-wrench" },
+        { "label": "可视化管理", "data": "可视化管理", "icon": "fa-wrench" },
+        { "label": "企业级管理", "data": "企业级管理", "icon": "fa-wrench" },
+        { "label": "车间级管理", "data": "车间级管理", "icon": "fa-wrench" }
+      ]
+    },
+    {
+      "label": "工业互联网",
+      "data": "工业互联网",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "芯片及通信模块", "data": "芯片及通信模块", "icon": "fa-wrench" },
+        { "label": "工业交换机", "data": "工业交换机", "icon": "fa-wrench" },
+        { "label": "工业网关", "data": "工业网关", "icon": "fa-wrench" },
+        { "label": "信息协同", "data": "信息协同", "icon": "fa-wrench" },
+        { "label": "IPV 6", "data": "IPV 6", "icon": "fa-wrench" },
+        { "label": "工业有线通信", "data": "工业有线通信", "icon": "fa-wrench" },
+        { "label": "工业无线通信", "data": "工业无线通信", "icon": "fa-wrench" },
+        { "label": "网络组网技术", "data": "网络组网技术", "icon": "fa-wrench" }
+      ]
+    },
+    {
+      "label": "工业软件",
+      "data": "工业软件",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "数据管理", "data": "数据管理", "icon": "fa-wrench" },
+        { "label": "数据处理技术", "data": "数据处理技术", "icon": "fa-wrench" },
+        { "label": "工业软件集成", "data": "工业软件集成", "icon": "fa-wrench" },
+        { "label": "应用软件", "data": "应用软件", "icon": "fa-wrench" },
+        { "label": "软件资产管理", "data": "软件资产管理", "icon": "fa-wrench" },
+        { "label": "软件质量管理", "data": "软件质量管理", "icon": "fa-wrench" }
+      ]
+    },
+    {
+      "label": "智能服务",
+      "data": "智能服务",
+      "expandedIcon": "fa-folder-open",
+      "collapsedIcon": "fa-folder",
+      "children": [
+        { "label": "应急管理", "data": "应急管理", "icon": "fa-wrench" },
+        { "label": "监控", "data": "监控", "icon": "fa-wrench" },
+        { "label": "安全", "data": "安全", "icon": "fa-wrench" },
+        { "label": "服务能力", "data": "服务能力", "icon": "fa-wrench" },
+        { "label": "资源共享", "data": "资源共享", "icon": "fa-wrench" }
+      ]
+    }
+  ]
+}

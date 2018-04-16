@@ -1,0 +1,68 @@
+$active-color: #fff;
+$text-color: rgba(255, 255, 255, 1);
+
+.navbar {
+  margin: 0;
+  width: 100%;
+}
+
+ul {
+  padding-right: .7rem;
+
+  li {
+    padding: .6rem 1.5rem .6rem 1rem;
+  }
+
+  &.log-in-out {
+    li {
+      padding-left: .7rem;
+      padding-right: .7rem;
+      position: relative;
+
+      &:first-child {
+        &::after {
+          background: white;
+          content: '';
+          height: 15px;
+          position: absolute;
+          right: 0;
+          top: 1.38rem;
+          width: 1px;
+        }
+      }
+    }
+  }
+}
+
+.account {
+  img {
+    border-radius: 15px;
+  }
+
+  a.account-name {
+    color: $active-color;
+    font-size: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-decoration: none;
+
+    &::after {
+      content: none;
+    }
+  }
+
+  a.dropdown-item {
+    font-size: 1.3rem;
+    line-height: 2.4rem;
+  }
+}
+
+a.nav-link {
+  color: $text-color;
+  font-size: 1.4rem;
+
+  &.active {
+    color: $active-color;
+    font-weight: bold;
+  }
+}

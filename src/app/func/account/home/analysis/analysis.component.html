@@ -1,0 +1,109 @@
+
+<section style="margin: 20px 0;">
+  <ol class="go-back" *ngIf="md5 !== entity?.md5">
+    <li class="active">
+      <a [routerLink]="['/account/home']" [queryParams]="{type: 'company'}" style="color: #3c8dbc;">企业订阅</a>
+    </li>
+    <li class="active">
+      <a>{{key}}</a>
+    </li>
+  </ol>
+  <div class="nav-wrap">
+    <div class="col-md-12 col-sm-12 col-xs-12 imgwrapper"  *ngIf="md5 !== entity?.md5">
+      <figure class="entitywrapper">
+        <img *ngIf="company?.logo else showLogo" [src]="company.logo | ImgPathPre | trustURL" width="100" alt="logo">
+        <ng-template #showLogo>
+          <img src="../../../../../asset/image/default/company_default.png" />
+        </ng-template>
+        <figcaption>
+          <h3>{{company?.name}}</h3>
+          <label>企业地址：</label><span>{{company?.address}}</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="nav-items">
+      <ul>
+          <li class="item" [ngClass]="item==0 ? 'select' : ''"><a (click)="onItemClick(0)">企业舆情</a></li>
+          <li class="item" [ngClass]="item==1 ? 'select' : ''"><a (click)="onItemClick(1)">投资图谱</a></li>
+          <li class="item" [ngClass]="item==2 ? 'select' : ''"><a (click)="onItemClick(2)">股权比例</a></li>
+          <li class="item" [ngClass]="item==3 ? 'select' : ''"><a (click)="onItemClick(3)">风险分析</a></li>
+          <li class="item" [ngClass]="item==4 ? 'select' : ''"><a (click)="onItemClick(4)">创新分析</a></li>
+          <li class="item" [ngClass]="item==5 ? 'select' : ''"><a (click)="onItemClick(5)">中标分析</a></li>
+      </ul>
+    </div>
+    <div>
+      <div [style.display]="item==0 ? 'block' : 'none'">
+        <div class="padding-20">
+            <div *ngIf="consensus.size">
+              <div class="margin-b-10" style="border-bottom: 1px solid #eee;" *ngFor="let item of consensus.data">
+                <div class="">
+                  <a class="font-14" href="{{item.url}}" target="_blank">{{item.title}} <span class="font-12" style="color: #636363;">{{item.source}}</span></a>
+                  <span class="margin-l-10 font-10" style="color: #636363;"><i class="proudsmart ps-time"></i> {{item.publishTime | date:'yyyy-MM-dd' }}</span>
+                </div>
+                <div class="margin-t-10">
+                  <p  *ngIf="item.description" [innerHtml]="item.description | trustHtml" ></p>
+                </div>
+              </div>
+              <div class="box-footer padding-t-42 padding-b-10">
+                <ark-paginator rows="10" currentPage="{{consensus.currentPage}}" totalRecords="{{consensus.size}}" (onPageChange)="pageCompanyNewsNumber($event)"></ark-paginator>
+              </div>
+            </div>
+            <ark-no-data showType="detail"  bgc="transparent" [hideSign]="consensus.size"></ark-no-data>
+        </div>
+      </div>
+      <!-- 投资图谱 -->
+      <div [style.display]="item==1 ? 'block' : 'none'">
+        <ark-chart-relation [onChartData]="invRelationData"></ark-chart-relation>
+        <ark-no-data showType="detail"  bgc="transparent" [hideSign]="!invRelationData ? false : true"></ark-no-data>
+      </div>
+       <!--股权比例-->
+      <div [style.display]="item==2 ? 'block' : 'none'">
+        <ark-chart-entity-relation [onChartData]="shareHoldData" *ngIf="shareHoldData"></ark-chart-entity-relation>
+        <ark-no-data showType="detail"  bgc="transparent" [hideSign]="!shareHoldData ? false : true"></ark-no-data>
+      </div>
+      <div [style.display]="item==3 ? 'block' : 'none'">
+        <div class="row"  *ngIf="courtPieAggList && courtLineAggList">
+          <!--涉诉案由-->
+          <div class="col-sm-4 col-xs-12 no-padding-left">
+            <div [configOption]="courtPieConfig" type="pie" [onChartData]="courtPieAggList" arkChart></div>
+          </div>
+          <!--涉诉趋势-->
+          <div class="col-sm-8 col-xs-12 no-padding-right">
+            <div [configOption]="courtLineConfig" type="line" [onChartData]="courtLineAggList" arkChart></div>
+          </div>
+        </div>
+        <ark-no-data showType="detail"  bgc="transparent" [hideSign]="!(courtLineAggList && courtPieAggList) ? false : true"></ark-no-data>
+      </div>
+      <div [style.display]="item==4 ? 'block' : 'none'">
+        <div class="row" *ngIf="patentPieAggList && patentBarAggList && softRightBarAggList">
+          <!--专利分布-->
+          <div class="col-sm-4 col-xs-12">
+            <div [configOption]="patentPieConfig" type="pie" [onChartData]="patentPieAggList" arkChart></div>
+          </div>
+          <!--专利申请趋势-->
+          <div class="col-sm-8 col-xs-12 no-padding-right">
+            <div [configOption]="patentBarConfig" type="bar" [onChartData]="patentBarAggList" arkChart></div>
+          </div>
+            <!--软著申请趋势-->
+          <div class="col-sm-12 col-xs-12 padding-t-20">
+            <div [configOption]="softRightBarConfig" type="bar" [onChartData]="softRightBarAggList" arkChart></div>
+          </div>
+        </div>
+        <ark-no-data showType="detail"  bgc="transparent" [hideSign]="!(patentPieAggList && patentBarAggList && softRightBarAggList) ? false : true"></ark-no-data>
+      </div>
+      <div [style.display]="item==5 ? 'block' : 'none'">
+        <div class="row" *ngIf="bidPieAggList && bidMapAggList">
+          <!--中标行业-->
+          <div class="col-sm-4 col-xs-12">
+            <div [configOption]="bidPieConfig" type="pie" [onChartData]="bidPieAggList" arkChart></div>
+          </div>
+          <!--中标区域-->
+          <div class="col-sm-8 col-xs-12 no-padding-right">
+            <div [configOption]="bidMapConfig" type="map" [onChartData]="bidMapAggList" arkChart></div>
+          </div>
+        </div>
+        <ark-no-data showType="detail"  bgc="transparent" [hideSign]="!(bidPieAggList && bidMapAggList) ? false : true"></ark-no-data>
+      </div>
+    </div>
+  </div>
+</section>

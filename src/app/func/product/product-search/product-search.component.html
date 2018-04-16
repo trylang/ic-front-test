@@ -1,0 +1,76 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+
+<section class="flex-1 body-bgc">
+  <div class="container col-sm-12" style="padding:0;">
+    <div class="row search-main" style="justify-content: center;">
+      <!-- 侧边栏 -->
+      <aside>
+        <div class="nav">
+          <ul>
+            <li class="prduct-item" *ngFor="let cat1 of cats; let i=index" routerLinkActive="active">
+              <div class="item-wrapper">
+                <a routerLinkActive="active" [routerLink]="['/product/search']" [queryParams]="{cat1: cat1.label}" (click)="toggleUrl(cat1.label)">                 
+                  <span class="cat1name">{{cat1.label}}</span>
+                </a>
+                <ol>
+                  <li class="nav-child" *ngFor="let cat2 of catChild[i]">
+                    <a href="#" routerLinkActive="active" [routerLink]="['/product/search']" [queryParams]="{cat1: cat1.label, cat2: cat2}" queryParamsHandling="merge" (click)="toggleUrl(cat1.label, cat2)">
+                      <span class="cat2name">{{cat2}}</span>
+                    </a>
+                  </li>
+                </ol>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <article>
+
+        <!--筛选栏-->
+        <ul class="ark-sort-item">
+          <li><a [ngClass]="{'active' : sort == -1}" [routerLink]="[]" [queryParams]="{sort: -1, page: 1}" queryParamsHandling="merge">默认排序</a></li>
+          <li style="width:110px;"><a [ngClass]="{'active' : sort == 1}" [routerLink]="[]" [queryParams]="{sort: 1, page: 1}" queryParamsHandling="merge">热度</a></li>
+          <li>
+            <span class="input-group pull-right"  style="color: #333;font-size: 14px;font-family:'微软雅黑';border:0px;">
+                为您找到
+                <span  style="color: #ff4e00;border:0px;">{{size}}</span> 条结果
+            </span>
+          </li>
+        </ul>
+
+        <!--列表区-->
+        <div class="product-item" *ngIf="totalRecords">
+          <div class="items" *ngFor="let prod of products">
+            <figure>
+              <span>
+                  <a [routerLink]="['/product/detail']" [queryParams]="{md5: prod.md5, name: prod.title}">
+                    <img *ngIf="prod?.logo; else showImage"  alt="product" [src]="prod.logo | ImgPathPre | trustURL">
+                    <ng-template #showImage>
+                        <img alt="product" src="../../../../asset/image/default/product_default.png">
+                    </ng-template>
+                  </a>
+              </span>
+              <figcaption>
+                  <h3>
+                    <b><a [routerLink]="['/product/detail']" [queryParams]="{md5: prod.md5, name: prod.title}"  [title]="prod.title"  [innerHtml]="prod.name | trustHtml"></a></b>
+                  </h3>
+                  <div style="margin-top:1rem;margin-bottom:3rem;font-weight: bold; color: #459ada;">
+                    <p><span style="display:inline;">供应商: </span>{{prod.company_name}}</p>
+                  </div>
+                  <div>
+                    <p class="max-2-line"><span style="display:inline;">简介: </span>{{prod.summary}}</p>
+                  </div>
+                </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div style="padding-top:14px; padding-bottom:66px;" *ngIf="totalRecords">
+          <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+        </div>
+        <ark-no-data showType="search" [searchKey]="keywords" bgc="transparent" [hideSign]="totalRecords"></ark-no-data>
+      </article>
+    </div>
+  </div>
+</section>
+<ark-footer></ark-footer>

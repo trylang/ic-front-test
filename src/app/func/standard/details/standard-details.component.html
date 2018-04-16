@@ -1,0 +1,115 @@
+<ark-header headerTitle="标准详情"></ark-header>
+
+<div class="ark-search-detail-2 padding-t-20 padding-b-40 body-bgc flex-1">
+  <div class="container">
+    <div class="row no-margin">
+      <!-- 左侧详情 -->
+      <div class="col-lg-8 col-md-12">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" routerLink="/standard/search">标准搜索</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>标准详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <article>
+          <header>
+            <h3 class="title">{{detailsdata.name}}</h3>
+            <div class="tool">
+              <h3>标准简介</h3>
+              <div class="share">
+                <ark-share sharePic="" shareDesc="{{detailsdata.indivoduction}}"></ark-share>
+                <span><add-collect type="2" [md5]="recdata.md5"></add-collect></span>
+              </div>
+            </div>
+          </header>
+
+          <!-- 用于table的显示 -->
+          <div class="detail-table-container">
+            <p [innerHTML]="detailsdata.introduction | trustHtml"></p>
+
+            <table class="table table-bordered">
+              <tbody>
+                <tr>
+                  <td class="td-label">英文名称</td>
+                  <td>{{detailsdata.engName}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">标准编号</td>
+                  <td>{{detailsdata.bianhao}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">替代情况</td>
+                  <td [innerHTML]="detailsdata.tidaiQingkuang | trustHtml"></td>
+                </tr>
+                <tr>
+                  <td class="td-label">标准状态</td>
+                  <td>{{detailsdata.status}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">发布部门</td>
+                  <td>{{detailsdata.fabuBumen}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">发布日期</td>
+                  <td>{{detailsdata.fabuRiqi}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">实施日期</td>
+                  <td>{{detailsdata.shishiRiqi}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">中标分类</td>
+                  <td>{{detailsdata.zhongbiaoFenlei}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">ICS分类</td>
+                  <td>{{detailsdata.fenleiSic}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">提出单位</td>
+                  <td>{{detailsdata.tichuDanwei}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">归口单位</td>
+                  <td>{{detailsdata.guikouDanwei}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">主管部门</td>
+                  <td>{{detailsdata.zhuguanBumen}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">起草单位</td>
+                  <td>{{detailsdata.qicaoDanwei}}</td>
+                </tr>
+                <tr>
+                  <td class="td-label">起草人</td>
+                  <td>{{detailsdata.qicaoren}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+
+      <!-- 右侧列表 -->
+      <aside class="col-lg-4 col-md-12">
+        <header>
+          <h3>类似标准</h3>
+        </header>
+
+        <div class="detail-list">
+          <div class="list-item" *ngFor="let slide of leisidata.resultList">
+            <h3><a [routerLink]="['/standard/detail']" [queryParams]="{md5:slide.md5.trim()}" [innerHTML]="slide.name | trustHtml"></a></h3>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<ark-footer></ark-footer>

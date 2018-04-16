@@ -1,0 +1,22 @@
+<section>
+  <div class="container">
+    <div class="row ark-aside-layout margin-b-20">
+      <!-- 侧边栏 -->
+      <div class="aside">
+        <ul>
+          <li><a routerLink="/account/ent/ent/message" [queryParams]="{rootname: '企业资料'}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-park-data"></i></span> <span>企业资料</span> </a></li>
+          <li><a routerLink="/account/ent/ent/message" [queryParams]="{rootname: '基本信息'}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-latest-program"></i></span> <span>基本信息</span> </a></li>
+          <li><a routerLink="/account/ent/ent/scheme" [queryParams]="{rootname: '我的方案'}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-policy-collection"></i></span> <span>我的方案</span> </a></li>
+          <li><a routerLink="/account/ent/ent/case" [queryParams]="{rootname: '我的案例'}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-supplier-collection"></i></span> <span>我的案例</span> </a></li>
+          <li><a routerLink="/account/ent/ent/goods" [queryParams]="{rootname: '我的产品'}" routerLinkActive="active"><span class="font-container"><i class="proudsmart ps-product-collection"></i></span> <span>我的产品</span> </a></li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <!-- <div class=""> -->
+          <router-outlet></router-outlet>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>

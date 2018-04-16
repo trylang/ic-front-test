@@ -1,0 +1,23 @@
+<section class="subscribe-edit-theme">
+  <form>
+    <div class="modal-header">
+        <h3>企业类型</h3>
+    </div>
+    <div class="modal-body">
+      <h4 class="model-title-slide">方案集成商：（请选择方案应用行业）</h4>
+      <div>
+        <mat-checkbox name="solution{{i}}" class="margin-r-16" *ngFor="let item of solutionSupplierCategory; let i = index;" [(ngModel)]="item.isSelected">{{item.name}}</mat-checkbox>
+      </div>
+
+      <h4 class="model-title-slide margin-t-20">产品供应商</h4>
+      <div>
+        <mat-checkbox name="product{{i}}" class="margin-r-16" *ngFor="let item of productSupplierCategory; let i = index;" [(ngModel)]="item.isSelected">{{item.name}}</mat-checkbox>
+      </div>
+    </div>
+
+    <div class="form-group text-center margin-t-16">
+      <button type="button" class="btn btn-primary btn-lg" (click)="onClaime()">确定</button>
+      <button type="button" class="btn btn-secondary btn-lg" (click)="onCancel()">取消</button>
+    </div>
+  </form>
+</section>

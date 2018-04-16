@@ -1,0 +1,153 @@
+$text-color: #666666;
+$white-color: #ffffff;
+$black-color: #000;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.detail-content {
+  width: 100%;
+  min-height: 80rem;
+  display: block;
+  justify-content: center;
+  float: left;
+  position: relative;
+
+  .item-content {
+    width: 100%;
+    top: 22px;
+    height: 254px;
+    float: left;
+    position: relative;
+
+    .item-img {
+      width: 324px;
+      height: 254px;
+      float: left;
+      background-color: $white-color;
+    }
+  }
+}
+
+.table {
+  display: table;
+  margin-bottom: 2rem;
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+  table-layout: fixed;
+  word-break: break-all;
+  word-wrap: break-word;
+
+  thead {
+    vertical-align: middle;
+
+    th {
+      border-bottom: 2px solid #777;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 8px;
+      text-align: left;
+      vertical-align: bottom;
+    }
+  }
+
+  tbody {
+    color: #777;
+    font-family: Helvetica, Arial, 'Microsoft Yahei';
+    padding-top: 6px;
+
+    tr {
+      border-bottom: 2px solid #f4f4f4;
+      height: 40px;
+      margin: 0 10px;
+      padding: 30px 0;
+
+      td {
+        font-size: 14px;
+        padding: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.text-max-line-1 {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-item {
+  margin: -20px auto 0;
+  padding-bottom: 30px;
+  width: 100%;
+
+  .items {
+    border-bottom: 1px solid #d4d4d4;
+    padding: 20px 0;
+    
+    figure {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: 0;
+      width: 100%;
+
+      a {
+        background: #fff;
+        border: 1px solid #d5d5d5;
+        padding: 4px;
+
+        img {
+          height: 130px;
+          width: 184px;
+        }
+      }
+    }
+    figcaption {
+
+      h3 {
+        margin: auto;
+        padding: 0;
+
+        a {
+          font-size: 1.6rem;
+          font-weight: bold;
+          color: #000;
+        }
+      }
+
+      h4 {
+        margin-top: 18px;
+        margin-bottom: 34px;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #459ada;
+        font-style: normal;
+        font-family: Microsoft Yahei;
+
+        i {
+          font-style: normal;
+        }
+      }
+      .product-summary {
+        display: block;
+        font-size: 1.4rem;
+        line-height: 24px;
+        max-height: 48px;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+      }
+    }
+  }
+}

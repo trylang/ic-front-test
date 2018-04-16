@@ -1,0 +1,92 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+
+<section class="flex-1 body-bgc">
+  <div class="container col-sm-12" style="padding:0;">
+<div class="row search-main" style="justify-content: center;">
+  <!-- 侧边栏 -->
+  <aside>
+    <div class="nav">
+      <p>产品供应商</p>
+      <ul>
+        <li *ngFor="let cat of productCats; let i=index" routerLinkActive="active">
+          <a href="#" routerLinkActive="active" [routerLink]="[]" [queryParams]="{productSuppliers : cat}" queryParamsHandling="merge" (click)="toggleUrl('productSuppliers', cat)">      
+            <span>{{cat}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav">
+      <p>方案供应商</p>
+      <ul class="no-border-right">
+        <li *ngFor="let cat of companyCats; let i=index" routerLinkActive="active">
+          <a href="#" routerLinkActive="active" [routerLink]="[]" [queryParams]="{solutionSuppliers: cat}" queryParamsHandling="merge" (click)="toggleUrl('solutionSuppliers', cat)">
+            <span>{{cat}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>  
+  </aside>
+  <article>
+        <!--筛选栏-->
+        <ul class="ark-sort-item">
+          <li><a [ngClass]="{'active' : sort == -1}" [routerLink]="[]" [queryParams]="{sort: -1, page: 1}" queryParamsHandling="merge">默认排序</a></li>
+          <li><a [ngClass]="{'active' : sort == 1}" [routerLink]="[]" [queryParams]="{sort: 1, page: 1}" queryParamsHandling="merge">热度</a></li>
+          <li class="region dropdown">
+            <a class="dropdown-toggle" href="javascript: void(0);" id="regionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span *ngIf="province === '全部' || province === null; else showProvince " >地区</span>
+              <ng-template #showProvince>
+                  <span>{{province}}</span>
+              </ng-template>
+            <i class="proudsmart ps-top"></i>
+            </a>
+            <ul class="region dropdown-menu"  aria-labelledby="regionDropdown">
+              <li style="margin:0;"> 
+                <a class="dropdown-item font-14 padding-0"  *ngFor="let province of provinces" [routerLink]="[]" [queryParams]="{province: province}" queryParamsHandling="merge">{{province}}</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <span class="input-group" style="color: #333;font-size: 14px;font-family:'微软雅黑';border:0px;">
+            为您找到
+            <span  style="color: #ff4e00;border:0px;">{{size}}</span> 条结果
+            </span>
+          </li>
+        </ul>
+
+        <!--列表区-->
+        <div class="company-item" *ngIf="totalRecords">
+          <div class="items" *ngFor="let company of companys">
+            <figure>
+                <span class="ark-img-ease-in">
+                  <a [routerLink]="['/company/detail']" [queryParams]="{md5: company.md5}">
+                    <img *ngIf="company?.logo; else showImage"  alt="company" [src]="company.logo | ImgPathPre | trustURL">
+                    <ng-template #showImage>
+                        <img alt="company" src="../../../../asset/image/default/company_default.png">
+                    </ng-template>
+                  </a>
+                </span>
+                <figcaption>
+                    <h3>
+                      <b><a [routerLink]="['/company/detail']" [queryParams]="{md5: company.md5}" [title]="company.title"  [innerHtml]="company.name | trustHtml"></a></b>
+                    </h3>
+                    <div style="margin-top:1rem;margin-bottom:3rem;font-weight: bold; color: #459ada;">
+                      <p><span>主营产品: </span><span style="display:inline-block;"  *ngIf="company.product" [innerHtml]="company.product | trustHtml"></span></p> 
+                    </div>
+                    <div>
+                      <p class="max-2-line"><span>公司摘要: </span>{{company.content }}</p>
+                    </div>
+                  </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div style="padding-top:4px; padding-bottom:66px;" *ngIf="totalRecords">
+          <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+        </div>
+        <ark-no-data showType="search" [searchKey]="keywords" bgc="transparent" [hideSign]="totalRecords"></ark-no-data>
+      </article>
+    </div>
+  </div>
+</section>
+
+<ark-footer></ark-footer>

@@ -1,0 +1,98 @@
+<section class="full-height flex flex-column">
+  <ark-header headerTitle="登录"></ark-header>
+
+  <section class="flex-1">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6 col-sm-8 col-xs-12 ark-log-in">
+          <ul class="nav" id="signUpTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="personal-tab" data-toggle="pill" href="#personal" role="tab" aria-controls="personal" aria-expanded="true">个人登录</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="ent-tab" data-toggle="pill" href="#ent" role="tab" aria-controls="ent" aria-expanded="true">企业（园区）登录</a>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="signUpTabContent">
+            <!-- 个人登录-->
+            <div class="tab-pane fade show active ark-signup-form" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+              <form role="form" [formGroup]="logInForm" (ngSubmit)="onSubmit('personal')" novalidate>
+                <div class="form-group login-input">
+                  <i class="proudsmart ps-login1"></i>
+                  <input type="text" class="form-control" autocomplete="off" formControlName="authentication" [(ngModel)]="account.authentication" required placeholder="用户名/手机号">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.authentication">{{formErrors.authentication}}</span>
+                  </div>
+                </div>
+                <div class="form-group login-input">
+                  <i class="proudsmart ps-password"></i>
+                  <input type="password" class="form-control" autocomplete="off" formControlName="password" [(ngModel)]="account.password" required placeholder="密码">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.password">{{formErrors.password}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" formControlName="remember" [(ngModel)]="account.remember"> <span class="text-sub font-12 margin-l-2">保持登录</span>
+                  </label>
+                  </div>
+                </div>
+
+                <div class="form-group margin-t-10">
+                  <button class="btn btn-primary signup-btn" type="submit" [disabled]="!logInForm.valid">登录</button>
+                </div>
+
+                <div class="form-group sub-content">
+                  <a routerLink="/signup">免费注册</a>
+                  <a routerLink="/forgotpassword" [queryParams]="{type: 'person'}">忘记密码</a>
+                </div>
+              </form>
+            </div>
+
+            <!-- 企业园区登录 -->
+            <div class="tab-pane fade ark-signup-form" id="ent" role="tabpanel" aria-labelledby="ent-tab">
+              <form role="form" [formGroup]="logInForm" (ngSubmit)="onSubmit('ent')" novalidate>
+                <div class="form-group login-input">
+                  <i class="proudsmart ps-login1"></i>
+                  <input type="text" class="form-control" autocomplete="off" formControlName="authentication" [(ngModel)]="account.authentication" required placeholder="用户名/邮箱">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.authentication">{{formErrors.authentication}}</span>
+                  </div>
+                </div>
+                <div class="form-group login-input">
+                  <i class="proudsmart ps-password"></i>
+                  <input type="password" class="form-control" autocomplete="off" formControlName="password" [(ngModel)]="account.password" required placeholder="密码">
+                  <div class="error-tip">
+                    <span *ngIf="formErrors.password">{{formErrors.password}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" formControlName="remember" [(ngModel)]="account.remember"> <span class="text-sub font-12 margin-l-2">保持登录</span>
+                  </label>
+                  </div>
+                </div>
+
+                <div class="form-group margin-t-10">
+                  <button class="btn btn-primary signup-btn" type="submit" [disabled]="!logInForm.valid">登录</button>
+                </div>
+
+                <div class="form-group sub-content">
+                  <a routerLink="/signup">免费注册</a>
+                  <a routerLink="/forgotpassword" [queryParams]="{type: 'ent'}">忘记密码</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ark-footer></ark-footer>
+</section>

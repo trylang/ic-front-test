@@ -1,0 +1,52 @@
+<div class="table-wrapper">
+  <div class="table-header" *ngIf="tableData.header">   
+    <h3>{{tableData.header.title}}</h3>
+    <div class="table-options" *ngIf="tableData.header.options">
+      <div *ngFor="let header of tableData.header.options">
+         <span>{{header.label}}</span>
+          <span *ngIf="header.type==='select'">
+            <select class="form-control table-select" [ngClass]="header.class" [ngStyle]="header.style"  [(ngModel)]="header.data" (ngModelChange)=modelChange($event)>
+              <option *ngFor="let opt of header.options" [value]="opt[header.filterFormat.value]">{{opt[header.filterFormat.label]}}</option>
+            </select>
+          </span>
+      </div>       
+    </div>  
+  </div>
+  <table class="table-container">
+    <thead>
+      <tr *ngIf="tableData.columnDefs.show">
+        <th *ngFor="let col of tableData.columnDefs.data" [ngClass]="col.class" [ngStyle]="col.style">
+          <label for="">{{col.label}}</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of tableData.columns">
+        <td *ngFor="let col of tableData.columnDefs.data">
+          <span *ngIf="col.type=='text'" [ngClass]="col.colClass" [ngStyle]="col.colStyle">{{row[col.data]}}</span>
+          <span *ngIf="col.type=='date'" [ngClass]="col.colClass" [ngStyle]="col.colStyle">{{row[col.data] | date:"yyyy-MM-dd"}}</span>
+          <span *ngIf="col.type=='link'" [ngClass]="col.colClass" [ngStyle]="col.colStyle" (click)=col.colClick(row) scrollTo>{{row[col.data]}}</span>
+          <div class="buttonGroup" *ngIf="col.type==='buttonGroup'">
+            <div *ngFor="let btn of col['modes']">
+              <div [ngClass]="btn.class" [ngStyle]="btn.style" (click)="btn.click(row)">{{btn.label}}</div>
+            </div>
+          </div>
+          <div class="iconGroup" *ngIf="col.type==='iconGroup'">
+            <div *ngFor="let icon of col['modes']">
+              <ng-template #tipContent>{{icon.label}}</ng-template>
+              <div [ngClass]="icon.class" [ngStyle]="icon.style" [ngbTooltip]="tipContent" (click)="icon.click(row)">
+                <i [ngClass]="icon.iconFont"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="(!tableData.columns || tableData.columns.length < 1)">
+        <td colspan="5" class="text-center">暂无数据</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="box-footer clearfix" *ngIf="(tableData.page.show) && (tableData.columns && tableData.columns.length > 0)">
+    <ark-paginator rows="{{tableData.page.rows}}" currentPage="{{tableData.page.currentPage?tableData.page.currentPage:1}}" totalRecords="{{tableData.page.size}}" (onPageChange)="paginate($event)"></ark-paginator>
+  </div>
+</div>

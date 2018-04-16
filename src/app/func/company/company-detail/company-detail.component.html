@@ -1,0 +1,191 @@
+<ark-header headerTitle="供应商详情"></ark-header>
+
+<section class="flex-1 body-bgc padding-t-20 padding-b-20">
+  <div class="container">
+    <div class="row no-margin justify-content-center" scrollTo>
+      <div class="col-lg-9 col-md-12 margin-b-20">
+        <nav class="ark-search-breadcrumb" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a class="text-active" routerLink="/company/search">供应商搜索</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a>供应商详情</a>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="ark-search-detail">
+          <!-- 顶部简介 -->
+          <div class="row">
+            <!-- Logo -->
+            <div class="col-lg-4 col-md-12">
+              <figure class="logo">
+                <img *ngIf="company?.logo; else showCompanyImage" alt="company" [src]="company.logo | ImgPathPre | trustURL">
+                <ng-template #showCompanyImage>
+                  <img alt="company" src="../../../../asset/image/default/company_default.png">
+                </ng-template>
+                <figcaption>
+                  <div class="view">
+                    <i class="proudsmart ps-focus"></i><span>{{company.pageView}}</span>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+
+            <!-- 详情简述 -->
+            <div class="col-lg-8 col-md-12">
+              <div class="detail-intro">
+                <h3 class="title" name="companyName">{{company.name}}</h3>
+                <div class="flex">
+                  <label>主营产品: </label>
+                  <span class="text-max-line-1 no-margin" data-toggle="tooltip" data-placement="top" title="{{toolip}}" *ngIf="company.mainProduct" [innerHtml]="company.mainProduct | TrimHTML"></span>
+                </div>
+                <div><label>地址: </label><span class="text-max-line-1 no-margin" data-toggle="tooltip" data-placement="top" title="{{company.address}}">{{company.address}}</span></div>
+                <div><label>电话: </label><span>{{company.phone}}</span></div>
+                <div><label>邮箱: </label><span>{{company.email}}</span></div>
+                <div><label>网址: </label><span><a href="javascript:void(0)" (click)="openNewPage(company.website)">{{company.website}}</a></span></div>
+                <div class="share">
+                  <ark-share sharePic="{{company.logo | ImgPathPre}}" shareDesc="{{company.introduction | TrimHTML}}"></ark-share>
+                  <add-collect type="7" [md5]="md5" (click)="onClick"></add-collect>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab 详情 -->
+          <div class="row margin-t-30">
+            <div class="col-12 detail">
+              <div class="detail-nav">
+                <ul>
+                  <li><a [ngClass]="selItem==0 ? 'active' : ''" (click)="onItemClick(0)">企业介绍</a></li>
+                  <li><a [ngClass]="selItem==1 ? 'active' : ''" (click)="onItemClick(1)">方案</a></li>
+                  <li><a [ngClass]="selItem==2 ? 'active' : ''" (click)="onItemClick(2)">产品</a></li>
+                  <li><a [ngClass]="selItem==3 ? 'active' : ''" (click)="onItemClick(3)">专利</a></li>
+                </ul>
+              </div>
+
+              <div class="detail-content">
+                <!-- 详情 -->
+                <div [style.display]="selItem==0 ? 'block' : 'none'">
+                  <div class="detail-container" *ngIf="company?.introduction" [innerHtml]="company?.introduction | trustHtml">
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="company?.introduction"></ark-no-data>
+                </div>
+
+                <!-- 方案 -->
+                <div [style.display]="selItem==1 ? 'block' : 'none'">
+                  <div class="detail-list row" *ngIf="stSize">
+                    <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let solution of solutions">
+                      <div class="detail-list-item">
+                        <figure>
+                          <a [routerLink]="['/solution/detail']" [queryParams]="{md5: solution.md5, name: solution.name, industry: solution.industryCategory}">
+                             <img *ngIf="solution?.logo; else showSolutionImage"  alt="solution" [src]="solution.logo | ImgPathPre | trustURL">
+                             <ng-template #showSolutionImage>
+                                 <img alt="company" src="../../../../asset/image/default/solution_default.png">
+                             </ng-template>
+                          </a>
+                          <figcaption>
+                            <h3>
+                              <a [routerLink]="['/solution/detail']" [queryParams]="{md5: solution.md5, name: solution.name, industry: solution.industryCategory}" title="{{solution.name}}" [innerHtml]="solution.name | trustHtml"></a>
+                            </h3>
+                            <h4>
+                              <label>行业:</label>
+                              <span>{{solution.industryCategory}}</span>
+                            </h4>
+                            <h4>
+                              <label>技术:</label>
+                              <span>{{solution.technologyCategories}}</span>
+                            </h4>
+                            <h4>
+                              <label>产品:</label>
+                              <span>{{solution.productCategories}}</span>
+                            </h4>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="stSize" style="clear: both;padding-top: 18px; padding-bottom: 66px;">
+                    <ark-paginator rows="6" currentPage="{{sc}}" totalRecords="{{stSize}}" (onPageChange)="paginate_sol($event)"></ark-paginator>
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="solutions!==null"></ark-no-data>
+                </div>
+
+                <!-- 产品 -->
+                <div class="con" [style.display]="selItem==2 ? 'block' : 'none'">
+                  <div class="product-item" *ngIf="ptSize">
+                    <div class="items" *ngFor="let prod of products">
+                      <div class="row">
+                        <figure class="col-lg-3 col-md-6 col-sm-12">
+                          <a [routerLink]="['/product/detail']" [queryParams]="{md5: prod.md5, name: prod.name}">
+                           <img *ngIf="prod?.logo; else showProductImage"  alt="product" [src]="prod.logo | ImgPathPre | trustURL">
+                           <ng-template #showProductImage>
+                             <img alt="product"  src="../../../../asset/image/default/product_default.png">
+                           </ng-template>
+                          </a>
+                        </figure>
+                        <figcaption class="col-lg-9 col-md-6 col-sm-12">
+                          <h3>
+                            <a [routerLink]="['/product/detail']" [queryParams]="{md5: prod.md5, id: prod.id, name: prod.name}" [title]="prod.name" [innerHtml]="prod.name | trustHtml"></a>
+                          </h3>
+                          <div class="product-summary">
+                            <span>简介: </span>
+                            <span *ngIf="prod.summary" [innerHtml]="prod.summary | trustHtml"></span>
+                          </div>
+                        </figcaption>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="ptSize" style="clear: both;margin-top: 50px; margin-bottom: 40px;">
+                    <ark-paginator rows="10" currentPage="{{pc}}" totalRecords="{{ptSize}}" (onPageChange)="paginate_prod($event)"></ark-paginator>
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="products!==null"></ark-no-data>
+                </div>
+
+                <!-- 专利 -->
+                <div class="con" [style.display]="selItem==3 ? 'block' : 'none'">
+                  <div class="box body" *ngIf="totalRecords">
+                    <p class="full-width pull-left" style="color: #333;font-size:14px; padding-top: 15px;">
+                      为您找到 <strong style="color:red;">{{totalRecords >= 200 ? '200+' : totalRecords}}</strong> 家符合条件的专利
+                    </p>
+                    <table class="table table-borderd" broder="1" cellspacing="0" cellpadding="0">
+                      <thead>
+                        <tr>
+                          <th width="8%">序号</th>
+                          <th width="26%">发明名称</th>
+                          <th width="12%">发明类型</th>
+                          <th width="15%">申请号</th>
+                          <th width="12%">申请日</th>
+                          <th width="15%">公开(公告)号</th>
+                          <th width="12%">公开(公告)日</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let patent of patents;">
+                          <td>{{patent.sortId}}</td>
+                          <td><a [routerLink]="['/papost/patents/details']" [queryParams]="{md5: patent.md5, key: patent.name}">{{patent.mingcheng}}</a></td>
+                          <td>{{patent.leixing}}</td>
+                          <td>{{patent.shenqinghao}}</td>
+                          <td>{{patent.shenqingri}}</td>
+                          <td>{{patent.shouquanGonggaohao}}</td>
+                          <td>{{patent.shouquanGonggaori}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div style="padding-top:14px;padding-bottom:66px;">
+                      <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+                    </div>
+                  </div>
+                  <ark-no-data showType="detail" bgc="transparent" [hideSign]="totalRecords"></ark-no-data>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ark-footer></ark-footer>

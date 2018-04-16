@@ -1,0 +1,157 @@
+$main-bg: #fff;
+$aside-bgs: #cacfd4, #a1a9b1;
+$aside-color: #fff;
+$border-color: #eee;
+$subTitle-color: #EFB933;
+
+$yellow: #f39c12 !default;
+$red: #f00 !default;
+$blue: #0073b7 !default;
+$green: #00a65a !default;
+$info: #14997b !default;
+$warning:  #8a6d3b !default;
+$content: #777 !default;
+
+.nav-wrap {
+  width: 100%;
+  min-height: 800px;
+  background: $main-bg;
+  padding: 20px;
+ 
+  .nav-header {
+    h3 {
+      font-size: 18px;
+      line-height: 18px;
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+    
+    border-bottom:  1px solid #a1a9b1;
+  }
+
+  .nav-items {
+  
+    ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      padding: 0;
+      background: #eee;
+      border-bottom: 1px solid #efb933;
+    }
+    .item {
+      display: inline-flex;
+      justify-content: center;
+      height: 28px;
+      width: 100%;
+
+      a {
+        font-size: 14px;
+        color: #000;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+
+      }
+
+      &.select {
+        a {
+          color: #e9a90b;
+          font-weight: bold;
+        }
+        border-bottom: 3px solid #efb933;
+      }
+   
+      &:fist-child {
+        font-weight: bold;
+        border-bottom-color: 6px solid #EFB830;
+      }
+    }
+
+  }
+
+  .nav-content {
+
+    min-height: 500px;
+    padding: 20;
+
+
+    .box {
+      position: relative;
+      border-radius: 3px;
+      background: #ffffff;
+    
+      margin-bottom: 20px;
+      width: 100%;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    }
+
+    .box-header {
+      border-bottom: 1px solid #f4f4f4;
+    }
+
+    .box-body {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+      padding: 10px;
+    }
+  }
+}
+
+.table-wrapper {
+  position: relative;
+  .main-title {
+    position: absolute;
+    right: 2rem;
+    top: 1.5rem;
+    cursor: default;
+    span,
+    a {
+      font-size: 1.5rem;
+      color: $subTitle-color;
+    }
+  }
+}
+  
+.news {
+  border-top: 1px solid #eee;
+}
+
+// 字体颜色
+$textlist:('blue', $blue),
+('red', $red),
+('yellow', $yellow),
+('green', $green),
+('info', $info),
+('warning', $warning),
+('gray', $content);
+@each $colortype,
+$color in $textlist {
+  .text-#{$colortype} {
+      color: $color;
+  }
+}
+
+// 边框颜色
+$arkbtntype: (info, 1, 'rgb(29, 197, 208)', '#14997b', 'rgb(31, 213, 224)'),
+(default, 2, 'rgb(238, 133, 156)', '#a43796', 'rgb(248, 144, 166)'),
+(primary, 3, 'rgb(223, 186, 108)', '#897e0b', 'rgb(241, 201, 116)'),
+(success, 4, 'rgb(38, 182, 255)', '#076eb0', 'rgb(73, 192, 252)'),
+(danger, 5, 'rgb(29, 197, 208)', '#1d980d', 'rgb(31, 213, 224)'),
+(warning, 6, 'rgb(238, 133, 156)', '#a43796', 'rgb(248, 144, 166)');
+@each $type,
+$index,
+$boxcolor,
+$textcolor,
+$hoverboxcolor in $arkbtntype {
+  .box-#{$type} {
+    background-color: #{$boxcolor};
+    border: 0.1rem solid #{$boxcolor};
+    border-top: 3px solid #{$textcolor};
+    &:hover {
+        background-color: #{$hoverboxcolor};
+    }
+  }
+}

@@ -1,0 +1,124 @@
+<ark-header></ark-header>
+<ark-header-search></ark-header-search>
+
+<section class="body-bgc padding-t-20 padding-b-40 flex-1">
+  <div class="container ">
+
+      <div class="ark-search-filter">
+        <div class="filter-list">
+          <div class="filter-label">行业</div>
+          <div class="col-sm-10 search-element">
+            <ul>
+              <li>
+                <a [ngClass]="{'active' : industry === 'all'}" [routerLink]="['/park/search']" [queryParams]="{industries: 'all', page:1}" queryParamsHandling="merge">全部</a>
+              </li>
+              <li *ngFor="let industry of industries">
+                <a [ngClass]="{active: searchParam.industries === industry.value}" [routerLink]="['/park/search']" [queryParams]="{industries: industry.value, page: 1}" queryParamsHandling="merge" [innerHtml]="industry.value | trustHtml"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="pull-right ark-btn-more" moreBtn></div>
+        </div>
+        <div class="filter-list">
+          <div class="filter-label">级别</div>
+          <div class="col-sm-10 search-element">
+            <ul>
+              <li>
+                <a [ngClass]="{'active' : level === 'all'}" [routerLink]="['/park/search']" [queryParams]="{level: 'all', page:1}" queryParamsHandling="merge">全部</a>
+              </li>
+              <li *ngFor="let level of levels">
+                <a [ngClass]="{active: searchParam.level === level}" [routerLink]="['/park/search']" [queryParams]="{level: level, page: 1}" queryParamsHandling="merge" [innerHtml]="level | trustHtml"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="filter-list">
+          <div class="filter-label">地区</div>
+          <div class="col-sm-10 search-element">
+            <ul>
+              <li>
+                <a [ngClass]="{'active' : province === 'all'}" [routerLink]="['/park/search']" [queryParams]="{province: 'all', page:1}" queryParamsHandling="merge">全部</a>
+              </li>
+              <li *ngFor="let province of regions">
+                <a [ngClass]="{active: searchParam.province === province}" [routerLink]="['/park/search']" [queryParams]="{province: province, page: 1}" queryParamsHandling="merge" [innerHtml]="province | trustHtml"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="filter-list">
+          <div class="filter-label">物业类型</div>
+          <div class="col-sm-10 search-element">
+            <ul>
+              <li>
+                <a [ngClass]="{'active' : tenement === 'all'}" [routerLink]="['/park/search']" [queryParams]="{tenements: 'all'}" queryParamsHandling="merge">全部</a>
+              </li>
+              <li *ngFor="let tenement of tenements">
+                <a [ngClass]="{active: searchParam.tenements === tenement}" [routerLink]="['/park/search']" [queryParams]="{tenements: tenement, page: 1}" queryParamsHandling="merge" [innerHtml]="tenement | trustHtml"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 统计总数 -->
+      <div class="show-data-size-box" *ngIf="totalRecords">
+        <p>
+          为您找到 <span>{{size}}</span> 条结果
+        </p>
+      </div>
+
+      <!--列表区-->
+      <div class="ark-card" *ngIf="totalRecords">
+        <div class="ark-card-header">
+          <span class="col-md-2">园区</span>
+          <span class="col-md-5"></span>
+          <span class="col-md-5">主导产业</span>
+        </div>
+
+        <div class="ark-card-content">
+          <div class="ark-list" *ngFor="let park of parks">
+            <div class="col-md-2">
+              <figure class="ark-img">
+                <a [routerLink]="['/park/detail']" [queryParams]="{md5: park.md5}">
+                  <img *ngIf="park?.logo; else showImage" alt="park" [src]="park.logo | ImgPathPre | trustURL">
+                  <ng-template #showImage>
+                    <img alt="park" src="../../../../asset/image/default/park_default.png">
+                  </ng-template>
+                </a>
+              </figure>
+            </div>
+            <div class="col-md-5">
+              <div class="park-list-content" style="width: 500px;">
+                <h3 class="flex flex-center-v margin-b-20">
+                  <a class="text-bold text-active" [routerLink]="['/park/detail']" [queryParams]="{md5: park.md5}" [title]="park.title" [innerHtml]="park.name | trustHtml"></a>
+                  <span class="font-14 text-bold text-sup margin-l-20 margin-r-20">{{park.level}}</span>
+                  <span class="ark-badge park-badge" *ngIf="park?.type">{{park.type}}</span>
+                </h3>
+                <div class="margin-b-16">
+                  <label for="" class="text-sup">地址: </label> <span class="text-secondary">{{park.address}}</span>
+                </div>
+                <div class="margin-b-16">
+                  <label for="" class="text-sup">面积: </label> <span class="text-secondary">{{park.area}}</span>
+                </div>
+                <div class="">
+                  <label for="" class="text-sup">物业: </label> <span class="text-secondary">{{park.tenements}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5">
+              {{park.industries}}
+            </div>
+          </div>
+        </div>
+
+        <div class="ark-paginator">
+          <ark-paginator rows="10" currentPage="{{currentPage}}" totalRecords="{{totalRecords}}" (onPageChange)="paginate($event)"></ark-paginator>
+        </div>
+      </div>
+      <div class="margin-t-20" *ngIf="totalRecords < 1">
+        <ark-no-data showType="search" [searchKey]="keywords" [hideSign]="totalRecords"></ark-no-data>
+      </div>
+  </div>
+</section>
+
+<ark-footer></ark-footer>

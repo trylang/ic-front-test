@@ -1,0 +1,147 @@
+<section>
+  <div class="main-header">
+    <h3>{{tapstr}}</h3>
+  </div>
+
+  <div class="main-content">
+    <!-- 企业资料 -->
+    <div *ngIf=" tapstr==='企业资料' ">
+      <form role="form">
+        <div class="form-group row">
+          <label class="col-form-label col-sm-2">企业名称:</label>
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext full-width" value="{{entParam.companyName}}">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2 must-input">企业类型:</label>
+          <div class="col-sm-10">
+            <button class="btn btn-primary btn-lg" (click)="openEntTypeDialog()">选择</button>
+          </div>
+
+          <!-- container -->
+          <div class="col-12">
+            <div class="ark-list-area-container margin-t-10">
+              <div class="ark-list-area">
+                <label for="" class="col-form-label" style="color: #b0b0b0">方案集成商：</label>
+                <div class="list-area">
+                  <ul>
+                    <li *ngFor="let item of entParam.solutionSupplierCategory">
+                      <span>{{item}}</span>
+                      <i class="fa fa-times" aria-hidden="true" (click)="removeItem(item, 'solution')"></i>
+                    </li>
+                  </ul>
+                </div>
+                <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+              </div>
+
+              <div class="ark-list-area">
+                <label for="" class="col-form-label" style="color: #b0b0b0">产品供应商：</label>
+                <div class="list-area">
+                  <ul>
+                    <li *ngFor="let item of entParam.productSupplierCategory">
+                      <span>{{item}}</span>
+                      <i class="fa fa-times" aria-hidden="true" (click)="removeItem(item, 'product')"></i>
+                    </li>
+                  </ul>
+                </div>
+                <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2 must-input">企业地址:</label>
+          <div class="col-sm-10">
+            <input class="form-control" name="address" [(ngModel)]="entParam.address" type="text">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2 must-input">所属地区:</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="area" [(ngModel)]="entParam.region">
+              <option value="选择地区">选择地区</option>
+              <option *ngFor="let item of wrapdatas.region" value="{{item}}">{{item}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2 must-input">联系人:</label>
+          <div class="col-sm-10">
+            <input class="form-control" name="lianxiren" [(ngModel)]="entParam.contactPerson" type="text">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2 must-input">所属部门:</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="department" [(ngModel)]="entParam.personDepartment">
+              <option value="请选择联系人职能部门">请选择联系人职能部门</option>
+              <option *ngFor="let item of wrapdatas.personDepartment" value="{{item}}">{{item}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2 must-input">手机:</label>
+          <div class="col-sm-10">
+            <input class="form-control" name="phone" [(ngModel)]="entParam.contactPhone" type="text">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-2">固定电话:</label>
+          <div class="col-sm-10">
+            <input class="form-control" name="tel" [(ngModel)]="entParam.companyPhone" type="text">
+          </div>
+        </div>
+
+        <div class="form-group text-center margin-t-28">
+          <button class="btn col-lg-4 col-md-6 col-sm-10 col-xs-12 ark-form-btn save-btn" (click)="FnSubBtn()">保存</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 基本信息 -->
+    <div *ngIf=" tapstr==='基本信息' ">
+      <form role="form">
+        <div class="form-group">
+          <div class="row">
+            <label for="" class="col-sm-2 col-form-label">企业图片:</label>
+            <div class="col-sm-10">
+              <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+            </div>
+          </div>
+            <figure class="margin-t-20" *ngIf="basicParam.logo">
+              <img [src]="basicParam.logo | ImgPathPre | trustURL" alt="Logo">
+            </figure>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="col-form-label">主营产品:</label>
+          <div><textarea class="form-control" name="product" cols="30" rows="10" [(ngModel)]="basicParam.mainProduct"></textarea></div>
+        </div>
+
+        <div class="form-group">
+          <label for="" class="col-form-label">企业介绍:</label>
+          <div>
+            <ckeditor name="summary" [(ngModel)]="basicParam.description" [config]="editorConf" [readonly]="false" debounce="500">
+            </ckeditor>
+          </div>
+        </div>
+
+        <div class="form-group text-center margin-t-28">
+          <button class="btn col-lg-4 col-md-6 col-sm-10 col-xs-12 ark-form-btn save-btn" (click)="FnSubBtn()">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

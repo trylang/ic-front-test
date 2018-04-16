@@ -1,0 +1,30 @@
+$border-color: #ddd;
+$text-color: #aaa;
+
+figure {
+  border: 1px solid $border-color;
+  color: $text-color;
+  padding: 10px;
+
+  img {
+    max-width: 100%;
+  }
+
+  figcaption {
+    margin-top: 20px;
+  }
+
+  h4 {
+    margin-bottom: 15px;
+  }
+
+  a {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+}
+
+textarea,
+h4 {
+  word-break: break-all;
+}

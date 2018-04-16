@@ -1,0 +1,165 @@
+<section>
+  <div class="main" [ngClass]="{'min-hight' : entUser.state === 2 || entUser.state === 1}">
+    <div class="main-header">
+      <legend>审核信息<span *ngIf="entUser.state === 0">*未通过审核,请检查提交的信息</span></legend>
+    </div>
+    <div class="row flex-column main-content" *ngIf="entUser?.state === 0 || entUser?.state === null">
+      <form role="form" [formGroup]="entUserForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="companyName" class="col-sm-3 col-form-label must-input">企业名称</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="companyName" [(ngModel)]="entUser.companyName" required invalidateName placeholder="请输入企业名称">
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.companyName">{{entFormErrors.companyName}}</span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="contactPerson" class="col-sm-3 col-form-label must-input">联系人</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="contactPerson" [(ngModel)]="entUser.contactPerson" required placeholder="请输入联系人">
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.contactPerson">{{entFormErrors.contactPerson}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="address" class="col-sm-3 col-form-label must-input">企业地址</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="address" [(ngModel)]="entUser.address" required placeholder="请输入企业地址">
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.address">{{entFormErrors.address}}</span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="personDepartment" class="col-sm-3 col-form-label must-input">所属部门</label>
+            <select class="col-sm-9 form-control" formControlName="personDepartment" [(ngModel)]="entUser.personDepartment" required>
+              <option value="">选择联系人的职能部门</option>
+              <option *ngFor="let department of departments" value="{{department}}">{{department}}</option>
+            </select>
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.personDepartment">{{entFormErrors.personDepartment}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="region" class="col-sm-3 col-form-label must-input">所属地区</label>
+            <select class="col-sm-9 form-control" formControlName="region" [(ngModel)]="entUser.region" required>
+              <option value="">选择省份</option>
+              <option *ngFor="let province of provinces" value="{{province}}">{{province}}</option>
+            </select>
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.region">{{entFormErrors.region}}</span>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="contactPhone" class="col-sm-3 col-form-label must-input">手机</label>
+            <input type="text" class="col-sm-9 form-control" autocomplete="off" formControlName="contactPhone" [(ngModel)]="entUser.contactPhone" required placeholder="请输入手机">
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.contactPhone">{{entFormErrors.contactPhone}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6 inherit" style="padding-left:0;">
+          <label for="" class="col-sm-3 col-form-label">企业类型</label>
+          <button class="btn btn-primary primary-btn margin-l-10" style="margin-left:0;" type="button" (click)="openEntTypeModel()">选择分类</button>
+
+          <!-- container -->
+          <div class="ark-list-area-container margin-t-10 margin-b-10" style="width: 900px;">
+            <div class="ark-list-area">
+              <label for="" class="col-form-label">方案集成商：</label>
+              <div class="list-area">
+                <ul>
+                  <li *ngFor="let s of entUser.solutionSupplierCategory">
+                    <span>{{s}}</span>
+                    <i class="fa fa-times" aria-hidden="true" (click)="removeItem(s, 'solution')"></i>
+                  </li>
+                </ul>
+              </div>
+              <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <div class="ark-list-area">
+              <label for="" class="col-form-label">产品供应商：</label>
+              <div class="list-area">
+                <ul>
+                  <li *ngFor="let p of entUser.productSupplierCategory">
+                    <span>{{p}}</span>
+                    <i class="fa fa-times" aria-hidden="true" (click)="removeItem(p, 'product')"></i>
+                  </li>
+                </ul>
+              </div>
+              <a href="javascript: void(0)" class="toggle-icon" toggleEditAction>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+            </div>
+          </div>
+          <div class="error-tip">
+            <span *ngIf="!entUser.productSupplierCategory || !entUser.solutionSupplierCategory || entUser.productSupplierCategory.length < 1 || entUser.solutionSupplierCategory.length < 1">请选择企业类型</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6 inherit">
+            <label for="license" class="col-sm-3 col-form-label must-input">营业执照</label>
+            <div class="col-sm-9 no-padding">
+              <button type="button" class="btn btn-primary ark-upload-btn-primary" id="basic-addon" onclick="document.getElementById('license').click()">上传文件</button>
+              <input type="file" id="license" class="hide" hidden (change)="uploadLogo($event)">
+              <!-- <div class="input-group">
+                <input type="text" class="form-control" readonly="readonly" placeholder="营业执照" aria-label="园区图片" aria-describedby="basic-addon">
+                <button type="button" class="input-group-addon" id="basic-addon" onclick="document.getElementById('license').click()">上传文件</button>
+                <input type="file" id="license" class="hide" hidden (change)="uploadLogo($event)">
+              </div> -->
+              <!-- 预览照片 -->
+              <div class="full-width margin-t-20" *ngIf="entUser?.license">
+                <figure class="ark-preview-image">
+                  <img [src]="entUser.license | ImgPathPre | trustURL" style="max-height: 180px; max-width: 300px;" alt="license">
+                </figure>
+              </div>
+              <div class="error-tip" style="padding-left:0px;">
+                <span *ngIf="entFormErrors.license">请上传营业执照</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="companyPhone" class="col-sm-3 col-form-label">企业电话</label>
+            <input type="text" class="col-sm-9 form-control" formControlName="companyPhone" [(ngModel)]="entUser.companyPhone" placeholder="请输入固定电话">
+            <div class="error-tip">
+              <span *ngIf="entFormErrors.companyPhone">{{entFormErrors.companyPhone}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text-center padding-t-42 padding-b-66">
+          <button class="btn ark-form-btn" type="submit" [disabled]="entUserForm.invalid && !entUser.license && entUser.productSupplierCategory && entUser.solutionSupplierCategory">提交</button>
+        </div>
+      </form>
+    </div>
+    <div class="row flex-column main-content" *ngIf="entUser.state === 1">
+      <div class="check-notice">
+        <div>
+          <img src="../../../../../asset/image/default/success.png" alt="" />
+          <span>通过审核</span>
+        </div>
+        <p>尊敬的用户，您提交的信息已通过审核。</p>
+        <a class="btn ark-form-btn" [routerLink]="['/account/setting']">确定</a>
+      </div>
+    </div>
+    <div class="row flex-column" *ngIf="entUser.state === 2">
+      <div class="check-notice">
+        <div>
+          <img src="../../../../../asset/image/default/success.png" alt="" />
+          <span>提交成功,审核中...</span>
+        </div>
+        <p>提交审核资料之后需要24小时的审核期，请耐心等待...</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+<!-- TODO: change down url -->
+<link rel="stylesheet" href="/src/asset/css/primeng/primeng.min.css">
+<link rel="stylesheet" href="/src/asset/css/primeng/theme.css">
+
+<section>
+  <div class="margin-b-20">
+    <ol class="breadcrumb font-16">
+      <li class="breadcrumb-item"><a href="javascript: void(0)" routerLink="{{parentRouter}}">园区列表</a></li>
+      <li class="breadcrumb-item active">编辑园区</li>
+    </ol>
+  </div>
+
+  <mat-card>
+    <mat-card-content class="container">
+      <div class="row flex-column">
+        <mat-tab-group (selectChange)="selectChange($event)">
+          <mat-tab label="基本信息">
+            <park-basic *ngIf="activeTab === 0"></park-basic>
+          </mat-tab>
+
+          <mat-tab label="园区介绍和政策" [disabled]="!md5"> 
+            <park-preferential *ngIf="activeTab === 1"></park-preferential>
+          </mat-tab>
+
+          <mat-tab label="入驻企业" [disabled]="!md5">
+            <park-company *ngIf="activeTab === 2"></park-company>
+          </mat-tab>
+
+          <mat-tab label="园区优势" [disabled]="!md5">
+            <park-advantage *ngIf="activeTab === 3"></park-advantage> 
+          </mat-tab>
+
+          <mat-tab label="物业" [disabled]="!md5">
+            <park-property *ngIf="activeTab === 4"></park-property>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

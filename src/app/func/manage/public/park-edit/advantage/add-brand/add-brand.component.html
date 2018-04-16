@@ -1,0 +1,32 @@
+<section>
+  <form role="form">
+    <h3>编辑品牌优势</h3>
+
+    <div class="form-group row">
+      <label for="desc" class="col-form-label font-12 text-bold col-sm-2">品牌描述: </label>
+      <div class="col-md-4 col-sm-10 col-xs-12">
+        <input type="text" autocomplete="off" class="form-control font-12" id="desc" name="desc" [(ngModel)]="brand.title" placeholder="请填写园区获得的奖项或资质">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="" class="col-form-label col-sm-2 font-12">上传图片</label>
+      <div class="col-sm-10">
+        <ngx-cropper [config]="ngxCropperConfig" (returnData)="onReturnData($event)"></ngx-cropper>
+        <!-- <button type="button" class="btn btn-primary btn-lg" onclick="document.getElementById('parkLogo').click()">选择文件</button>
+        <input type="file" id="parkLogo" class="hide" hidden (change)="uploadLogo($event)"> -->
+        <!-- 预览照片 -->
+        <div class="full-width" *ngIf="brand.logo">
+          <figure class="margin-t-10">
+            <img src="{{brand.logo | ImgPathPre}}" style="max-height: 160px; max-width: 300px;" alt="logo">
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group text-center margin-t-20">
+      <button type="button" class="btn btn-primary btn-lg" (click)="onApply()">确定</button>
+      <button type="button" class="btn btn-secondary btn-lg" [mat-dialog-close]="cancel">取消</button>
+    </div>
+  </form>
+</section>
