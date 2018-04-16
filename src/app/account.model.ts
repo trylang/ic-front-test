@@ -1,5 +1,5 @@
 /**
- * Account 账户的基本信息
+ * Account 账户的基本信息     
  * type 1-个人普通用户，2-研究员，3-企业用户，4-园区用户，5-管理员
  * @export
  * @class Account
